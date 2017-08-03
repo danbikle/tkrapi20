@@ -1,0 +1,9 @@
+~/tkrapi20/features.txt
+
+
+NOT DONE YET
+bitb repo: tkrapi20
+
+
+SHOULD BE DONE NOW
+Start features.txt
