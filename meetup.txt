@@ -1,0 +1,46 @@
+
+Dan Bikle <bikle101@gmail.com>
+Apr 13 (2 days ago)
+
+to Jeff, Glen 
+Jeff, here is my presentation description for the Aug 24 Meetup.
+
+
+Title:
+
+"Stock Market ML API with Flask-RESTful AND Keras-Tensor-Flow"
+
+This is part 2 of a two part series.
+
+Part 1 was presented in early 2016.
+
+In this talk Dan Bikle shows you how to build a sophisticated Machine Learning App from the ground up using Tensor Flow (Wrapped by Keras) and packages in Anaconda Python.
+
+We start by building a simple API server, with Python package Flask-RESTful, which responds to GET requests containing parameters which affect the behavior of a Keras backend server.
+
+We use Keras-Tensor-Flow to create a Deep Learning model and then generate predictions for any stock symbol of interest.
+The predictions are affected by features selected by end-user such as various slopes of price-moving-avg and/or date features like Day-of-Week and/or Month-of-Year.
+Building a Deep Learning model is expensive so we use Postgres to cache each model in case we encounter another identical request in the near future.
+Additionally we cache all predictions which could be generated from each model.
+
+Next in the workflow we use Flask-RESTful to serve predictions to the end-user as JSON documents.
+
+For deployment, we offer two techniques.
+
+Technique 1 is simple.
+Just deploy the app to an EC2 server and configure Flask-RESTful to listen on the public interface.
+
+Technique 2 might be more cost-effective.
+Find some unused hardware in your office which can run Ubuntu 16.
+Then deploy the app to that server.
+Next, deploy the Flask-RESTful piece to Heroku which should be free or low cost.
+Finally, configure both pieces so they communicate using shared data on a Postgres database hosted at Heroku.
+Each piece will connect to Postgres using Python package SQLAlchemy.
+
+Python is awesome technology and it is perfect for building an elegant Machine Learning Application.
+
+Dan Bikle is a graduate of Caltech and works as an independent Data Scientist.
+
+He is skilled at extracting knowledge (forecasts mostly) from data.
+
+Also Dan teaches three classes at Santa Clara Adult Education: Hands on Python, Time Series Data Science, and Machine Learning Applications.
