@@ -1,6 +1,6 @@
 # README.md
 
-This repo should drive an API service.
+This repo, tkrapi20, should drive an API service.
 
 The code in this repo should be presented to a Meetup:
 
@@ -14,3 +14,18 @@ features.txt
 Some of features.txt depends on a description of the Meetup presentation:
 
 meetup.txt
+
+Note that I had started an earlier repos:
+  * tkrapi in 2017-01 [ API server for the tkrz Rails app. ]
+  * tkrapi2 in 2017-06-ish
+  
+Maybe someday I will merge the 3 repos.
+
+Currently I have these:
+
+  * git@bitbucket.org:bikle/tkrapi.git
+  * git@bitbucket.org:bikle/tkrapi2.git
+  * git@bitbucket.org:bikle/tkrapi20.git
+
+This README.md is for tkrapi20.git
+
