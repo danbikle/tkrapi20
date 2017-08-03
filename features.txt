@@ -1,18 +1,20 @@
 ~/tkrapi20/features.txt
 
-NOT DONE YET
+NOT DONE YET:
 Site should have README.md
 The README should list installation steps
 Site should have features.txt
-Install cuda, tensorflow on dan@u78
 write,run script to remove invalid tkrs from tkrlist.txt
-Tinker with flask-restful to ensure it works:
-  dict -> json
-  static-json
 
 
-SHOULD BE DONE NOW
+SHOULD BE DONE NOW:
 Start features.txt
 bitb repo: tkrapi20
 README.md started
 get tkrlist.txt from ~/tkrapi2/tkrlist.txt
+
+Install cuda, tensorflow on dan@u78: DONE: ~dan/py36/, tensorflow-gpu (1.2.1)
+
+Tinker with flask-restful to ensure it works:
+  dict -> json
+  static-json
