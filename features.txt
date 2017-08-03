@@ -6,7 +6,9 @@ The README should list installation steps
 Site should have features.txt
 Install cuda, tensorflow on dan@u78
 write,run script to remove invalid tkrs from tkrlist.txt
-Tinker with flask-restful to ensure it works
+Tinker with flask-restful to ensure it works:
+  dict -> json
+  static-json
 
 
 SHOULD BE DONE NOW
