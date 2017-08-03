@@ -2,9 +2,12 @@
 
 
 NOT DONE YET
-Site should have README.md, features.txt
+Site should have README.md
+The README should list installation steps
+Site should have features.txt
 
 
 SHOULD BE DONE NOW
 Start features.txt
 bitb repo: tkrapi20
+README.md started
