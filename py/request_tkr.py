@@ -16,8 +16,8 @@ headers_d    = {'User-Agent': user_agent_s}
 tkr_r        = requests.get(url_s, headers=headers_d)
 print(tkr_r.status_code)
 
-html_s = tkr_r.content
-print(html_s[:155])
+html_s = tkr_r.content.decode("utf-8")
+print(html_s.replace('DOCTYPE','hello')[:155])
 
 'bye'
 
