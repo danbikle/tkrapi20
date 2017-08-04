@@ -8,6 +8,7 @@
 # I need to pass a string; variable with string fails
 
 TKR=IBM
+TKR=FB
 
 rm -f /tmp/curl_tkr.bash.cookiejar.txt
 
@@ -43,11 +44,12 @@ sleep 1
 
 # https://query1.finance.yahoo.com/v7/finance/download/%5EGSPC?period1=-631123200&period2=1501743600&interval=1d&events=history&crumb=9cxzOy3G0UF
 
+nowutime=`date +%s`
 /usr/bin/curl --verbose \
               --cookie     /tmp/curl_tkr.bash.cookiejar.txt \
               --cookie-jar /tmp/curl_tkr.bash.cookiejar.txt \
               --user-agent 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36' \
-              "https://query1.finance.yahoo.com/v7/finance/download/${TKR}?period1=-631123200&period2=1501743600&interval=1d&events=history&crumb=${crum}" \
+              "https://query1.finance.yahoo.com/v7/finance/download/${TKR}?period1=-631123200&period2=${nowutime}&interval=1d&events=history&crumb=${crum}" \
               > /tmp/${TKR}.csv \
               2> /tmp/s2.txt
 
