@@ -9,6 +9,7 @@ cat ../tkrlist.txt | while read TKR
 do
     ./curl_tkr.bash $TKR
     ls -la /tmp/curl_tkr/${TKR}.csv
+    gzip /tmp/curl_tkr/${TKR}.csv
 done
 
 exit
