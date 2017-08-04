@@ -27,5 +27,16 @@ sleep 1
               https://finance.yahoo.com/quote/${TKR}/history?p=${TKR} \
               > /tmp/tkr1.html \
               2> /tmp/s1.txt
+sleep 1
+
+# https://query1.finance.yahoo.com/v7/finance/download/IBM?period1=-252432000&period2=1501743600&interval=1d&events=history&crumb=9cxzOy3G0UF
+
+/usr/bin/curl --verbose \
+              --cookie     /tmp/curl_tkr.bash.cookiejar.txt \
+              --cookie-jar /tmp/curl_tkr.bash.cookiejar.txt \
+              --user-agent 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36' \
+              https://query1.finance.yahoo.com/v7/finance/download/${TKR}?period1=-252432000&period2=1501743600&interval=1d&events=history \
+              > /tmp/tkr2.html \
+              2> /tmp/s2.txt
 
 exit
