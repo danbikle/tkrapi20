@@ -1,4 +1,3 @@
-tkr
 ^GSPC
 ^RUT
 QQQ
