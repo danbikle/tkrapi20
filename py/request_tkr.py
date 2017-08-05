@@ -4,13 +4,22 @@ request_tkr.py
 This script should get price data.
 Ref:
 https://stackoverflow.com/questions/21736970/using-requests-module-how-to-handle-set-cookie-in-request-response
+
+Demo:
+python request_tkr.py IBM
 """
 
 import datetime
 import os
 import re
 import requests
+import sys
+import time
 import pdb
+
+tkr          = '^GSPC' # default
+# I should get the tkr from the command line
+tkr = sys.argv[1]
 
 # I should ensure the output folders exist
 outdirh = '/tmp/request_tkr/html/'
@@ -18,7 +27,6 @@ outdirc = '/tmp/request_tkr/csv/'
 os.system('mkdir -p '+outdirh+' '+outdirc)
 
 # I should prepare to talk to Yahoo:
-tkr          = '^GSPC'
 user_agent_s = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36'
 url_s        = 'https://finance.yahoo.com/quote/'+tkr+'/history?p='+tkr
 headers_d    = {'User-Agent': user_agent_s}
@@ -51,6 +59,8 @@ with requests.Session() as ssn:
 
     nowutime_s = datetime.datetime.now().strftime("%s")
     csvurl_s   = 'https://query1.finance.yahoo.com/v7/finance/download/'+tkr+'?period1=-631123200&period2='+nowutime_s+'&interval=1d&events=history&crumb='+crumb_s
+    # Server needs time to remember the cookie-crumb-pair it just served:
+    time.sleep(5)
     csv_r      = ssn.get(csvurl_s)
     csv_s      = csv_r.content.decode("utf-8")
     csv_status_i = csv_r.status_code
