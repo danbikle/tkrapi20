@@ -10,7 +10,10 @@ SCRIPTPATH=`dirname $SCRIPT`
 PARPATH=${SCRIPTPATH}/..
 PYPATH=${PARPATH}/py
 
-cat ${PARPATH}/tkrs.txt|while read TKR
+date
+echo busy...
+#cat ${PARPATH}/tkrs.txt|while read TKR
+cat ${PARPATH}/tkrlist.txt|while read TKR
 do
   python ${PYPATH}/request_tkr.py $TKR
 done
