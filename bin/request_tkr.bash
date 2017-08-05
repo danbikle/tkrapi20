@@ -17,5 +17,6 @@ cat ${PARPATH}/tkrlist.txt|while read TKR
 do
   python ${PYPATH}/request_tkr.py $TKR
 done
+date
 
 exit
