@@ -13,9 +13,8 @@ user_agent_s = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like 
 url_s        = 'https://finance.yahoo.com/quote/'+tkr+'/history?p='+tkr
 headers_d    = {'User-Agent': user_agent_s}
 tkr_r        = requests.get(url_s, headers=headers_d)
+html_s       = tkr_r.content.decode("utf-8")
 print(tkr_r.status_code)
-
-html_s = tkr_r.content.decode("utf-8")
 
 # debug
 with open('/tmp/'+tkr+'.html','w') as fh:
@@ -35,7 +34,7 @@ with open('/tmp/'+tkr+'.html','w') as fh:
 # This is a bit different than how I used sed which cut the string into 3 pieces instead of 2:
 pattern_re = r'(CrumbStore":{"crumb":")(.+?")'
 pattern_ma = re.search(pattern_re, html_s)
-crumb_s = pattern_ma[2].replace('"','') # erase " on end of crumb
+crumb_s    = pattern_ma[2].replace('"','') # erase " on end of crumb
 # ref:
 # https://stackoverflow.com/questions/44030983/yahoo-finance-url-not-working
 # "CrumbStore":\{"crumb":"(?<crumb>[^"]+)"\}
