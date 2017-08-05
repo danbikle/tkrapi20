@@ -12,7 +12,7 @@ PYPATH=${PARPATH}/py
 
 cat ${PARPATH}/tkrs.txt|while read TKR
 do
-  echo  python ${PYPATH}/request_tkr.py $TKR
+  python ${PYPATH}/request_tkr.py $TKR
 done
 
 exit
