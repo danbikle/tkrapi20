@@ -16,6 +16,7 @@ then
 fi
 
 TKR=$1
+echo Busy with: $TKR
 CSVDIR=/tmp/curl_tkr
 mkdir -p $CSVDIR
 CJAR=/tmp/curl_tkr.bash.cookiejar.txt
@@ -68,5 +69,7 @@ nowutime=`date +%s`
               "https://query1.finance.yahoo.com/v7/finance/download/${TKR}?period1=-631123200&period2=${nowutime}&interval=1d&events=history&crumb=${crum}" \
               > ${CSVDIR}/${TKR}.csv \
               2> /tmp/s2.txt
+
+ls -l ${CSVDIR}/${TKR}.csv
 
 exit
