@@ -2,20 +2,31 @@
 
 # curl_tkr.bash
 
+# Demo:
+# ./curl_tkr.bash IBM
+
 # This script should call curl and help me study the response.
 
-# Note the user-agent arg.
-# I need to pass a string; variable with string fails
+if [ "$#" -ne 1 ]
+then
+    echo You should supply a Ticker.
+    echo Demo:
+    echo $0 IBM
+    exit 1
+fi
 
-TKR=IBM
 TKR=$1
 CSVDIR=/tmp/curl_tkr
 mkdir -p $CSVDIR
+CJAR=/tmp/curl_tkr.bash.cookiejar.txt
 
-rm -f /tmp/curl_tkr.bash.cookiejar.txt
+rm -f ${CJAR}
+
+# Note the user-agent arg.
+# I need to pass a string; variable with string fails.
 
 /usr/bin/curl --verbose \
-              --cookie-jar /tmp/curl_tkr.bash.cookiejar.txt \
+              --cookie-jar ${CJAR} \
               --user-agent 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36' \
               https://finance.yahoo.com/quote/${TKR} \
               > /tmp/tkr0.html \
@@ -24,8 +35,8 @@ rm -f /tmp/curl_tkr.bash.cookiejar.txt
 sleep 2
 
 /usr/bin/curl --verbose \
-              --cookie     /tmp/curl_tkr.bash.cookiejar.txt \
-              --cookie-jar /tmp/curl_tkr.bash.cookiejar.txt \
+              --cookie     ${CJAR} \
+              --cookie-jar ${CJAR} \
               --user-agent 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36' \
               https://finance.yahoo.com/quote/${TKR}/history?p=${TKR} \
               > /tmp/tkr1.html \
@@ -51,8 +62,8 @@ nowutime=`date +%s`
 
 # I should get the csv file now:
 /usr/bin/curl --verbose \
-              --cookie     /tmp/curl_tkr.bash.cookiejar.txt \
-              --cookie-jar /tmp/curl_tkr.bash.cookiejar.txt \
+              --cookie     ${CJAR} \
+              --cookie-jar ${CJAR} \
               --user-agent 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36' \
               "https://query1.finance.yahoo.com/v7/finance/download/${TKR}?period1=-631123200&period2=${nowutime}&interval=1d&events=history&crumb=${crum}" \
               > ${CSVDIR}/${TKR}.csv \
