@@ -22,4 +22,6 @@ do
 done
 date
 
+${SCRIPTPATH}/retry_request_tkr.bash
+
 exit

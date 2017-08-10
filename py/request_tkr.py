@@ -28,12 +28,15 @@ os.system('mkdir -p '+outdirh+' '+outdirc)
 
 # I should prepare to talk to Yahoo:
 user_agent_s = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36'
-url_s        = 'https://finance.yahoo.com/quote/'+tkr+'/history?p='+tkr
+url1_s        = 'https://finance.yahoo.com/quote/'+tkr
+url2_s        = url1_s+'/history?p='+tkr
 headers_d    = {'User-Agent': user_agent_s}
 
 with requests.Session() as ssn:
-    tkr_r  = ssn.get(url_s)
-    html_s = tkr_r.content.decode("utf-8")
+    tkr1_r = ssn.get(url1_s, headers=headers_d)
+    time.sleep(3)
+    tkr2_r = ssn.get(url2_s, headers=headers_d)
+    html_s = tkr2_r.content.decode("utf-8")
     # debug
     with open(outdirh+tkr+'.html','w') as fh:
         fh.write(html_s)
@@ -60,8 +63,8 @@ with requests.Session() as ssn:
     nowutime_s = datetime.datetime.now().strftime("%s")
     csvurl_s   = 'https://query1.finance.yahoo.com/v7/finance/download/'+tkr+'?period1=-631123200&period2='+nowutime_s+'&interval=1d&events=history&crumb='+crumb_s
     # Server needs time to remember the cookie-crumb-pair it just served:
-    time.sleep(5)
-    csv_r      = ssn.get(csvurl_s)
+    time.sleep(3)
+    csv_r      = ssn.get(csvurl_s, headers=headers_d)
     csv_s      = csv_r.content.decode("utf-8")
     csv_status_i = csv_r.status_code
     # I should write the csv_s to csv file:
