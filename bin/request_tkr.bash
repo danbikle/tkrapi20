@@ -17,8 +17,8 @@ cat ${PARPATH}/tkrlist.txt|while read TKR
 do
     echo busy with                  $TKR
     python ${PYPATH}/request_tkr.py $TKR
-    gzip     /tmp/request_tkr/html/${TKR}.html
-    gzip      /tmp/request_tkr/csv/${TKR}.csv
+    gzip -f  /tmp/request_tkr/html/${TKR}.html
+    gzip -f   /tmp/request_tkr/csv/${TKR}.csv
 done
 date
 
