@@ -17,7 +17,7 @@ import sys
 import time
 import pdb
 
-tkr          = '^GSPC' # default
+tkr = '^GSPC' # default
 # I should get the tkr from the command line
 tkr = sys.argv[1]
 
