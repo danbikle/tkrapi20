@@ -4,7 +4,7 @@ NOT DONE YET:
 Site should have README.md
 The README should list installation steps
 Site should have features.txt
-write,run script to remove invalid tkrs from tkrlist.txt
+
 
 
 SHOULD BE DONE NOW:
@@ -18,3 +18,12 @@ Install cuda, tensorflow on dan@u78: DONE: ~dan/py36/, tensorflow-gpu (1.2.1)
 Tinker with flask-restful to ensure it works:
   dict -> json
   static-json
+
+write,run script to remove invalid tkrs from tkrlist.txt
+
+Write retry_request_tkr.bash to get tkrs which need 2nd try
+Enhance request_tkr.bash so it calls retry_request_tkr.bash to get tkrs which need 2nd try
+
+Write retry_curl_tkrs.bash to get tkrs which need 2nd try
+Enhance curl_tkrs.bash so it calls retry_curl_tkrs.bash  to get tkrs which need 2nd try
+
