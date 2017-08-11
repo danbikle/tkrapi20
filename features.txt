@@ -5,6 +5,7 @@ NOT DONE YET:
 question:
   - how to create a 2 layer net having 1 neuron in output layer with linear output?
   - query of relu in keras help me?
+  - yes, found linear(x) here: https://keras.io/activations/
   
 Site should have list of behaviorial dimensions:
   - algo-types
