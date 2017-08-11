@@ -8,6 +8,8 @@ Site should have list of behaviorial dimensions:
   - training sizes
   - join candidates: gspc, gld, tlt, rut, xom
   - prediction types: pctlead-1day, pctlead-2day, pctlead-5day
+  - tkr
+  - month2predict
   
 Site should have README.md
 The README should list installation steps
