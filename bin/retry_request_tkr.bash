@@ -7,6 +7,7 @@
 SCRIPT=`realpath $0`
 SCRIPTPATH=`dirname $SCRIPT`
 PARPATH=${SCRIPTPATH}/..
+PYPATH=${PARPATH}/py
 
 # In bash how to loop through a folder of files?
 for FN in /tmp/request_tkr/csv/*.csv.gz
@@ -18,7 +19,7 @@ do
 	ls -l $FN
 	echo I should retry to request it:
 	TKR=`basename $FN | sed 's/.csv.gz//'`
-        ${SCRIPTPATH}/request_tkr.bash $TKR
+	python ${PYPATH}/request_tkr.py    $TKR
         gzip -f      /tmp/request_tkr/csv/${TKR}.csv
         ls -la       /tmp/request_tkr/csv/${TKR}.csv.gz
     fi
