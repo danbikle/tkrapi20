@@ -16,7 +16,7 @@ import flask_restful as fr
 from sqlalchemy import create_engine
 
 # I should connect to the DB
-db_s = 'postgres://ann:ann@127.0.0.1/ann'
+db_s = 'postgres://tkrapi:tkrapi@127.0.0.1/tkrapi'
 conn = create_engine(db_s).connect()
 
 application = flask.Flask(__name__)
