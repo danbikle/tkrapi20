@@ -1,6 +1,14 @@
 ~/tkrapi20/features.txt
 
 NOT DONE YET:
+
+Site should have list of behaviorial dimensions:
+  - algo-types
+  - ml-feature-names
+  - training sizes
+  - join candidates: gspc, gld, tlt, rut, xom
+  - prediction types: pctlead-1day, pctlead-2day, pctlead-5day
+  
 Site should have README.md
 The README should list installation steps
 Site should have features.txt
