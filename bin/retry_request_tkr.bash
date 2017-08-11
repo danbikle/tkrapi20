@@ -4,6 +4,7 @@
 
 # This script should loop through a folder full of CSV files and maybe feed some to request_tkr.bash
 
+PYTHON=${HOME}/anaconda3/bin/python
 SCRIPT=`realpath $0`
 SCRIPTPATH=`dirname $SCRIPT`
 PARPATH=${SCRIPTPATH}/..
@@ -19,9 +20,9 @@ do
 	ls -l $FN
 	echo I should retry to request it:
 	TKR=`basename $FN | sed 's/.csv.gz//'`
-	python ${PYPATH}/request_tkr.py    $TKR
-        gzip -f      /tmp/request_tkr/csv/${TKR}.csv
-        ls -la       /tmp/request_tkr/csv/${TKR}.csv.gz
+	$PYTHON ${PYPATH}/request_tkr.py    $TKR
+        gzip -f       /tmp/request_tkr/csv/${TKR}.csv
+        ls -la        /tmp/request_tkr/csv/${TKR}.csv.gz
     fi
 done
     

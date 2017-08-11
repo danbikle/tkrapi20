@@ -2,6 +2,16 @@
 
 NOT DONE YET:
 
+postgres account:
+  tkrapi/tkrapi
+  db_s = 'postgres://tkrapi:tkrapi@127.0.0.1/tkrapi'
+  
+list of resources:
+  /tkrlist
+  /istkr/IBM
+  /sklinear/IBM/25/2016-11?features='pctlag1,slope4,moy'
+  /keras_linear/IBM/25/2016-11?features='pctlag1,slope4,moy'
+  
 question:
   - how to create a 2 layer net having 1 neuron in output layer with linear output?
   - query of relu in keras help me?
