@@ -22,12 +22,28 @@ conn = create_engine(db_s).connect()
 application = flask.Flask(__name__)
 api         = fr.Api(application)
 
+with open('years.txt') as fh:
+  years_l = fh.read().split()
+  
+with open('tkrlist.txt') as fh:
+  tkrlist_l = fh.read().split()
+  
 class Demo11(fr.Resource):
   def get(self):
     my_k_s = 'hello'
     my_v_s = 'world'
     return {my_k_s: my_v_s}
 api.add_resource(Demo11, '/demo11.json')
+
+class Tkrlist(fr.Resource):
+  def get(self):
+    return {'tkrlist': tkrlist_l}
+api.add_resource(Tkrlist, '/tkrlist')
+
+class Years(fr.Resource):
+  def get(self):
+    return {'years': years_l}
+api.add_resource(Years, '/years')
 
 if __name__ == "__main__":
   port = int(os.environ.get("PORT", 5000))

@@ -7,7 +7,6 @@ postgres account:
   db_s = 'postgres://tkrapi:tkrapi@127.0.0.1/tkrapi'
   
 list of resources:
-  /tkrlist
   /istkr/IBM
   /sklinear/IBM/25/2016-11?features='pctlag1,slope4,moy'
   /keras_linear/IBM/25/2016-11?features='pctlag1,slope4,moy'
@@ -52,3 +51,8 @@ Enhance request_tkr.bash so it calls retry_request_tkr.bash to get tkrs which ne
 Write retry_curl_tkrs.bash to get tkrs which need 2nd try
 Enhance curl_tkrs.bash so it calls retry_curl_tkrs.bash  to get tkrs which need 2nd try
 
+
+list of resources:
+  /tkrlist
+  /years
+  
