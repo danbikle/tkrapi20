@@ -59,6 +59,9 @@ class Tkrprices(fr.Resource):
   This class should list prices for a tkr.
   """
   def get(self):
+    # I should get csv_s from db
+    sql_s = '''select csv from tkrprices
+      where tkr      = %s'''
     return {'tkrprices': [1,2,3]}
 api.add_resource(Tkrprices, '/tkrprices/IBM')
 
