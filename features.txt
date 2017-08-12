@@ -7,6 +7,7 @@ postgres account:
   db_s = 'postgres://tkrapi:tkrapi@127.0.0.1/tkrapi'
   
 list of resources:
+  /tkrprices/IBM
   /istkr/IBM
   /sklinear/IBM/25/2016-11?features='pctlag1,slope4,moy'
   /keras_linear/IBM/25/2016-11?features='pctlag1,slope4,moy'
