@@ -10,6 +10,7 @@ curl localhost:5011/demo11.json
 curl localhost:5011/static/hello.json
 """
 
+import pdb
 import os
 import flask
 import flask_restful as fr
@@ -58,12 +59,16 @@ class Tkrprices(fr.Resource):
   """
   This class should list prices for a tkr.
   """
-  def get(self):
+  def get(self, tkr):
     # I should get csv_s from db
-    sql_s = '''select csv from tkrprices
-      where tkr      = %s'''
-    return {'tkrprices': [1,2,3]}
-api.add_resource(Tkrprices, '/tkrprices/IBM')
+    sql_s       = '''select csv from tkrprices
+      where tkr = %s  LIMIT 1'''
+    result      = conn.execute(sql_s,[tkr])
+    if not result.rowcount:
+      return {'no': 'data found'}    
+    myrow       = [row for row in result][0]
+    return {'tkrprices': myrow.csv.split()}
+api.add_resource(Tkrprices, '/tkrprices/<tkr>')
 
 if __name__ == "__main__":
   port = int(os.environ.get("PORT", 5000))
