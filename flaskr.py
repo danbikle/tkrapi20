@@ -29,6 +29,9 @@ with open('tkrlist.txt') as fh:
   tkrlist_l = fh.read().split()
   
 class Demo11(fr.Resource):
+  """
+  This class should be a simple syntax demo.
+  """
   def get(self):
     my_k_s = 'hello'
     my_v_s = 'world'
@@ -36,14 +39,28 @@ class Demo11(fr.Resource):
 api.add_resource(Demo11, '/demo11.json')
 
 class Tkrlist(fr.Resource):
+  """
+  This class should list all the tkrs in tkrlist.txt
+  """
   def get(self):
     return {'tkrlist': tkrlist_l}
 api.add_resource(Tkrlist, '/tkrlist')
 
 class Years(fr.Resource):
+  """
+  This class should list all the years in years.txt
+  """
   def get(self):
     return {'years': years_l}
 api.add_resource(Years, '/years')
+
+class Tkrprices(fr.Resource):
+  """
+  This class should list prices for a tkr.
+  """
+  def get(self):
+    return {'tkrprices': [1,2,3]}
+api.add_resource(Tkrprices, '/tkrprices/IBM')
 
 if __name__ == "__main__":
   port = int(os.environ.get("PORT", 5000))
