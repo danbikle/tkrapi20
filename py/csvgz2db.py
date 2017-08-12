@@ -1,16 +1,16 @@
 """
-demo_csvgz2db.py
+csvgz2db.py
 
-This script should demo how to insert a csv.gz file into a table.
+This script should insert csv.gz files into a table.
 
 Demo:
-~/anaconda3/bin/python demo_csvgz2db.py
+~/anaconda3/bin/python csvgz2db.py
 """
 
-import pandas as pd
-import pdb
-from sqlalchemy import create_engine
 import glob
+import pandas as pd
+from sqlalchemy import create_engine
+
 
 # I should connect to the DB
 db_s = 'postgres://tkrapi:tkrapi@127.0.0.1/tkrapi'
@@ -34,7 +34,7 @@ for csvf_s in glob.glob('/tmp/request_tkr/csv/*.csv.gz'):
   conn.execute(sql_s)
 
 # I should check:
-# sql_s = "select tkr, csv from tkrprices" # limit 1"
+# sql_s = "select tkr, csv from tkrprices limit 1"
 # result = conn.execute(sql_s)
 # 
 # for row in result:
