@@ -47,6 +47,15 @@ class Tkrlist(fr.Resource):
     return {'tkrlist': tkrlist_l}
 api.add_resource(Tkrlist, '/tkrlist')
 
+class Istkr(fr.Resource):
+  """
+  This class should answer True, False given a tkr.
+  """
+  def get(self, tkr):
+    torf = tkr in tkrlist_l
+    return {'istkr': torf}
+api.add_resource(Istkr, '/istkr/<tkr>')
+
 class Years(fr.Resource):
   """
   This class should list all the years in years.txt

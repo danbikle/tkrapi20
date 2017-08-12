@@ -3,7 +3,6 @@
 NOT DONE YET:
 
 list of resources:
-  /tkrprices/IBM
   /istkr/IBM
   /sklinear/IBM/25/2016-11?features='pctlag1,slope4,moy'
   /keras_linear/IBM/25/2016-11?features='pctlag1,slope4,moy'
@@ -52,6 +51,7 @@ Enhance curl_tkrs.bash so it calls retry_curl_tkrs.bash  to get tkrs which need 
 list of resources:
   /tkrlist
   /years
+  /tkrprices/IBM
   
 
 postgres account:
