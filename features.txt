@@ -2,10 +2,6 @@
 
 NOT DONE YET:
 
-postgres account:
-  tkrapi/tkrapi
-  db_s = 'postgres://tkrapi:tkrapi@127.0.0.1/tkrapi'
-  
 list of resources:
   /tkrprices/IBM
   /istkr/IBM
@@ -56,4 +52,12 @@ Enhance curl_tkrs.bash so it calls retry_curl_tkrs.bash  to get tkrs which need 
 list of resources:
   /tkrlist
   /years
+  
+
+postgres account:
+  tkrapi/tkrapi
+  syntax:
+    create role tkrapi with login super user password 'tkrapi';
+    create database tkrapi;
+  db_s = 'postgres://tkrapi:tkrapi@127.0.0.1/tkrapi'
   
