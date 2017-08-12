@@ -11,5 +11,5 @@
 -- psql -f cr_tkrapi.sql
 
 create role tkrapi with login superuser password 'tkrapi';
-create database ttkrapi;
+create database tkrapi;
 
