@@ -24,7 +24,7 @@ sql_s = "create table tkrprices(tkr varchar, csv text)"
 conn.execute(sql_s)
 
 # I should read csv.gz files:
-for csvf_s in glob.glob('/tmp/request_tkr/csv/*.csv.gz'):
+for csvf_s in sorted(glob.glob('/tmp/request_tkr/csv/*.csv.gz')):
   # I should avoid files which are too small:
   sz_i = os.path.getsize(csvf_s)
   print(csvf_s, sz_i)
