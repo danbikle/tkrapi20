@@ -30,6 +30,7 @@ for row in result:
     feat_df.head()
     pdb.set_trace()
     feat_df['pct_lead'] = 100.0*((feat_df.cp.shift(-1) - feat_df.cp) / feat_df.cp).fillna(0)
+    feat_df['pct_lag1'] = feat_df.pct_lead.shift(1).fillna(0)
     print(row.tkr)
     
 'bye'
