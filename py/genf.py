@@ -7,6 +7,7 @@ Demo:
 ~/anaconda3/bin/python genf.py
 """
 
+import io
 import pdb
 import pandas     as pd
 import sqlalchemy as sql
@@ -22,6 +23,13 @@ result  = conn.execute(sql_sql)
 if not result.rowcount:
   sys.exit(1)
 for row in result:
+    # I should get csv_s
+    pdb.set_trace()
+    csv_s = row.csv
+    csv_s[:99]
+    tkr_df = pd.read_csv(io.StringIO(csv_s),names=('cdate','cp'))
+    tkr_df.head()
+    pct_lead_sr = 100.0*((tkr_df.cp.shift(-1) - tkr_df.cp) / tkr_df.cp).fillna(0)
     print(row.tkr)
     
 'bye'
