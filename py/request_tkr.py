@@ -78,12 +78,13 @@ with requests.Session() as ssn:
       time.sleep(3)
       csv_r        = ssn.get(csvurl_s, headers=headers_d)
       csv_s        = csv_r.content.decode("utf-8")
-      csv_status_i = csv_r.status_code
-      # I should write the csv_s to csv file:
-      csvf_s       = outdirc+type_s+'/'+tkr+'.csv'
-      with open(csvf_s,'w') as fh:
-        fh.write(csv_s)
-        print('Wrote:', csvf_s)
-          
+      if (csv_r.status_code == 200):
+        # I should write the csv_s to csv file:
+        csvf_s       = outdirc+type_s+'/'+tkr+'.csv'
+        with open(csvf_s,'w') as fh:
+          fh.write(csv_s)
+          print('Wrote:', csvf_s)
+      else:
+        print('GET request of ',tkr, ' failed. Maybe try later.')
 'bye'
 
