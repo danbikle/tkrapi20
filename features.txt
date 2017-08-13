@@ -1,9 +1,9 @@
 ~/tkrapi20/features.txt
 
 NOT DONE YET:
-
+  genf.py
+  
 list of resources:
-  /istkr/IBM
   /sklinear/IBM/25/2016-11?features='pctlag1,slope4,moy'
   /keras_linear/IBM/25/2016-11?features='pctlag1,slope4,moy'
   
@@ -52,7 +52,7 @@ list of resources:
   /tkrlist
   /years
   /tkrprices/IBM
-  
+  /istkr/IBM  
 
 postgres account:
   tkrapi/tkrapi
