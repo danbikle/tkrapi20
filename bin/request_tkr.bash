@@ -4,6 +4,8 @@
 
 # This script should call request_tkr.py
 # which should help me collect prices into CSV files
+# Demo:
+# bin/request_tkr.bash
 
 PYTHON=${HOME}/anaconda3/bin/python
 SCRIPT=`realpath $0`
