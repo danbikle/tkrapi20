@@ -1,6 +1,8 @@
 ~/tkrapi20/features.txt
 
 NOT DONE YET:
+  request splits
+  unsplit.py
   genf.py
   
 list of resources:
