@@ -90,13 +90,13 @@ with requests.Session() as ssn:
         print('GET request of ',tkr, ' failed. So I am trying again...')
         with requests.Session() as ssn2:
           tkr1_r = ssn2.get(url1_s, headers=headers_d)
-          time.sleep(5) # slower this time
+          time.sleep(6) # slower this time
           tkr2_r     = ssn2.get(url2_s, headers=headers_d)
           html2_s    = tkr2_r.content.decode("utf-8")
           pattern_ma = re.search(pattern_re, html2_s)
           crumb_s    = pattern_ma[2].replace('"','')
           csvurl_s   = qurl_s+tkr+p1p2_s+nowutime_s+ie_s+type_s+'&crumb='+crumb_s
-          time.sleep(5)
+          time.sleep(6)
           csv2_r = ssn2.get(csvurl_s, headers=headers_d)
           csv2_s = csv_r.content.decode("utf-8")
           if (csv2_r.status_code == 200):
