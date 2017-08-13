@@ -39,19 +39,22 @@ for type_s in csv_type_l:
 
 # I should prepare to talk to Yahoo:
 user_agent_s = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36'
-url1_s        = 'https://finance.yahoo.com/quote/'+tkr
-url2_s        = url1_s+'/history?p='+tkr
+url1_s       = 'https://finance.yahoo.com/quote/'+tkr
+url2_s       = url1_s+'/history?p='+tkr
 headers_d    = {'User-Agent': user_agent_s}
+qurl_s       = 'https://query1.finance.yahoo.com/v7/finance/download/'
+p1p2_s       = '?period1=-631123200&period2='
+ie_s         = '&interval=1d&events='
 
 with requests.Session() as ssn:
     tkr1_r = ssn.get(url1_s, headers=headers_d)
     time.sleep(3)
     tkr2_r = ssn.get(url2_s, headers=headers_d)
     html_s = tkr2_r.content.decode("utf-8")
-    # debug
+    # use4debug
     with open(outdirh+tkr+'.html','w') as fh:
         fh.write(html_s)
-    # debug
+    # use4debug
     # I should extract the value of crumb from a string like this:
     # lhs_html_s+'"CrumbStore":{"crumb":"z6M4ACgDGXK"}'+rhs_html_s
     # Here is how I do it with sed:
@@ -73,7 +76,7 @@ with requests.Session() as ssn:
     csv_type_l = ['history']
     for type_s in csv_type_l:
       nowutime_s = datetime.datetime.now().strftime("%s")
-      csvurl_s   = 'https://query1.finance.yahoo.com/v7/finance/download/'+tkr+'?period1=-631123200&period2='+nowutime_s+'&interval=1d&events='+type_s+'&crumb='+crumb_s
+      csvurl_s   = qurl_s+tkr+p1p2_s+nowutime_s+ie_s+type_s+'&crumb='+crumb_s
       # Server needs time to remember the cookie-crumb-pair it just served:
       time.sleep(3)
       csv_r        = ssn.get(csvurl_s, headers=headers_d)
@@ -85,6 +88,25 @@ with requests.Session() as ssn:
           fh.write(csv_s)
           print('Wrote:', csvf_s)
       else:
-        print('GET request of ',tkr, ' failed. Maybe try later.')
+        print('GET request of ',tkr, ' failed. So I am trying again...')
+        with requests.Session() as ssn2:
+          tkr1_r = ssn2.get(url1_s, headers=headers_d)
+          time.sleep(5)
+          tkr2_r     = ssn2.get(url2_s, headers=headers_d)
+          html2_s    = tkr2_r.content.decode("utf-8")
+          pattern_ma = re.search(pattern_re, html2_s)
+          crumb_s    = pattern_ma[2].replace('"','')
+          csvurl_s = qurl_s+tkr+p1p2_s+nowutime_s+ie_s+type_s+'&crumb='+crumb_s
+          time.sleep(5)
+          csv2_r = ssn2.get(csvurl_s, headers=headers_d)
+          csv2_s = csv_r.content.decode("utf-8")
+          if (csv2_r.status_code == 200):
+            csvf_s       = outdirc+type_s+'/'+tkr+'.csv'
+            with open(csvf_s,'w') as fh:
+              fh.write(csv2_s)
+              print('Wrote:', csvf_s)
+          else:
+            print('GET request of ',tkr, ' failed. Maybe try later.')
+
 'bye'
 
