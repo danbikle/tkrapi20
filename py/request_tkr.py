@@ -22,8 +22,10 @@ tkr = '^GSPC' # default
 tkr = sys.argv[1]
 
 # I should ensure the output folders exist
-outdirh = '/tmp/request_tkr/html/'
-outdirc = '/tmp/request_tkr/csv/'
+homef   = os.environ['HOME'] # Like /home/ann
+outdirc = homef+'/tkrcsv/'
+outdirh = homef+'/tkrhtml/'
+
 os.system('mkdir -p '+outdirh+' '+outdirc)
 
 csv_types_l = ['div','history','split']
