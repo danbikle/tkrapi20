@@ -10,6 +10,7 @@ SCRIPT=`realpath $0`
 SCRIPTPATH=`dirname $SCRIPT`
 PARPATH=${SCRIPTPATH}/..
 PYPATH=${PARPATH}/py
+OUTDIRC=${HOME}'/tkrcsv/history'
 
 date
 echo busy...
@@ -20,9 +21,7 @@ do
     echo busy with                   $TKR
     $PYTHON ${PYPATH}/request_tkr.py $TKR
     # I should remove null-strings:
-    sed -i '/null/d' /tmp/request_tkr/csv/${TKR}.csv
-    gzip -f          /tmp/request_tkr/csv/${TKR}.csv
-    gzip -f         /tmp/request_tkr/html/${TKR}.html
+    sed -i '/null/d' ${OUTDIRC}/${TKR}.csv
 done
 date
 
