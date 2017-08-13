@@ -13,7 +13,6 @@ PYPATH=${PARPATH}/py
 
 date
 echo busy...
-#cat ${PARPATH}/tkrs.txt|while read TKR
 cat ${PARPATH}/tkrlist.txt|while read TKR
 do
     echo busy with                   $TKR
