@@ -61,15 +61,15 @@ with requests.Session() as ssn:
     # SOF syntax does not work for me but it pointed me in the right direction.
     csv_type_l = ['history']
     for type_s in csv_type_l:
-    nowutime_s = datetime.datetime.now().strftime("%s")
-    csvurl_s   = 'https://query1.finance.yahoo.com/v7/finance/download/'+tkr+'?period1=-631123200&period2='+nowutime_s+'&interval=1d&events='+type_s+'&crumb='+crumb_s
-    # Server needs time to remember the cookie-crumb-pair it just served:
-    time.sleep(3)
-    csv_r      = ssn.get(csvurl_s, headers=headers_d)
-    csv_s      = csv_r.content.decode("utf-8")
-    csv_status_i = csv_r.status_code
-    # I should write the csv_s to csv file:
-    with open(outdirc+tkr+'.csv','w') as fh:
-        fh.write(csv_s)
+      nowutime_s = datetime.datetime.now().strftime("%s")
+      csvurl_s   = 'https://query1.finance.yahoo.com/v7/finance/download/'+tkr+'?period1=-631123200&period2='+nowutime_s+'&interval=1d&events='+type_s+'&crumb='+crumb_s
+      # Server needs time to remember the cookie-crumb-pair it just served:
+      time.sleep(3)
+      csv_r      = ssn.get(csvurl_s, headers=headers_d)
+      csv_s      = csv_r.content.decode("utf-8")
+      csv_status_i = csv_r.status_code
+      # I should write the csv_s to csv file:
+      with open(outdirc+tkr+'.csv','w') as fh:
+          fh.write(csv_s)
 'bye'
 
