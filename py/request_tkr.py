@@ -79,11 +79,11 @@ with requests.Session() as ssn:
       csvurl_s   = qurl_s+tkr+p1p2_s+nowutime_s+ie_s+type_s+'&crumb='+crumb_s
       # Server needs time to remember the cookie-crumb-pair it just served:
       time.sleep(3)
-      csv_r        = ssn.get(csvurl_s, headers=headers_d)
-      csv_s        = csv_r.content.decode("utf-8")
+      csv_r  = ssn.get(csvurl_s, headers=headers_d)
+      csv_s  = csv_r.content.decode("utf-8")
+      csvf_s = outdirc+type_s+'/'+tkr+'.csv'
       if (csv_r.status_code == 200):
         # I should write the csv_s to csv file:
-        csvf_s       = outdirc+type_s+'/'+tkr+'.csv'
         with open(csvf_s,'w') as fh:
           fh.write(csv_s)
           print('Wrote:', csvf_s)
@@ -91,17 +91,16 @@ with requests.Session() as ssn:
         print('GET request of ',tkr, ' failed. So I am trying again...')
         with requests.Session() as ssn2:
           tkr1_r = ssn2.get(url1_s, headers=headers_d)
-          time.sleep(5)
+          time.sleep(5) # slower this time
           tkr2_r     = ssn2.get(url2_s, headers=headers_d)
           html2_s    = tkr2_r.content.decode("utf-8")
           pattern_ma = re.search(pattern_re, html2_s)
           crumb_s    = pattern_ma[2].replace('"','')
-          csvurl_s = qurl_s+tkr+p1p2_s+nowutime_s+ie_s+type_s+'&crumb='+crumb_s
+          csvurl_s   = qurl_s+tkr+p1p2_s+nowutime_s+ie_s+type_s+'&crumb='+crumb_s
           time.sleep(5)
           csv2_r = ssn2.get(csvurl_s, headers=headers_d)
           csv2_s = csv_r.content.decode("utf-8")
           if (csv2_r.status_code == 200):
-            csvf_s       = outdirc+type_s+'/'+tkr+'.csv'
             with open(csvf_s,'w') as fh:
               fh.write(csv2_s)
               print('Wrote:', csvf_s)
