@@ -73,7 +73,7 @@ with requests.Session() as ssn:
     # https://stackoverflow.com/questions/44030983/yahoo-finance-url-not-working
     # "CrumbStore":\{"crumb":"(?<crumb>[^"]+)"\}
     # SOF syntax does not work for me but it pointed me in the right direction.
-    csv_type_l = ['history']
+    csv_type_l = ['history','split']
     for type_s in csv_type_l:
       nowutime_s = datetime.datetime.now().strftime("%s")
       csvurl_s   = qurl_s+tkr+p1p2_s+nowutime_s+ie_s+type_s+'&crumb='+crumb_s
