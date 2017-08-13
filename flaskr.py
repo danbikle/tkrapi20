@@ -74,7 +74,7 @@ class Tkrprices(fr.Resource):
       where tkr = %s  LIMIT 1'''
     result      = conn.execute(sql_s,[tkr])
     if not result.rowcount:
-      return {'no': 'data found'}    
+      return {'no': 'data found'}  
     myrow       = [row for row in result][0]
     return {'tkrprices': myrow.csv.split()}
 api.add_resource(Tkrprices, '/tkrprices/<tkr>')

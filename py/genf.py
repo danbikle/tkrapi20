@@ -23,14 +23,18 @@ result  = conn.execute(sql_sql)
 if not result.rowcount:
   sys.exit(1)
 for row in result:
-    # I should get csv_s
-    csv_s = row.csv
-    csv_s[:99]
-    feat_df = pd.read_csv(io.StringIO(csv_s),names=('cdate','cp'))
-    feat_df.head()
-    pdb.set_trace()
+    # I should convert each row into a DataFrame so I can generate features:
+    feat_df = pd.read_csv(io.StringIO(row.csv),names=('cdate','cp'))
+    # But first, I should get the dependent variable:
     feat_df['pct_lead'] = 100.0*((feat_df.cp.shift(-1) - feat_df.cp) / feat_df.cp).fillna(0)
-    feat_df['pct_lag1'] = feat_df.pct_lead.shift(1).fillna(0)
-    print(row.tkr)
+    # Now, I should get features:
+    feat_df['pct_lag1'] = 100.0*((feat_df.cp - feat_df.cp.shift(1))/feat_df.cp.shift(1)).fillna(0)
+    feat_df['pct_lag2'] = 100.0*((feat_df.cp - feat_df.cp.shift(2))/feat_df.cp.shift(2)).fillna(0)
+    feat_df['pct_lag4'] = 100.0*((feat_df.cp - feat_df.cp.shift(4))/feat_df.cp.shift(4)).fillna(0)
+    feat_df['pct_lag8'] = 100.0*((feat_df.cp - feat_df.cp.shift(8))/feat_df.cp.shift(8)).fillna(0)
+    # debug
+    pdb.set_trace()
+    feat_df.to_csv('/tmp/tmp.csv',index=False, float_format="%.3f")
+    # debug
     
 'bye'
