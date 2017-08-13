@@ -9,6 +9,7 @@ Demo:
 
 import io
 import pdb
+import numpy      as np
 import pandas     as pd
 import sqlalchemy as sql
 
@@ -23,6 +24,11 @@ result  = conn.execute(sql_sql)
 if not result.rowcount:
   sys.exit(1)
 for row in result:
+    print(row.tkr)
+    pdb.set_trace()
+    'bye'
+def nada():
+
     # I should convert each row into a DataFrame so I can generate features:
     feat_df = pd.read_csv(io.StringIO(row.csv),names=('cdate','cp'))
     # But first, I should get the dependent variable:
@@ -33,7 +39,6 @@ for row in result:
     feat_df['pct_lag4'] = 100.0*((feat_df.cp - feat_df.cp.shift(4))/feat_df.cp.shift(4)).fillna(0)
     feat_df['pct_lag8'] = 100.0*((feat_df.cp - feat_df.cp.shift(8))/feat_df.cp.shift(8)).fillna(0)
     # debug
-    pdb.set_trace()
     feat_df.to_csv('/tmp/tmp.csv',index=False, float_format="%.3f")
     # debug
     

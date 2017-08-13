@@ -21,8 +21,11 @@ do
 	echo I should retry to request it:
 	TKR=`basename $FN | sed 's/.csv.gz//'`
 	$PYTHON ${PYPATH}/request_tkr.py    $TKR
-        gzip -f       /tmp/request_tkr/csv/${TKR}.csv
-        ls -la        /tmp/request_tkr/csv/${TKR}.csv.gz
+        # I should remove null-strings:
+        sed -i '/null/d' /tmp/request_tkr/csv/${TKR}.csv
+        gzip -f          /tmp/request_tkr/csv/${TKR}.csv
+        gzip -f         /tmp/request_tkr/html/${TKR}.html
+        ls -la           /tmp/request_tkr/csv/${TKR}.csv.gz
     fi
 done
     
