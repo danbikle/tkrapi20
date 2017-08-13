@@ -11,6 +11,7 @@ SCRIPTPATH=`dirname $SCRIPT`
 PARPATH=${SCRIPTPATH}/..
 PYPATH=${PARPATH}/py
 OUTDIRC=${HOME}'/tkrcsv/history'
+mkdir -p $OUTDIRC
 
 date
 echo busy...
