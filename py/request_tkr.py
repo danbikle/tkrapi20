@@ -6,7 +6,7 @@ Ref:
 https://stackoverflow.com/questions/21736970/using-requests-module-how-to-handle-set-cookie-in-request-response
 
 Demo:
-python request_tkr.py IBM
+~/anaconda3/bin/python request_tkr.py IBM
 """
 
 import datetime
@@ -25,6 +25,13 @@ tkr = sys.argv[1]
 outdirh = '/tmp/request_tkr/html/'
 outdirc = '/tmp/request_tkr/csv/'
 os.system('mkdir -p '+outdirh+' '+outdirc)
+
+csv_types_l = ['div','history','split']
+for type_s in csv_types_l:
+  os.system('mkdir -p '+outdirc+type_s)
+stophere
+
+
 
 # I should prepare to talk to Yahoo:
 user_agent_s = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36'
