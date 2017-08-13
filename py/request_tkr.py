@@ -17,7 +17,12 @@ import sys
 import time
 import pdb
 
-tkr = '^GSPC' # default
+if (len(sys.argv) != 2):
+  print('I see a problem. Maybe you forgot a tkr?')
+  print('Demo:')
+  print('~/anaconda3/bin/python '+sys.argv[0]+' IBM')
+  sys.exit(1)
+  
 # I should get the tkr from the command line
 tkr = sys.argv[1]
 
@@ -28,12 +33,9 @@ outdirh = homef+'/tkrhtml/'
 
 os.system('mkdir -p '+outdirh+' '+outdirc)
 
-csv_types_l = ['div','history','split']
-for type_s in csv_types_l:
+csv_type_l = ['div','history','split']
+for type_s in csv_type_l:
   os.system('mkdir -p '+outdirc+type_s)
-stophere
-
-
 
 # I should prepare to talk to Yahoo:
 user_agent_s = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36'
@@ -59,10 +61,10 @@ with requests.Session() as ssn:
     
     # Here is a different approach with Python.
     # I should create a regexp with 2-groups.
+    # Typically, a group is the syntax inside parenthesis.
     # I should find crumb_s in the 2nd group.
-    # This is a bit different than how I used sed which cut the string into 3 pieces instead of 2:
     pattern_re = r'(CrumbStore":{"crumb":")(.+?")'
-    pattern_ma = re.search(pattern_re, html_s)
+    pattern_ma = re.search(pattern_re, html_s) # The crumb I want is in pattern_ma[2].
     crumb_s    = pattern_ma[2].replace('"','') # erase " on end of crumb
     # ref:
     # https://stackoverflow.com/questions/44030983/yahoo-finance-url-not-working
@@ -74,11 +76,14 @@ with requests.Session() as ssn:
       csvurl_s   = 'https://query1.finance.yahoo.com/v7/finance/download/'+tkr+'?period1=-631123200&period2='+nowutime_s+'&interval=1d&events='+type_s+'&crumb='+crumb_s
       # Server needs time to remember the cookie-crumb-pair it just served:
       time.sleep(3)
-      csv_r      = ssn.get(csvurl_s, headers=headers_d)
-      csv_s      = csv_r.content.decode("utf-8")
+      csv_r        = ssn.get(csvurl_s, headers=headers_d)
+      csv_s        = csv_r.content.decode("utf-8")
       csv_status_i = csv_r.status_code
       # I should write the csv_s to csv file:
-      with open(outdirc+tkr+'.csv','w') as fh:
-          fh.write(csv_s)
+      csvf_s       = outdirc+type_s+'/'+tkr+'.csv'
+      with open(csvf_s,'w') as fh:
+        fh.write(csv_s)
+        print('Wrote:', csvf_s)
+          
 'bye'
 
