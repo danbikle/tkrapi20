@@ -16,10 +16,7 @@ OUTDIRC=${HOME}'/tkrcsv/history'
 mkdir -p $OUTDIRC
 
 date
-echo busy...
-# cat ${PARPATH}/tkrlist.txt|while read TKR
-# debug:
-cat ${PARPATH}/tkrlist.txt|grep AA|while read TKR
+cat ${PARPATH}/tkrlist.txt|while read TKR
 do
     echo busy with                   $TKR
     $PYTHON ${PYPATH}/request_tkr.py $TKR
