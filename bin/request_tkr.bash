@@ -13,7 +13,9 @@ PYPATH=${PARPATH}/py
 
 date
 echo busy...
-cat ${PARPATH}/tkrlist.txt|while read TKR
+# cat ${PARPATH}/tkrlist.txt|while read TKR
+# debug:
+cat ${PARPATH}/tkrlist.txt|grep AA|while read TKR
 do
     echo busy with                   $TKR
     $PYTHON ${PYPATH}/request_tkr.py $TKR
@@ -23,6 +25,10 @@ do
     gzip -f         /tmp/request_tkr/html/${TKR}.html
 done
 date
+
+#debug
+exit
+#debug
 
 ${SCRIPTPATH}/retry_request_tkr.bash
 ${SCRIPTPATH}/retry_request_tkr.bash
