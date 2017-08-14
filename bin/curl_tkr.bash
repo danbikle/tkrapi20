@@ -15,10 +15,14 @@ then
     exit 1
 fi
 
+SCRIPT=`realpath $0`
+SCRIPTPATH=`dirname $SCRIPT`
+cd ${SCRIPTPATH}/../
+. env.bash
+
 TKR=$1
 echo Busy with: $TKR
-CSVDIR=/tmp/curl_tkr
-mkdir -p $CSVDIR
+mkdir -p $TKRCSVD $TKRCSVH $TKRCSVS
 CJAR=/tmp/curl_tkr.bash.cookiejar.txt
 
 rm -f ${CJAR}
@@ -52,24 +56,51 @@ sleep 2
 crum=`sed -n '/CrumbStore/s/^.*CrumbStore":{"crumb":"//p' /tmp/tkr1.html | sed -n '1s/"}.*//p'`
 #sed -n '/CrumbStore/s/^.*CrumbStore":{"crumb":"//p' /tmp/tkr1.html|sed -n '1s/"}.*//p' > /tmp/c.txt
 
-sleep 2
+sleep 3
 
-# https://query1.finance.yahoo.com/v7/finance/download/IBM?period1=-252432000&period2=1501743600&interval=1d&events=history&crumb=9cxzOy3G0UF
-
-# https://query1.finance.yahoo.com/v7/finance/download/%5EGSPC?period1=-631123200&period2=1501743600&interval=1d&events=history&crumb=9cxzOy3G0UF
+# https://query1.finance.yahoo.com/v7/finance/download/IBM?period1=-631123200&period2=1501743600&interval=1d&events=history&crumb=9cxzOy3G0UF
 
 # I should get the current time as a unix time string:
 nowutime=`date +%s`
 
-# I should get the csv file now:
+QURL0="https://query1.finance.yahoo.com/v7/finance/download/${TKR}?"
+QURLD="${QURL0}period1=-631123200&period2=${nowutime}&interval=1d&events=div&crumb=${crum}"
+QURLH="${QURL0}period1=-631123200&period2=${nowutime}&interval=1d&events=history&crumb=${crum}"
+QURLS="${QURL0}period1=-631123200&period2=${nowutime}&interval=1d&events=split&crumb=${crum}"
+
+echo $QURL
+
+# I should get csv files now:
+
+# Dividends:
 /usr/bin/curl --verbose \
               --cookie     ${CJAR} \
               --cookie-jar ${CJAR} \
               --user-agent 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36' \
-              "https://query1.finance.yahoo.com/v7/finance/download/${TKR}?period1=-631123200&period2=${nowutime}&interval=1d&events=history&crumb=${crum}" \
-              > ${CSVDIR}/${TKR}.csv \
+              $QURLD \
+              > ${TKRCSVD}/${TKR}.csv \
               2> /tmp/s2.txt
+sleep 1
 
-ls -l ${CSVDIR}/${TKR}.csv
+# History:
+/usr/bin/curl --verbose \
+              --cookie     ${CJAR} \
+              --cookie-jar ${CJAR} \
+              --user-agent 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36' \
+              $QURLH \
+              > ${TKRCSVH}/${TKR}.csv \
+              2> /tmp/s2.txt
+sleep 1
+
+# Splits:
+/usr/bin/curl --verbose \
+              --cookie     ${CJAR} \
+              --cookie-jar ${CJAR} \
+              --user-agent 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36' \
+              $QURLS \
+              > ${TKRCSVS}/${TKR}.csv \
+              2> /tmp/s2.txt
+# Files look okay?
+ls -l ${TKRCSVD}/${TKR}.csv ${TKRCSVH}/${TKR}.csv ${TKRCSVS}/${TKR}.csv
 
 exit

@@ -8,17 +8,15 @@
 
 SCRIPT=`realpath $0`
 SCRIPTPATH=`dirname $SCRIPT`
-PARPATH=${SCRIPTPATH}/..
+cd ${SCRIPTPATH}/../
+. env.bash
 
-# cat ${PARPATH}/tkrs.txt | while read TKR
 cat ${PARPATH}/tkrlist.txt | while read TKR
 do
     ${SCRIPTPATH}/curl_tkr.bash $TKR
-    gzip -f      /tmp/curl_tkr/${TKR}.csv
-    ls -la       /tmp/curl_tkr/${TKR}.csv.gz
 done
 
-# Some of the tks might need more effort
+# Some of the tkrs might need more effort
 
 ${SCRIPTPATH}/retry_curl_tkrs.bash
 ${SCRIPTPATH}/retry_curl_tkrs.bash
