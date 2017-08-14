@@ -16,13 +16,12 @@ from sqlalchemy import create_engine
 # I should connect to the DB
 db_s = os.environ['PGURL']
 
-pdb.set_trace()
 conn = create_engine(db_s).connect()
 
 sql_s = "drop table if exists tkrprices"
 conn.execute(sql_s)
 
-sql_s = "create table tkrprices(tkr varchar, csvh text)"
+sql_s = "create table tkrprices(tkr varchar, csvd text, csvh text, csvs text)"
 conn.execute(sql_s)
 
 # I should read csv files:
@@ -37,7 +36,11 @@ for csvf_s in sorted(glob.glob(os.environ['TKRCSVH']+'/AB*.csv')):
     csv0_s = csv_df.to_csv(index=False,header=False,columns=('Date','Close'),float_format='%.3f')
     csvh_s = "'"+csv0_s+"'"
     tkr_s  = "'"+tkr0_s+"'"
-    sql_s  = "insert into tkrprices(tkr,csvh)values("+tkr_s+","+csvh_s+")"
+    csvfs_s = os.environ['TKRCSVS']+'/'+tkr0_s+'.csv'
+    csvs_df = pd.read_csv(csvfs_s)
+    csvs0_s = csvs_df.to_csv(index=False,header=False)
+    csvs_s  = "'"+csvs0_s+"'"
+    sql_s   = "insert into tkrprices(tkr,csvh,csvs)values("+tkr_s+","+csvh_s+","+csvs_s+")"
     conn.execute(sql_s)
 
 # I should check:
@@ -53,6 +56,6 @@ for csvf_s in sorted(glob.glob(os.environ['TKRCSVH']+'/AB*.csv')):
 # select csvh from tkrprices where tkr='SNAP';
 # select substring(csvh from 0 for 144) from tkrprices where tkr='SNAP';
 # select tkr, substring(csvh from 0 for 22) from tkrprices;
-
+# select tkr, csvs from tkrprices;
 'bye'
 
