@@ -15,16 +15,18 @@ from sqlalchemy import create_engine
 
 # I should connect to the DB
 db_s = os.environ['PGURL']
+
+pdb.set_trace()
 conn = create_engine(db_s).connect()
 
 sql_s = "drop table if exists tkrprices"
 conn.execute(sql_s)
 
-sql_s = "create table tkrprices(tkr varchar, hcsv text)"
+sql_s = "create table tkrprices(tkr varchar, csvh text)"
 conn.execute(sql_s)
 
 # I should read csv files:
-for csvf_s in sorted(glob.glob(os.environ['TKRCSVH']+'/*.csv')):
+for csvf_s in sorted(glob.glob(os.environ['TKRCSVH']+'/AB*.csv')):
   # I should avoid files which are too small:
   sz_i = os.path.getsize(csvf_s)
   print(csvf_s, sz_i)
