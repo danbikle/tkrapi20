@@ -7,11 +7,15 @@ Given a splitdate, this script should find all prices at and after the splitdate
 Then uscp should be cp * split_ratio.
 
 Demo:
-python unsplit_prices.py
+. env.bash
+$PYTHON py/unsplit_prices.py
 """
 
 import pdb
-import pandas as pd
+import pandas     as pd
+import sqlalchemy as sql
 from   fractions import Fraction
+
+
 
 'bye'
