@@ -30,7 +30,8 @@ if not result.rowcount:
 
 for row in result:
   print(row.tkr)
-  sd_df = pd.read_csv(row.csvs)
-
+  sd_df = pd.read_csv(io.StringIO(row.csvs),names=('sdate','ratio'))
+  pdb.set_trace()
+  sd_df.head()
 
 'bye'
