@@ -15,6 +15,7 @@ from sqlalchemy import create_engine
 
 # I should connect to the DB
 db_s = 'postgres://tkrapi:tkrapi@127.0.0.1/tkrapi'
+db_s = os.environ['PGURL']
 conn = create_engine(db_s).connect()
 
 sql_s = "drop table if exists tkrprices"
