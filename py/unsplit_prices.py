@@ -22,12 +22,15 @@ db_s = os.environ['PGURL']
 conn = sql.create_engine(db_s).connect()
 
 # I should loop through the table full of tkrs, prices, split dates:
-sql_s   = "select tkr from tkrprices order by tkr" # where tkr like 'AA%'"
+sql_s   = "select tkr, csvh, csvs from tkrprices order by tkr" # where tkr like 'AA%'"
 sql_sql = sql.text(sql_s)
 result  = conn.execute(sql_sql)
+if not result.rowcount:
+  sys.exit(1)
 
 for row in result:
-    print(row.tkr)
+  print(row.tkr)
+  sd_df = pd.read_csv(row.csvs)
 
 
 'bye'

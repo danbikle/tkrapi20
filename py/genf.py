@@ -26,7 +26,7 @@ sql_s = "create table features(tkr varchar, csv text)"
 conn.execute(sql_s)
 
 # I should loop through the tkrprices table:
-sql_s   = "select tkr,csv from tkrprices WHERE tkr like 'AA%' order by tkr"
+sql_s   = "select tkr,csvh from tkrprices WHERE tkr like 'AA%' order by tkr"
 sql_sql = sql.text(sql_s)
 result  = conn.execute(sql_sql)
 if not result.rowcount:
@@ -34,7 +34,7 @@ if not result.rowcount:
 for row in result:
     print(row.tkr)
     # I should convert each row into a DataFrame so I can generate features:
-    feat_df = pd.read_csv(io.StringIO(row.csv),names=('cdate','cp'))
+    feat_df = pd.read_csv(io.StringIO(row.csvh),names=('cdate','cp'))
     # But first, I should get the dependent variable:
     feat_df['pct_lead'] = 100.0*((feat_df.cp.shift(-1) - feat_df.cp) / feat_df.cp).fillna(0)
     # Now, I should get features:
@@ -56,5 +56,5 @@ for row in result:
 # select       tkr  from features;
 # select count(tkr) from features;
 # select csv from features where tkr='FB';
-    
+
 'bye'
