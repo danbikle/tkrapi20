@@ -1,10 +1,10 @@
 """
-csvgz2db.py
+csv2db.py
 
 This script should insert csv.gz files into a table.
 
 Demo:
-~/anaconda3/bin/python csvgz2db.py
+~/anaconda3/bin/python csv2db.py
 """
 
 import glob

@@ -12,6 +12,6 @@ cd ${SCRIPTPATH}/../
 # I should request prices:
 ${SCRIPTPATH}/request_tkr.bash
 # I should load prices into db:
-$PYTHON ${PYPATH}/csvgz2db.py
+$PYTHON ${PYPATH}/csv2db.py
 
 exit

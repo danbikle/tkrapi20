@@ -22,6 +22,10 @@ from   fractions import Fraction
 db_s = os.environ['PGURL']
 conn = sql.create_engine(db_s).connect()
 
+# The data I need should be in a table named tkrprices
+# which should have been created by py/csv2db.py
+# which should have been called by bin/req2db.bash
+
 # I should loop through the table full of tkrs, prices, splitdates:
 sql_s   = "select tkr, csvh, csvs from tkrprices order by tkr" # where tkr like 'AA%'"
 sql_sql = sql.text(sql_s)
@@ -42,7 +46,7 @@ for rowtkr in result:
     # Above series tells me dates after splitdate.
     # Prices at and after splitdate should be multiplied by splitratio.
     cp_df.loc[dt_gte_sd_sr,'uscp'] = float(Fraction(rowsd.ratio)) * cp_df[dt_gte_sd_sr].uscp
-    print(rowsd.sdate)
   print(sd_df)
-  print(cp_df.tail())
+  print(cp_df.tail(1))
+  # I should insert uscp into db.
 'bye'
