@@ -37,14 +37,12 @@ for rowtkr in result:
   cp_df['uscp'] = cp_df.cp
   # For each tkr, the split dates should drive a loop:
   for rowsd in sd_df.itertuples():
-    pdb.set_trace()
     # I should create a Series full of Booleans:
     dt_gte_sd_sr = (cp_df.cdate >= rowsd.sdate)
     # Above series tells me dates after splitdate.
-    # Prices after splitdate should be multiplied by splitratio.
+    # Prices at and after splitdate should be multiplied by splitratio.
     cp_df.loc[dt_gte_sd_sr,'uscp'] = float(Fraction(rowsd.ratio)) * cp_df[dt_gte_sd_sr].uscp
-    dt_gte_sd_sr.head()
-    dt_gte_sd_sr.tail()
     print(rowsd.sdate)
-
+  print(sd_df)
+  print(cp_df.tail())
 'bye'
