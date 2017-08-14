@@ -11,6 +11,7 @@ Demo:
 $PYTHON py/unsplit_prices.py
 """
 
+import io
 import os
 import pdb
 import pandas     as pd
@@ -28,10 +29,13 @@ result  = conn.execute(sql_sql)
 if not result.rowcount:
   sys.exit(1)
 
-for row in result:
-  print(row.tkr)
-  sd_df = pd.read_csv(io.StringIO(row.csvs),names=('sdate','ratio'))
+for rowtkr in result:
+  print(rowtkr.tkr)
+  sd_df = pd.read_csv(io.StringIO(rowtkr.csvs),names=('sdate','ratio'))
   pdb.set_trace()
   sd_df.head()
+  # For each tkr, the split dates should drive a loop:
+  for rowsd in sd_df.itertuples():
+    print(rowsd.sdate)
 
 'bye'
