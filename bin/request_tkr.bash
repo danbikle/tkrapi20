@@ -7,13 +7,12 @@
 # Demo:
 # bin/request_tkr.bash
 
-PYTHON=${HOME}/anaconda3/bin/python
 SCRIPT=`realpath $0`
 SCRIPTPATH=`dirname $SCRIPT`
-PARPATH=${SCRIPTPATH}/..
-PYPATH=${PARPATH}/py
-OUTDIRC=${HOME}'/tkrcsv/history'
-mkdir -p $OUTDIRC
+cd ${SCRIPTPATH}/../
+. env.bash
+
+mkdir -p $TKRCSVD $TKRCSVH $TKRCSVS
 
 date
 cat ${PARPATH}/tkrlist.txt|while read TKR
@@ -21,7 +20,7 @@ do
     echo busy with                   $TKR
     $PYTHON ${PYPATH}/request_tkr.py $TKR
     # I should remove null-strings:
-    sed -i '/null/d' ${OUTDIRC}/${TKR}.csv
+    sed -i '/null/d' ${TKRCSVH}/${TKR}.csv
 done
 date
 

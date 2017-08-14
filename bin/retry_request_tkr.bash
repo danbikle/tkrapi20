@@ -4,14 +4,17 @@
 
 # This script should loop through a folder full of CSV files and maybe feed some to request_tkr.bash
 
-PYTHON=${HOME}/anaconda3/bin/python
 SCRIPT=`realpath $0`
 SCRIPTPATH=`dirname $SCRIPT`
-PARPATH=${SCRIPTPATH}/..
-PYPATH=${PARPATH}/py
+cd ${SCRIPTPATH}/../
+. env.bash
+
+mkdir -p $TKRCSVD $TKRCSVH $TKRCSVS
+
+date
 
 # In bash how to loop through a folder of files?
-for FN in /tmp/request_tkr/csv/*.csv.gz
+for FN in ${TKRCSVH}/*.csv
 do
     fsz_s=`ls -1s $FN | cut -c1-3`
     if [ "$fsz_s" = '4 /' ]
@@ -19,14 +22,13 @@ do
 	echo This file should be larger:
 	ls -l $FN
 	echo I should retry to request it:
-	TKR=`basename $FN | sed 's/.csv.gz//'`
-	$PYTHON ${PYPATH}/request_tkr.py    $TKR
+	TKR=`basename $FN | sed 's/.csv//'`
+	$PYTHON ${PYPATH}/request_tkr.py $TKR
         # I should remove null-strings:
-        sed -i '/null/d' /tmp/request_tkr/csv/${TKR}.csv
-        gzip -f          /tmp/request_tkr/csv/${TKR}.csv
-        gzip -f         /tmp/request_tkr/html/${TKR}.html
-        ls -la           /tmp/request_tkr/csv/${TKR}.csv.gz
+        sed -i '/null/d' ${TKRCSVH}/${TKR}.csv
     fi
 done
-    
+
+date
+
 exit
