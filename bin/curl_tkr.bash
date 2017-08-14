@@ -63,12 +63,11 @@ sleep 3
 # I should get the current time as a unix time string:
 nowutime=`date +%s`
 
+# I should create some URLs which allow me to GET the CSV data:
 QURL0="https://query1.finance.yahoo.com/v7/finance/download/${TKR}?"
 QURLD="${QURL0}period1=-631123200&period2=${nowutime}&interval=1d&events=div&crumb=${crum}"
 QURLH="${QURL0}period1=-631123200&period2=${nowutime}&interval=1d&events=history&crumb=${crum}"
 QURLS="${QURL0}period1=-631123200&period2=${nowutime}&interval=1d&events=split&crumb=${crum}"
-
-echo $QURL
 
 # I should get csv files now:
 
