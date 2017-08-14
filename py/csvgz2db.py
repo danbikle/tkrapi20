@@ -34,13 +34,15 @@ for csvf_s in sorted(glob.glob(os.environ['TKRCSVH']+'/AB*.csv')):
     csv_df = pd.read_csv(csvf_s)
     # I should convert to String and pick only two columns:
     csv0_s = csv_df.to_csv(index=False,header=False,columns=('Date','Close'),float_format='%.3f')
-    csvh_s = "'"+csv0_s+"'"
-    tkr_s  = "'"+tkr0_s+"'"
+    csvh_s  = "'"+csv0_s+"'"
+    tkr_s   = "'"+tkr0_s+"'"
+    csvfd_s = os.environ['TKRCSVD']+'/'+tkr0_s+'.csv'
     csvfs_s = os.environ['TKRCSVS']+'/'+tkr0_s+'.csv'
-    csvs_df = pd.read_csv(csvfs_s)
-    csvs0_s = csvs_df.to_csv(index=False,header=False)
+    csvd0_s = pd.read_csv(csvfd_s).to_csv(index=False,header=False)
+    csvs0_s = pd.read_csv(csvfs_s).to_csv(index=False,header=False)
+    csvd_s  = "'"+csvd0_s+"'"
     csvs_s  = "'"+csvs0_s+"'"
-    sql_s   = "insert into tkrprices(tkr,csvh,csvs)values("+tkr_s+","+csvh_s+","+csvs_s+")"
+    sql_s   = "insert into tkrprices(tkr,csvd,csvh,csvs)values("+tkr_s+","+csvd_s+","+csvh_s+","+csvs_s+")"
     conn.execute(sql_s)
 
 # I should check:
@@ -56,6 +58,7 @@ for csvf_s in sorted(glob.glob(os.environ['TKRCSVH']+'/AB*.csv')):
 # select csvh from tkrprices where tkr='SNAP';
 # select substring(csvh from 0 for 144) from tkrprices where tkr='SNAP';
 # select tkr, substring(csvh from 0 for 22) from tkrprices;
-# select tkr, csvs from tkrprices;
+# select tkr, csvs from tkrprices WHERE tkr = 'AAPL';
+# select tkr, csvd from tkrprices WHERE tkr = 'AAPL';
 'bye'
 
