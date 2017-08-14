@@ -51,6 +51,8 @@ for csvf_s in sorted(glob.glob(os.environ['TKRCSVH']+'/AB*.csv')):
 # select       tkr  from tkrprices;
 # select count(tkr) from tkrprices;
 # select csvh from tkrprices where tkr='SNAP';
+# select substring(csvh from 0 for 144) from tkrprices where tkr='SNAP';
+# select tkr, substring(csvh from 0 for 22) from tkrprices;
 
 'bye'
 
