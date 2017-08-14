@@ -1,7 +1,6 @@
 ~/tkrapi20/features.txt
 
 NOT DONE YET:
-  request splits
   unsplit.py
   genf.py
   
@@ -62,4 +61,7 @@ postgres account:
     create role tkrapi with login super user password 'tkrapi';
     create database tkrapi;
   db_s = 'postgres://tkrapi:tkrapi@127.0.0.1/tkrapi'
-  
+
+request splits,div
+enhance curl_tkr.bash
+
