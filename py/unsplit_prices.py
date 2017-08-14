@@ -11,11 +11,14 @@ Demo:
 $PYTHON py/unsplit_prices.py
 """
 
+import os
 import pdb
 import pandas     as pd
 import sqlalchemy as sql
 from   fractions import Fraction
 
-
+# I should connect to the db.
+db_s = os.environ['PGURL']
+conn = sql.create_engine(db_s).connect()
 
 'bye'
