@@ -36,7 +36,7 @@ for rowtkr in result:
   # For each tkr, the split dates should drive a loop:
   for rowsd in sd_df.itertuples():
     pdb.set_trace()
-    dt_gte_sd_sr = cp_df.cdate >= rowsd.sdate
+    dt_gte_sd_sr = (cp_df.cdate >= rowsd.sdate)
     dt_gte_sd_sr.head()
     dt_gte_sd_sr.tail()
     print(rowsd.sdate)
