@@ -21,4 +21,13 @@ from   fractions import Fraction
 db_s = os.environ['PGURL']
 conn = sql.create_engine(db_s).connect()
 
+# I should loop through the table full of tkrs, prices, split dates:
+sql_s   = "select tkr from tkrprices order by tkr" # where tkr like 'AA%'"
+sql_sql = sql.text(sql_s)
+result  = conn.execute(sql_sql)
+
+for row in result:
+    print(row.tkr)
+
+
 'bye'
