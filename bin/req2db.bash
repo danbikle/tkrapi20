@@ -10,7 +10,8 @@ cd ${SCRIPTPATH}/../
 . env.bash
 
 # I should request prices:
-${SCRIPTPATH}/request_tkr.bash
+# ${SCRIPTPATH}/curl_tkrs.bash # bash, curl, and sed
+${SCRIPTPATH}/request_tkr.bash # bash and Python
 # I should load prices into db:
 $PYTHON ${PYPATH}/csv2db.py
 

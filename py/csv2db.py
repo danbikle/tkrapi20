@@ -25,7 +25,7 @@ sql_s = "create table tkrprices(tkr varchar, csvd text, csvh text, csvs text)"
 conn.execute(sql_s)
 
 # I should read csv files:
-for csvf_s in sorted(glob.glob(os.environ['TKRCSVH']+'/AB*.csv')):
+for csvf_s in sorted(glob.glob(os.environ['TKRCSVH']+'/*.csv')):
   # I should avoid files which are too small:
   sz_i = os.path.getsize(csvf_s)
   print(csvf_s, sz_i)
