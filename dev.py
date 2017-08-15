@@ -8,6 +8,7 @@ Demo:
 $PYTHON dev.py
 """
 
+import io
 import pdb
 import os
 import flask
@@ -21,6 +22,17 @@ import flaskr
 db_s = os.environ['PGURL']
 conn = sql.create_engine(db_s).connect()
 
+# I should select a row from features table like this:
+# select tkr from features where tkr = 'ABC';
+pdb.set_trace()
+tkr = 'ABC'
+sql_s  = "SELECT csv FROM features WHERE tkr = %s LIMIT 1"
+result = conn.execute(sql_s,[tkr])
+if not result.rowcount:
+  print("  return {'no': 'data found'}  ")
+myrow  = [row for row in result][0]
+feat_df = pd.read_csv(io.StringIO(myrow.csv))
+feat_df.head()
 
 """
 tp1 = flaskr.Tkrprices()
