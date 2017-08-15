@@ -14,4 +14,6 @@ export TKRCSV=${HOME}'/tkrcsv'
 export TKRCSVD=${TKRCSV}'/div'
 export TKRCSVH=${TKRCSV}'/history'
 export TKRCSVS=${TKRCSV}'/split'
+export FLASK_DEBUG=1
+export PORT=5011
 

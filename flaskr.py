@@ -2,9 +2,8 @@
 flaskr.py
 
 Demo:
-export FLASK_DEBUG=1
-export PORT=5011
-python flaskr.py
+. env.bash
+$PYTHON flaskr.py
 Other shell:
 curl localhost:5011/demo11.json
 curl localhost:5011/static/hello.json
@@ -17,7 +16,7 @@ import flask_restful as fr
 from sqlalchemy import create_engine
 
 # I should connect to the DB
-db_s = 'postgres://tkrapi:tkrapi@127.0.0.1/tkrapi'
+db_s = os.environ['PGURL']
 conn = create_engine(db_s).connect()
 
 application = flask.Flask(__name__)
@@ -69,14 +68,14 @@ class Tkrprices(fr.Resource):
   This class should list prices for a tkr.
   """
   def get(self, tkr):
-    # I should get csv_s from db
-    sql_s       = '''select csv from tkrprices
+    # I should get csvh from tkrprices in db:
+    sql_s       = '''select csvh from tkrprices
       where tkr = %s  LIMIT 1'''
     result      = conn.execute(sql_s,[tkr])
     if not result.rowcount:
       return {'no': 'data found'}  
     myrow       = [row for row in result][0]
-    return {'tkrprices': myrow.csv.split()}
+    return {'tkrprices': myrow.csvh.split()}
 api.add_resource(Tkrprices, '/tkrprices/<tkr>')
 
 if __name__ == "__main__":

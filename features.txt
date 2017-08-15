@@ -1,8 +1,7 @@
 ~/tkrapi20/features.txt
 
 NOT DONE YET:
-  unsplit.py
-  genf.py
+
   
 list of resources:
   /sklinear/IBM/25/2016-11?features='pctlag1,slope4,moy'
@@ -12,6 +11,7 @@ question:
   - how to create a 2 layer net having 1 neuron in output layer with linear output?
   - query of relu in keras help me?
   - yes, found linear(x) here: https://keras.io/activations/
+  - can I have a 1-neuron output layer which outputs binary logistic regression?
   
 Site should have list of behaviorial dimensions:
   - algo-types
@@ -65,3 +65,4 @@ postgres account:
 request splits,div
 enhance curl_tkr.bash
 
+genf.py
