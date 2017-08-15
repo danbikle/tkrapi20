@@ -22,12 +22,17 @@ from   fractions import Fraction
 db_s = os.environ['PGURL']
 conn = sql.create_engine(db_s).connect()
 
+sql_s = "drop table if exists unsplit_prices"
+conn.execute(sql_s)
+sql_s = "create table unsplit_prices(tkr varchar, csvd text, csvh text, csvs text)"
+conn.execute(sql_s)
+
 # The data I need should be in a table named tkrprices
 # which should have been created by py/csv2db.py
 # which should have been called by bin/req2db.bash
 
 # I should loop through the table full of tkrs, prices, splitdates:
-sql_s   = "select tkr, csvh, csvs from tkrprices order by tkr" # where tkr like 'AA%'"
+sql_s   = "select tkr, csvd, csvh, csvs from tkrprices order by tkr" # where tkr like 'AA%'"
 sql_sql = sql.text(sql_s)
 result  = conn.execute(sql_sql)
 if not result.rowcount:
@@ -49,4 +54,9 @@ for rowtkr in result:
   print(sd_df)
   print(cp_df.tail(1))
   # I should insert uscp into db.
+  tkr_s  = "'"+rowtkr.tkr+"'"
+  csvd_s = "'"+rowtkr.csvd+"'"
+  csvs_s = "'"+rowtkr.csvs+"'"
+  sql_s  = "insert into unsplit_prices(tkr,csvd,csvs)values("+tkr_s+","+csvd_s+","+csvs_s+")"
+  conn.execute(sql_s)
 'bye'
