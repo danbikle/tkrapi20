@@ -14,10 +14,11 @@ import os
 import flask
 import flask_restful as fr
 from sqlalchemy import create_engine
+import sqlalchemy as sql
 
 # I should connect to the DB
 db_s = os.environ['PGURL']
-conn = create_engine(db_s).connect()
+conn = sql.create_engine(db_s).connect()
 
 application = flask.Flask(__name__)
 api         = fr.Api(application)
