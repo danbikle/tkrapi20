@@ -78,6 +78,21 @@ class Tkrprices(fr.Resource):
     return {'tkrprices': myrow.csvh.split()}
 api.add_resource(Tkrprices, '/tkrprices/<tkr>')
 
+def getfeat(tkr):
+  """This function should return a DataFrame full of features for a tkr."""
+  return {'notdone-yet': True}
+#   /sklinear/IBM/25/2016-11?features='pctlag1,slope4,moy'
+
+class Sklinear(fr.Resource):
+  """
+  This class should build an sklearn linear regression model.
+  """
+  def get(self, tkr):
+    # I should get features for this tkr from db:
+    feat_df = getfeat(tkr)
+    return {'notdone-yet': True}
+api.add_resource(Sklinear, '/sklinear/<tkr>')
+  
 if __name__ == "__main__":
   port = int(os.environ.get("PORT", 5000))
   application.run(host='0.0.0.0', port=port)
