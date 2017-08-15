@@ -1,6 +1,13 @@
 """
 unsplit_prices.py
 
+Note that this script is an artifact which I no longer use.
+Before 2017-05, Yahoo served accurate historical closing prices.
+That data had discontinuities at split dates.
+After 2017-05, Yahoo serves adjusted prices so that the discontinuities are removed.
+This script will become useful if I encounter unadjusted historical closing prices again.
+
+
 This script should create a column named uscp which I see as unsplit_prices.
 
 Given a splitdate, this script should find all prices at and after the splitdate.
@@ -53,10 +60,12 @@ for rowtkr in result:
     cp_df.loc[dt_gte_sd_sr,'uscp'] = float(Fraction(rowsd.ratio)) * cp_df[dt_gte_sd_sr].uscp
   print(sd_df)
   print(cp_df.tail(1))
-  # I should insert uscp into db.
+  # I should insert uscp into db (along with other values from tkrprices):
+  csvh_s = cp_df.to_csv(index=False,header=False,float_format='%.3f')
+  csvh_s = "'"+csvh_s+"'"
   tkr_s  = "'"+rowtkr.tkr+"'"
   csvd_s = "'"+rowtkr.csvd+"'"
   csvs_s = "'"+rowtkr.csvs+"'"
-  sql_s  = "insert into unsplit_prices(tkr,csvd,csvs)values("+tkr_s+","+csvd_s+","+csvs_s+")"
+  sql_s  = "insert into unsplit_prices(tkr,csvd,csvh,csvs)values("+tkr_s+","+csvd_s+","+csvh_s+","+csvs_s+")"
   conn.execute(sql_s)
 'bye'
