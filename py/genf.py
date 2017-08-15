@@ -45,12 +45,21 @@ for row in result:
   feat_df['pct_lag4'] = 100.0*((feat_df.cp - feat_df.cp.shift(4))/feat_df.cp.shift(4)).fillna(0)
   feat_df['pct_lag8'] = 100.0*((feat_df.cp - feat_df.cp.shift(8))/feat_df.cp.shift(8)).fillna(0)
 
-  # Now, I should get 'slope' features from price:
+  # Now, I should calculate 'slope' features from price:
   for slope_i in [3,4,5,6,7,8,9]:
     rollx          = feat_df.rolling(window=slope_i)
     col_s          = 'slope'+str(slope_i)
     slope_sr       = 100.0 * (rollx.mean().cp - rollx.mean().cp.shift(1))/rollx.mean().cp
     feat_df[col_s] = slope_sr
+    
+  # Now, I should calculate 'date' features from cdate:
+  dt_sr = pd.to_datetime(feat_df.cdate)
+  dow_l = [float(dt.strftime('%w' ))/100.0 for dt in dt_sr]
+  moy_l = [float(dt.strftime('%-m'))/100.0 for dt in dt_sr]
+  dom_l = [float(dt.strftime('%-d'))       for dt in dt_sr] # maybe use later
+  wom_l = [round(dom/5)/100.0             for dom in dom_l] # maybe use later
+  feat_df['dow'] = dow_l
+  feat_df['moy'] = moy_l
 
   # debug
   feat_df.to_csv('/tmp/tmp.csv',index=False, float_format="%.3f")
