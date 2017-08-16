@@ -13,9 +13,12 @@ import io
 import pdb
 import os
 import flask
+import datetime      as dt
 import flask_restful as fr
+import numpy         as np
 import pandas        as pd
 import sqlalchemy    as sql
+import sklearn.linear_model as skl
 
 # I should connect to the DB
 db_s = os.environ['PGURL']
@@ -112,7 +115,10 @@ class Sklinear(fr.Resource):
     train_df = feat_df.loc[min_train_loc_i:max_train_loc_i]
     train_df.head()
     train_df.tail()
-    
+    # I should train:
+    linr_model = skl.LinearRegression()
+    xtrain_a = np.array(train_df)
+    xtrain_a[:3]
     
     return {'notdone-yet': True}
 api.add_resource(Sklinear, '/sklinear/<tkr>/<int:yrs>/<mnth>')
