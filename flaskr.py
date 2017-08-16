@@ -94,10 +94,10 @@ def getfeat(tkr):
   feat_df.head()
   return feat_df
 
-#   /sklinear/IBM/25/2016-11?features='pctlag1,slope4,moy'
+#   /sklinear/IBM/25/2016-11/'pctlag1,slope4,moy'
 
 def get_train_test(tkr,yrs,mnth,features):
-  # I should get features for this tkr from db:
+  """Using tkr,yrs,mnth,features, this function should get train,test numpy arrays."""
   feat_df = getfeat(tkr)
   # I should get the test data from feat_df:
   test_bool_sr = (feat_df.cdate.str[:7] == mnth)
@@ -119,8 +119,8 @@ def get_train_test(tkr,yrs,mnth,features):
   return xtrain_a, ytrain_a, xtest_a, out_df
 
 def learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,slope4,moy'):
+  """This function should use sklearn to learn, predict."""
   linr_model = skl.LinearRegression()
-  pdb.set_trace()
   xtrain_a, ytrain_a, xtest_a, out_df = get_train_test(tkr,yrs,mnth,features)
   # I should fit a model to xtrain_a, ytrain_a
   linr_model.fit(xtrain_a,ytrain_a)
@@ -128,40 +128,19 @@ def learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,s
   out_df['prediction']    = np.round(linr_model.predict(xtest_a),3).tolist()
   out_df['effectiveness'] = np.sign(out_df.pct_lead*out_df.prediction)*np.abs(out_df.pct_lead)
   out_df['accuracy']      = (1+np.sign(out_df.effectiveness))/2
-  pdb.set_trace()
+  # I should save out_df to db using params as a key:
+  # Not done yet.
   return out_df
   
 class Sklinear(fr.Resource):
   """
-  This class should build an sklearn linear regression model.
+  This class should return a DF full of predictions from sklearn.
   """
-  def get(self, tkr,yrs,mnth):
-    # I should get features for this tkr from db:
-    feat_df = getfeat(tkr)
-    # I should get the test data from feat_df:
-    test_bool_sr = (feat_df.cdate.str[:7] == mnth)
-    test_df      =  feat_df.loc[test_bool_sr] # should be about 21 rows
-    # I should get the training data from feat_df:
-    max_train_loc_i = -1 + test_df.index[0]
-    min_train_loc_i = max_train_loc_i - yrs * 252
-    if (min_train_loc_i < 10):
-      min_train_loc_i = 10
-    train_df = feat_df.loc[min_train_loc_i:max_train_loc_i]
-    train_df.head()
-    train_df.tail()
-    # I should train:
-    linr_model = skl.LinearRegression()
-    xtrain_a   = np.array(train_df)[:,3:]
-    ytrain_a   = np.array(train_df)[:,2 ]
-    linr_model.fit(xtrain_a,ytrain_a)
-    # I should predict:
-    xtest_a = np.array(test_df)[:,3:]
-    out_df  = test_df.copy()[['cdate','cp','pct_lead']]
-    out_df['prediction'] = linr_model.predict(xtest_a).tolist()
-    out_df['effectiveness'] = np.sign(out_df.pct_lead*out_df.prediction)*np.abs(out_df.pct_lead)
-    out_df['accuracy'] = (1+np.sign(out_df.effectiveness))/2
+  def get(self, tkr,yrs,mnth,features):
+    out_df = learn_predict_sklinear(tkr,yrs,mnth,features)
+    # I should return out_df in a readable format.
     return {'notdone-yet': True}
-api.add_resource(Sklinear, '/sklinear/<tkr>/<int:yrs>/<mnth>')
+api.add_resource(Sklinear, '/sklinear/<tkr>/<int:yrs>/<mnth>/<features>')
   
 if __name__ == "__main__":
   port = int(os.environ.get("PORT", 5000))
