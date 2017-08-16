@@ -113,7 +113,10 @@ def get_train_test(tkr,yrs,mnth,features):
   xtrain_df  = train_df[features_l]
   xtrain_a   = np.array(xtrain_df)
   ytrain_a   = np.array(train_df)[:,2 ]
-  return xtrain_a, ytrain_a
+  xtest_df   = test_df[features_l]
+  xtest_a    = np.array(xtest_df)
+  out_df     = test_df.copy()[['cdate','cp','pct_lead']]
+  return xtrain_a, ytrain_a, xtest_a, out_df
 
 def learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,slope4,moy'):
   linr_model = skl.LinearRegression()
@@ -130,16 +133,17 @@ def learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,s
   if (min_train_loc_i < 10):
     min_train_loc_i = 10
   train_df = feat_df.loc[min_train_loc_i:max_train_loc_i]
-  # I should train:
+
   features_l = features.split(',')
   xtrain_df  = train_df[features_l]
   xtrain_a   = np.array(xtrain_df)
   ytrain_a   = np.array(train_df)[:,2 ]
-  linr_model.fit(xtrain_a,ytrain_a)
-  # I should predict:
+
   xtest_df = test_df[features_l]
   xtest_a  = np.array(xtest_df)
   out_df   = test_df.copy()[['cdate','cp','pct_lead']]
+  
+  linr_model.fit(xtrain_a,ytrain_a)
   out_df['prediction']    = np.round(linr_model.predict(xtest_a),3).tolist()
   out_df['effectiveness'] = np.sign(out_df.pct_lead*out_df.prediction)*np.abs(out_df.pct_lead)
   out_df['accuracy']      = (1+np.sign(out_df.effectiveness))/2
