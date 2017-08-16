@@ -131,15 +131,27 @@ def learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,s
   # I should save out_df to db using params as a key:
   # Not done yet.
   return out_df
-  
+
+def get_out_l(out_df):
+  """This function should convert out_df to a readable format when in JSON."""
+  out_l = []
+  for row in out_df.itertuples():
+    row_d       = {
+      'date,price':[row.cdate,row.cp]
+      ,'pct_lead': row.pct_lead
+      ,'prediction,effectiveness,accuracy':[row.prediction,row.effectiveness,row.accuracy]
+    }
+    out_l.append(row_d)
+  return out_l
+
 class Sklinear(fr.Resource):
   """
-  This class should return a DF full of predictions from sklearn.
+  This class should return predictions from sklearn.
   """
   def get(self, tkr,yrs,mnth,features):
     out_df = learn_predict_sklinear(tkr,yrs,mnth,features)
-    # I should return out_df in a readable format.
-    return {'notdone-yet': True}
+    out_l  = get_out_l(out_df)
+    return {'predictions': out_l}
 api.add_resource(Sklinear, '/sklinear/<tkr>/<int:yrs>/<mnth>/<features>')
   
 if __name__ == "__main__":
