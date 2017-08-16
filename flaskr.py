@@ -9,12 +9,13 @@ curl localhost:5011/demo11.json
 curl localhost:5011/static/hello.json
 """
 
+import io
 import pdb
 import os
 import flask
 import flask_restful as fr
-from sqlalchemy import create_engine
-import sqlalchemy as sql
+import pandas        as pd
+import sqlalchemy    as sql
 
 # I should connect to the DB
 db_s = os.environ['PGURL']
@@ -81,7 +82,14 @@ api.add_resource(Tkrprices, '/tkrprices/<tkr>')
 
 def getfeat(tkr):
   """This function should return a DataFrame full of features for a tkr."""
-  return {'notdone-yet': True}
+  sql_s  = "SELECT csv FROM features WHERE tkr = %s LIMIT 1"
+  result = conn.execute(sql_s,[tkr])
+  if not result.rowcount:
+    return {'no': 'data found'}
+  myrow  = [row for row in result][0]
+  feat_df = pd.read_csv(io.StringIO(myrow.csv))
+  feat_df.head()
+  return feat_df
 #   /sklinear/IBM/25/2016-11?features='pctlag1,slope4,moy'
 
 class Sklinear(fr.Resource):
@@ -91,6 +99,9 @@ class Sklinear(fr.Resource):
   def get(self, tkr):
     # I should get features for this tkr from db:
     feat_df = getfeat(tkr)
+    pdb.set_trace()
+    feat_df.tail()
+    
     return {'notdone-yet': True}
 api.add_resource(Sklinear, '/sklinear/<tkr>')
   
