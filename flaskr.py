@@ -118,7 +118,7 @@ def learn_predict(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,slope4,moy
   xtest_df = test_df[features_l]
   xtest_a  = np.array(xtest_df)
   out_df   = test_df.copy()[['cdate','cp','pct_lead']]
-  out_df['prediction']    = linr_model.predict(xtest_a).tolist()
+  out_df['prediction']    = np.round(linr_model.predict(xtest_a),3).tolist()
   out_df['effectiveness'] = np.sign(out_df.pct_lead*out_df.prediction)*np.abs(out_df.pct_lead)
   out_df['accuracy']      = (1+np.sign(out_df.effectiveness))/2
   pdb.set_trace()
