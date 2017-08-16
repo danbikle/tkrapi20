@@ -18,6 +18,11 @@ import pandas as pd
 
 import flaskr
 
+pdb.set_trace()
+
+flaskr.learn_predict(tkr='ABC',yrs=20,mnth='2016-11')
+stophere
+
 # I should connect to the DB
 db_s = os.environ['PGURL']
 conn = sql.create_engine(db_s).connect()

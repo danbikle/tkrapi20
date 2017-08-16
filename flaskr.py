@@ -95,6 +95,12 @@ def getfeat(tkr):
   return feat_df
 #   /sklinear/IBM/25/2016-11?features='pctlag1,slope4,moy'
 
+def learn_predict(tkr='ABC',yrs=20,mnth='2016-11'):
+  pdb.set_trace()
+  # I should get features for this tkr from db:
+  feat_df = getfeat(tkr)
+  return True
+  
 class Sklinear(fr.Resource):
   """
   This class should build an sklearn linear regression model.
@@ -102,7 +108,6 @@ class Sklinear(fr.Resource):
   def get(self, tkr,yrs,mnth):
     # I should get features for this tkr from db:
     feat_df = getfeat(tkr)
-    feat_df.tail()
     # I should get the test data from feat_df:
     test_bool_sr = (feat_df.cdate.str[:7] == mnth)
     test_df      =  feat_df.loc[test_bool_sr] # should be about 21 rows
