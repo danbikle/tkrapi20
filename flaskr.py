@@ -129,7 +129,11 @@ def learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,s
   out_df['effectiveness'] = np.sign(out_df.pct_lead*out_df.prediction)*np.abs(out_df.pct_lead)
   out_df['accuracy']      = (1+np.sign(out_df.effectiveness))/2
   # I should save out_df to db using params as a key:
-  # Not done yet.
+  # I should convert out_df to a csv string.
+  # I should connect to the db.
+  # I should ensure that the predictions table exists.
+  # I should build an sql string.
+  # I should execute the string.
   return out_df
 
 def get_out_l(out_df):
