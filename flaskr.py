@@ -95,11 +95,34 @@ def getfeat(tkr):
   return feat_df
 #   /sklinear/IBM/25/2016-11?features='pctlag1,slope4,moy'
 
-def learn_predict(tkr='ABC',yrs=20,mnth='2016-11'):
-  pdb.set_trace()
+def learn_predict(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,slope4,moy'):
+  linr_model = skl.LinearRegression()
   # I should get features for this tkr from db:
   feat_df = getfeat(tkr)
-  return True
+  # I should get the test data from feat_df:
+  test_bool_sr = (feat_df.cdate.str[:7] == mnth)
+  test_df      =  feat_df.loc[test_bool_sr] # should be about 21 rows
+  # I should get the training data from feat_df:
+  max_train_loc_i = -1 + test_df.index[0]
+  min_train_loc_i = max_train_loc_i - yrs * 252
+  if (min_train_loc_i < 10):
+    min_train_loc_i = 10
+  train_df = feat_df.loc[min_train_loc_i:max_train_loc_i]
+  # I should train:
+  features_l = features.split(',')
+  xtrain_df  = train_df[features_l]
+  xtrain_a   = np.array(xtrain_df)
+  ytrain_a   = np.array(train_df)[:,2 ]
+  linr_model.fit(xtrain_a,ytrain_a)
+  # I should predict:
+  xtest_df = test_df[features_l]
+  xtest_a  = np.array(xtest_df)
+  out_df   = test_df.copy()[['cdate','cp','pct_lead']]
+  out_df['prediction']    = linr_model.predict(xtest_a).tolist()
+  out_df['effectiveness'] = np.sign(out_df.pct_lead*out_df.prediction)*np.abs(out_df.pct_lead)
+  out_df['accuracy']      = (1+np.sign(out_df.effectiveness))/2
+  pdb.set_trace()
+  return out_df
   
 class Sklinear(fr.Resource):
   """
@@ -120,7 +143,6 @@ class Sklinear(fr.Resource):
     train_df.head()
     train_df.tail()
     # I should train:
-    pdb.set_trace()
     linr_model = skl.LinearRegression()
     xtrain_a   = np.array(train_df)[:,3:]
     ytrain_a   = np.array(train_df)[:,2 ]
