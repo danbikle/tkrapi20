@@ -102,7 +102,6 @@ class Sklinear(fr.Resource):
   def get(self, tkr,yrs,mnth):
     # I should get features for this tkr from db:
     feat_df = getfeat(tkr)
-    pdb.set_trace()
     feat_df.tail()
     # I should get the test data from feat_df:
     test_bool_sr = (feat_df.cdate.str[:7] == mnth)
@@ -116,10 +115,17 @@ class Sklinear(fr.Resource):
     train_df.head()
     train_df.tail()
     # I should train:
+    pdb.set_trace()
     linr_model = skl.LinearRegression()
-    xtrain_a = np.array(train_df)
-    xtrain_a[:3]
-    
+    xtrain_a   = np.array(train_df)[:,3:]
+    ytrain_a   = np.array(train_df)[:,2 ]
+    linr_model.fit(xtrain_a,ytrain_a)
+    # I should predict:
+    xtest_a = np.array(test_df)[:,3:]
+    out_df  = test_df.copy()[['cdate','cp','pct_lead']]
+    out_df['prediction'] = linr_model.predict(xtest_a).tolist()
+    out_df['effectiveness'] = np.sign(out_df.pct_lead*out_df.prediction)*np.abs(out_df.pct_lead)
+    out_df['accuracy'] = (1+np.sign(out_df.effectiveness))/2
     return {'notdone-yet': True}
 api.add_resource(Sklinear, '/sklinear/<tkr>/<int:yrs>/<mnth>')
   
