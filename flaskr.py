@@ -93,10 +93,32 @@ def getfeat(tkr):
   feat_df = pd.read_csv(io.StringIO(myrow.csv))
   feat_df.head()
   return feat_df
+
 #   /sklinear/IBM/25/2016-11?features='pctlag1,slope4,moy'
 
-def learn_predict(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,slope4,moy'):
+def get_train_test(tkr,yrs,mnth,features):
+  # I should get features for this tkr from db:
+  feat_df = getfeat(tkr)
+  # I should get the test data from feat_df:
+  test_bool_sr = (feat_df.cdate.str[:7] == mnth)
+  test_df      =  feat_df.loc[test_bool_sr] # should be about 21 rows
+  # I should get the training data from feat_df:
+  max_train_loc_i = -1 + test_df.index[0]
+  min_train_loc_i = max_train_loc_i - yrs * 252
+  if (min_train_loc_i < 10):
+    min_train_loc_i = 10
+  train_df = feat_df.loc[min_train_loc_i:max_train_loc_i]
+  # I should train:
+  features_l = features.split(',')
+  xtrain_df  = train_df[features_l]
+  xtrain_a   = np.array(xtrain_df)
+  ytrain_a   = np.array(train_df)[:,2 ]
+  return xtrain_a, ytrain_a
+
+def learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,slope4,moy'):
   linr_model = skl.LinearRegression()
+  pdb.set_trace()
+  xtrain_a, ytrain_a = get_train_test(tkr,yrs,mnth,features)
   # I should get features for this tkr from db:
   feat_df = getfeat(tkr)
   # I should get the test data from feat_df:
