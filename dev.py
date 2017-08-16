@@ -18,12 +18,25 @@ import pandas as pd
 
 import flaskr
 
-flaskr.learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11')
-stophere
+predictions_df = flaskr.learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11')
+pdb.set_trace()
+predictions_df
+tkr='ABC';yrs=20;mnth='2016-11'
+# I should convert it to a string
+csv0_s = predictions_df.to_csv(index=False,float_format='%.3f')
+csv_s  = "'"+csv0_s+"'"
+tkr_s  = "'"+tkr+"'"
 
-# I should connect to the DB
+# I should insert into the DB
 db_s = os.environ['PGURL']
 conn = sql.create_engine(db_s).connect()
+
+sql_s  = "CREATE TABLE IF NOT EXISTS predictions(tkr VARCHAR, csv TEXT)"
+conn.execute(sql_s)
+sql_s  = "INSERT INTO predictions(tkr,csv)VALUES("+tkr_s+","+csv_s+")"
+conn.execute(sql_s)
+
+stophere
 
 # I should select a row from features table like this:
 # select tkr from features where tkr = 'ABC';
