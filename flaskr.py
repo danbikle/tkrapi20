@@ -96,14 +96,26 @@ class Sklinear(fr.Resource):
   """
   This class should build an sklearn linear regression model.
   """
-  def get(self, tkr):
+  def get(self, tkr,yrs,mnth):
     # I should get features for this tkr from db:
     feat_df = getfeat(tkr)
     pdb.set_trace()
     feat_df.tail()
+    # I should get the test data from feat_df:
+    test_bool_sr = (feat_df.cdate.str[:7] == mnth)
+    test_df      =  feat_df.loc[test_bool_sr] # should be about 21 rows
+    # I should get the training data from feat_df:
+    max_train_loc_i = -1 + test_df.index[0]
+    min_train_loc_i = max_train_loc_i - yrs * 252
+    if (min_train_loc_i < 10):
+      min_train_loc_i = 10
+    train_df = feat_df.loc[min_train_loc_i:max_train_loc_i]
+    train_df.head()
+    train_df.tail()
+    
     
     return {'notdone-yet': True}
-api.add_resource(Sklinear, '/sklinear/<tkr>')
+api.add_resource(Sklinear, '/sklinear/<tkr>/<int:yrs>/<mnth>')
   
 if __name__ == "__main__":
   port = int(os.environ.get("PORT", 5000))
