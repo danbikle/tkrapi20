@@ -18,7 +18,7 @@ import pandas as pd
 
 import flaskr
 
-flaskr.learn_predict(tkr='ABC',yrs=20,mnth='2016-11')
+flaskr.learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11')
 stophere
 
 # I should connect to the DB
