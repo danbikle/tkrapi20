@@ -18,22 +18,26 @@ import pandas as pd
 
 import flaskr
 
-predictions_df = flaskr.learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11')
+predictions_df = flaskr.learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,slope4,moy'):
 pdb.set_trace()
 predictions_df
-tkr='ABC';yrs=20;mnth='2016-11'
+tkr='ABC';yrs=20;mnth='2016-11';features='pct_lag1,slope4,moy'
+
 # I should convert it to a string
 csv0_s = predictions_df.to_csv(index=False,float_format='%.3f')
-csv_s  = "'"+csv0_s+"'"
-tkr_s  = "'"+tkr+"'"
+csv_s      = "'"+csv0_s+"'"
+tkr_s      = "'"+tkr+"'"
+mnth_s     = "'"+mnth+"'"
+features_s = "'"+features+"'"
+
 
 # I should insert into the DB
 db_s = os.environ['PGURL']
 conn = sql.create_engine(db_s).connect()
 
-sql_s  = "CREATE TABLE IF NOT EXISTS predictions(tkr VARCHAR, csv TEXT)"
+sql_s  = "CREATE TABLE IF NOT EXISTS predictions(tkr VARCHAR, yrs INTEGER, mnth VARCHAR, features VARCHAR, csv TEXT)"
 conn.execute(sql_s)
-sql_s  = "INSERT INTO predictions(tkr,csv)VALUES("+tkr_s+","+csv_s+")"
+sql_s  = "INSERT INTO predictions(tkr,mnth,features,csv)VALUES("+tkr_s+","+features_s+","+csv_s+")"
 conn.execute(sql_s)
 
 stophere
