@@ -121,7 +121,7 @@ def get_train_test(tkr,yrs,mnth,features):
 def learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,slope4,moy'):
   linr_model = skl.LinearRegression()
   pdb.set_trace()
-  xtrain_a, ytrain_a = get_train_test(tkr,yrs,mnth,features)
+  xtrain_a, ytrain_a, xtest_a, out_df = get_train_test(tkr,yrs,mnth,features)
   # I should get features for this tkr from db:
   feat_df = getfeat(tkr)
   # I should get the test data from feat_df:
