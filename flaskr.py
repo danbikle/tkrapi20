@@ -128,6 +128,7 @@ def learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,s
   out_df['prediction']    = np.round(linr_model.predict(xtest_a),3).tolist()
   out_df['effectiveness'] = np.sign(out_df.pct_lead*out_df.prediction)*np.abs(out_df.pct_lead)
   out_df['accuracy']      = (1+np.sign(out_df.effectiveness))/2
+  predictions2db(tkr,yrs,mnth,features,algo,algo_params)
   # I should save out_df to db using params as a key:
   # I should convert out_df to a csv string.
   # I should connect to the db.
