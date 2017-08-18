@@ -9,7 +9,6 @@ curl localhost:5011/demo11.json
 curl localhost:5011/static/hello.json
 """
 
-import pgdb
 import io
 import pdb
 import os
@@ -20,6 +19,9 @@ import numpy         as np
 import pandas        as pd
 import sqlalchemy    as sql
 import sklearn.linear_model as skl
+# modules in the py folder:
+import pgdb
+import sktkr
 
 # I should connect to the DB
 db_s = os.environ['PGURL']
@@ -88,7 +90,7 @@ api.add_resource(Tkrprices, '/tkrprices/<tkr>')
 
 #   /sklinear/ABC/25/2016-11/'pctlag1,slope4,moy'
 
-def learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,slope4,moy'):
+def learnx_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,slope4,moy'):
   """This function should use sklearn to learn, predict."""
   linr_model = skl.LinearRegression()
   xtrain_a, ytrain_a, xtest_a, out_df = pgdb.get_train_test(tkr,yrs,mnth,features)
@@ -119,7 +121,7 @@ class Sklinear(fr.Resource):
   This class should return predictions from sklearn.
   """
   def get(self, tkr,yrs,mnth,features):
-    out_df = learn_predict_sklinear(tkr,yrs,mnth,features)
+    out_df = sktkr.learn_predict_sklinear(tkr,yrs,mnth,features)
     out_l  = get_out_l(out_df)
     return {'predictions': out_l}
 api.add_resource(Sklinear, '/sklinear/<tkr>/<int:yrs>/<mnth>/<features>')
