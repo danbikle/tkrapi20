@@ -51,4 +51,31 @@ def get_train_test(tkr,yrs,mnth,features):
   out_df     = test_df.copy()[['cdate','cp','pct_lead']]
   return xtrain_a, ytrain_a, xtest_a, out_df
 
+def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,algo_params='None Needed'):
+  # I should convert DF to a string
+  csv0_s = predictions_df.to_csv(index=False,float_format='%.3f')
+  csv_s         = "'"+csv0_s+"'"
+  tkr_s         = "'"+tkr+"'"
+  mnth_s        = "'"+mnth+"'"
+  features_s    = "'"+features+"'"
+  algo_s        = "'"+algo+"'"
+  algo_params_s = "'"+algo_params+"'"
+  yrs_s         = str(yrs)
+
+  sql_s = '''CREATE TABLE IF NOT EXISTS
+    predictions(
+    tkr VARCHAR
+    ,yrs INTEGER
+    ,mnth VARCHAR
+    ,features VARCHAR
+    ,algo VARCHAR
+    ,algo_params VARCHAR
+    ,csv TEXT)'''
+  conn.execute(sql_s)
+  sql_s = '''INSERT INTO predictions(
+    tkr,yrs,mnth,features,algo,algo_params,csv)VALUES(
+    '''+tkr_s+","+yrs_s+","+mnth_s+","+features_s+","+algo_s+","+algo_params_s+","+csv_s+")"
+  conn.execute(sql_s)
+  return True
+
 'bye'

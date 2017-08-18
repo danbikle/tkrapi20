@@ -86,33 +86,6 @@ class Tkrprices(fr.Resource):
     return {'tkrprices': myrow.csvh.split()}
 api.add_resource(Tkrprices, '/tkrprices/<tkr>')
 
-def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,algo_params='None Needed'):
-  # I should convert DF to a string
-  csv0_s = predictions_df.to_csv(index=False,float_format='%.3f')
-  csv_s         = "'"+csv0_s+"'"
-  tkr_s         = "'"+tkr+"'"
-  mnth_s        = "'"+mnth+"'"
-  features_s    = "'"+features+"'"
-  algo_s        = "'"+algo+"'"
-  algo_params_s = "'"+algo_params+"'"
-  yrs_s         = str(yrs)
-
-  sql_s = '''CREATE TABLE IF NOT EXISTS
-    predictions(
-    tkr VARCHAR
-    ,yrs INTEGER
-    ,mnth VARCHAR
-    ,features VARCHAR
-    ,algo VARCHAR
-    ,algo_params VARCHAR
-    ,csv TEXT)'''
-  conn.execute(sql_s)
-  sql_s = '''INSERT INTO predictions(
-    tkr,yrs,mnth,features,algo,algo_params,csv)VALUES(
-    '''+tkr_s+","+yrs_s+","+mnth_s+","+features_s+","+algo_s+","+algo_params_s+","+csv_s+")"
-  conn.execute(sql_s)
-  return True
-
 #   /sklinear/ABC/25/2016-11/'pctlag1,slope4,moy'
 
 def learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,slope4,moy'):
@@ -126,7 +99,7 @@ def learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,s
   out_df['effectiveness'] = np.sign(out_df.pct_lead*out_df.prediction)*np.abs(out_df.pct_lead)
   out_df['accuracy']      = (1+np.sign(out_df.effectiveness))/2
   algo = 'sklinear'
-  predictions2db(tkr,yrs,mnth,features,algo,out_df)
+  pgdb.predictions2db(tkr,yrs,mnth,features,algo,out_df)
   return out_df
 
 def get_out_l(out_df):
