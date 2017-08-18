@@ -95,7 +95,7 @@ class Tkrprices(fr.Resource):
     return {'tkrprices': myrow.csvh.split()}
 api.add_resource(Tkrprices, '/tkrprices/<tkr>')
 
-def get_out_l(out_df):
+def get_out_d(out_df):
   """This function should convert out_df to a readable format when in JSON."""
   out_l = []
   for row in out_df.itertuples():
@@ -105,7 +105,13 @@ def get_out_l(out_df):
       ,'prediction,effectiveness,accuracy':[row.prediction,row.effectiveness,row.accuracy]
     }
     out_l.append(row_d)
-  return out_l
+    lo_acc = sum((1+np.sign(out_df.pct_lead))/2) / out_df.accuracy.size
+    out_d  = {'Long-Only-Accuracy': lo_acc }
+    out_d['Long-Only-Effectivness'] = sum(out_df.pct_lead)
+    out_d['Model-Effectivness']     = sum(out_df.effectiveness)
+    out_d['Model-Accuracy']         = sum(out_df.accuracy) / out_df.accuracy.size
+    out_d['Prediction-Details']     = out_l
+  return out_d
 
 class Sklinear(fr.Resource):
   """
@@ -113,8 +119,8 @@ class Sklinear(fr.Resource):
   """
   def get(self, tkr,yrs,mnth,features):
     out_df = sktkr.learn_predict_sklinear(tkr,yrs,mnth,features)
-    out_l  = get_out_l(out_df)
-    return {'predictions': out_l}
+    out_d  = get_out_d(out_df)
+    return {'predictions': out_d}
 api.add_resource(Sklinear, '/sklinear/<tkr>/<int:yrs>/<mnth>/<features>')
 
 class KerasLinear(fr.Resource):
@@ -123,8 +129,8 @@ class KerasLinear(fr.Resource):
   """
   def get(self, tkr,yrs,mnth,features):
     out_df = kerastkr.learn_predict_keraslinear(tkr,yrs,mnth,features)
-    out_l  = get_out_l(out_df)
-    return {'predictions': out_l}
+    out_d  = get_out_d(out_df)
+    return {'predictions': out_d}
 api.add_resource(KerasLinear, '/keras_linear/<tkr>/<int:yrs>/<mnth>/<features>')
   
 if __name__ == "__main__":
