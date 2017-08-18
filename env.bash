@@ -9,6 +9,7 @@ export PGURL='postgres://tkrapi:tkrapi@127.0.0.1/tkrapi'
 export PYTHON=${HOME}/anaconda3/bin/python
 export PARPATH=${HOME}/tkrapi20
 export PYPATH=${PARPATH}/py
+export PYTHONPATH=${PARPATH}/py
 export SCRIPTPATH=${PARPATH}/bin
 export TKRCSV=${HOME}'/tkrcsv'
 export TKRCSVD=${TKRCSV}'/div'

@@ -9,6 +9,7 @@ curl localhost:5011/demo11.json
 curl localhost:5011/static/hello.json
 """
 
+import pgdb
 import io
 import pdb
 import os
@@ -24,9 +25,11 @@ import sklearn.linear_model as skl
 db_s = os.environ['PGURL']
 conn = sql.create_engine(db_s).connect()
 
+# I should ready flask_restful:
 application = flask.Flask(__name__)
 api         = fr.Api(application)
 
+# I should fill lists which users want frequently:
 with open('years.txt') as fh:
   years_l = fh.read().split()
   
@@ -91,10 +94,8 @@ def getfeat(tkr):
     return {'no': 'data found'}
   myrow  = [row for row in result][0]
   feat_df = pd.read_csv(io.StringIO(myrow.csv))
-  feat_df.head()
   return feat_df
 
-#   /sklinear/IBM/25/2016-11/'pctlag1,slope4,moy'
 
 def get_train_test(tkr,yrs,mnth,features):
   """Using tkr,yrs,mnth,features, this function should get train,test numpy arrays."""
@@ -144,6 +145,8 @@ def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,algo_params='None N
     '''+tkr_s+","+yrs_s+","+mnth_s+","+features_s+","+algo_s+","+algo_params_s+","+csv_s+")"
   conn.execute(sql_s)
   return True
+
+#   /sklinear/ABC/25/2016-11/'pctlag1,slope4,moy'
 
 def learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,slope4,moy'):
   """This function should use sklearn to learn, predict."""

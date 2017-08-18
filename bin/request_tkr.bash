@@ -18,7 +18,7 @@ date
 cat ${PARPATH}/tkrlist.txt|while read TKR
 do
     echo busy with                   $TKR
-    $PYTHON ${PYPATH}/request_tkr.py $TKR
+    $PYTHON ${PYTHONPATH}/request_tkr.py $TKR
     # I should remove null-strings:
     sed -i '/null/d' ${TKRCSVH}/${TKR}.csv
 done

@@ -4,7 +4,6 @@ NOT DONE YET:
 
   
 list of resources:
-  /sklinear/IBM/25/2016-11?features='pctlag1,slope4,moy'
   /keras_linear/IBM/25/2016-11?features='pctlag1,slope4,moy'
   
 question:
@@ -66,3 +65,5 @@ request splits,div
 enhance curl_tkr.bash
 
 genf.py
+
+/sklinear/IBM/25/2016-11?features='pctlag1,slope4,moy'

@@ -23,7 +23,7 @@ do
 	ls -l $FN
 	echo I should retry to request it:
 	TKR=`basename $FN | sed 's/.csv//'`
-	$PYTHON ${PYPATH}/request_tkr.py $TKR
+	$PYTHON ${PYTHONPATH}/request_tkr.py $TKR
         # I should remove null-strings:
         sed -i '/null/d' ${TKRCSVH}/${TKR}.csv
     fi
