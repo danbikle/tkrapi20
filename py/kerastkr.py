@@ -34,7 +34,9 @@ def learn_predict_keraslinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag
   kmodel.compile(loss='mean_squared_error', optimizer='adam')
   kmodel.fit(xtrain_a,ytrain_a)
   # I should predict xtest_a then update out_df
-  out_df['prediction']    = np.round(kmodel.predict(xtest_a),3).tolist()
+  predictions_a           = np.round(kmodel.predict(xtest_a),3)
+  predictions_l           = [p_f[0] for p_f in predictions_a]
+  out_df['prediction']    = predictions_l
   out_df['effectiveness'] = np.sign(out_df.pct_lead*out_df.prediction)*np.abs(out_df.pct_lead)
   out_df['accuracy']      = (1+np.sign(out_df.effectiveness))/2
   algo = 'keraslinear'
