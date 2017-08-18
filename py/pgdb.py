@@ -61,17 +61,28 @@ def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,algo_params='None N
   algo_s        = "'"+algo+"'"
   algo_params_s = "'"+algo_params+"'"
   yrs_s         = str(yrs)
-
+  # I should move CREATE TABLE to an initialization script.
+  # Running this statement frequently is inefficient:
   sql_s = '''CREATE TABLE IF NOT EXISTS
     predictions(
-    tkr VARCHAR
-    ,yrs INTEGER
-    ,mnth VARCHAR
-    ,features VARCHAR
-    ,algo VARCHAR
+    tkr          VARCHAR
+    ,yrs         INTEGER
+    ,mnth        VARCHAR
+    ,features    VARCHAR
+    ,algo        VARCHAR
     ,algo_params VARCHAR
     ,csv TEXT)'''
   conn.execute(sql_s)
+  # Perhaps eventually I should replace DELETE/INSERT wit UPSERT:
+  sql_s = '''DELETE FROM predictions
+    WHERE tkr         = %s
+    AND   yrs         = %s
+    AND   mnth        = %s
+    AND   features    = %s
+    AND   algo        = %s
+    AND   algo_params = %s
+    '''
+  conn.execute(sql_s,[tkr,yrs,mnth,features,algo,algo_params])
   sql_s = '''INSERT INTO predictions(
     tkr,yrs,mnth,features,algo,algo_params,csv)VALUES(
     '''+tkr_s+","+yrs_s+","+mnth_s+","+features_s+","+algo_s+","+algo_params_s+","+csv_s+")"
