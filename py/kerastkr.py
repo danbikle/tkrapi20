@@ -26,8 +26,10 @@ def learn_predict_keraslinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag
   features_l = features.split(',')
   features_i = len(features_l)
   kmodel     = keras.models.Sequential()
-
-
+  kmodel.add(keras.layers.core.Dense(features_i, input_shape=(features_i,)))
+  kmodel.add(keras.layers.core.Activation('linear'))
+  kmodel.add(keras.layers.core.Dense(1)) # because I have 1 linear-output
+  
   kmodel.fit(xtrain_a,ytrain_a)
   # I should predict xtest_a then update out_df
   out_df['prediction']    = np.round(kmodel.predict(xtest_a),3).tolist()
