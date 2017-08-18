@@ -26,8 +26,8 @@ def learn_predict_kerasnn(tkr       = 'IBM'
                           ,yrs      = 20
                           ,mnth     = '2016-11'
                           ,features = 'pct_lag1,slope4,moy'
-                          ,hl       = 2
-                          ,neurons  = 4
+                          ,hl       = 2 # number of hidden layers
+                          ,neurons  = 4 # neurons in each hl
                           ):
   """This function should use keras to learn, predict."""
   # I should get train, test data.
@@ -41,6 +41,9 @@ def learn_predict_kerasnn(tkr       = 'IBM'
   kmodel.add(keras.layers.core.Dense(features_i, input_shape=(features_i,)))
   # https://keras.io/activations/
   kmodel.add(keras.layers.core.Activation('linear'))
+  # I should add hidden layers
+  
+  # Done with    hidden layers
   # I should have 1 linear-output:
   kmodel.add(keras.layers.core.Dense(1)) 
   kmodel.add(keras.layers.core.Activation('linear'))
