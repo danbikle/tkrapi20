@@ -3,7 +3,7 @@
 NOT DONE YET:
   
 list of resources:
-  /keras_linear/ABC/25/2016-11?features='pctlag1,slope4,moy'
+  /keras_linear/ABC/25/2016-11/'pctlag1,slope4,moy'
   
 question:
   - how to create a 2 layer net having 1 neuron in output layer with linear output?

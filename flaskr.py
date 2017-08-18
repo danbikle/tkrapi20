@@ -12,6 +12,7 @@ curl localhost:5011/istkr/IBM
 curl localhost:5011/years
 curl localhost:5011/tkrprices/SNAP
 curl localhost:5011/sklinear/ABC/20/2016-12/'pct_lag1,slope3,dow,moy'
+curl localhost:5011/keras_linear/ABC/20/2016-12/'pct_lag2,slope5,dow,moy'
 """
 
 import io
@@ -27,6 +28,7 @@ import sklearn.linear_model as skl
 # modules in the py folder:
 import pgdb
 import sktkr
+import kerastkr
 
 # I should connect to the DB
 db_s = os.environ['PGURL']
@@ -114,6 +116,16 @@ class Sklinear(fr.Resource):
     out_l  = get_out_l(out_df)
     return {'predictions': out_l}
 api.add_resource(Sklinear, '/sklinear/<tkr>/<int:yrs>/<mnth>/<features>')
+
+class KerasLinear(fr.Resource):
+  """
+  This class should return predictions from keras.
+  """
+  def get(self, tkr,yrs,mnth,features):
+    out_df = kerastkr.learn_predict_keraslinear(tkr,yrs,mnth,features)
+    out_l  = get_out_l(out_df)
+    return {'predictions': out_l}
+api.add_resource(KerasLinear, '/keras_linear/<tkr>/<int:yrs>/<mnth>/<features>')
   
 if __name__ == "__main__":
   port = int(os.environ.get("PORT", 5000))
