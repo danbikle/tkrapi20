@@ -22,7 +22,7 @@ def getfeat(tkr):
   sql_s  = "SELECT csv FROM features WHERE tkr = %s LIMIT 1"
   result = conn.execute(sql_s,[tkr])
   if not result.rowcount:
-    return False
+    return pd.DataFrame() # empty DF offers consistent behavior to caller.
   myrow  = [row for row in result][0]
   feat_df = pd.read_csv(io.StringIO(myrow.csv))
   return feat_df

@@ -89,6 +89,8 @@ api.add_resource(Tkrprices, '/tkrprices/<tkr>')
 def get_train_test(tkr,yrs,mnth,features):
   """Using tkr,yrs,mnth,features, this function should get train,test numpy arrays."""
   feat_df = pgdb.getfeat(tkr)
+  if (feat_df.empty):
+    return False # I should pass a signal that I have no data.
   # I should get the test data from feat_df:
   test_bool_sr = (feat_df.cdate.str[:7] == mnth)
   test_df      =  feat_df.loc[test_bool_sr] # should be about 21 rows

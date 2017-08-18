@@ -2,6 +2,7 @@
 
 NOT DONE YET:
 
+enhance predictions2db so it does delete and insert.
   
 list of resources:
   /keras_linear/IBM/25/2016-11?features='pctlag1,slope4,moy'
