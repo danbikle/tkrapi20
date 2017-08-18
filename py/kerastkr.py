@@ -31,7 +31,7 @@ def learn_predict_keraslinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag
   # I should have 1 linear-output:
   kmodel.add(keras.layers.core.Dense(1)) 
   kmodel.add(keras.layers.core.Activation('linear'))
-  
+  kmodel.compile(loss='mean_squared_error', optimizer='adam')
   kmodel.fit(xtrain_a,ytrain_a)
   # I should predict xtest_a then update out_df
   out_df['prediction']    = np.round(kmodel.predict(xtest_a),3).tolist()
