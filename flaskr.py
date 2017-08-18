@@ -13,6 +13,7 @@ curl localhost:5011/years
 curl localhost:5011/tkrprices/SNAP
 curl localhost:5011/sklinear/ABC/20/2016-12/'pct_lag1,slope3,dow,moy'
 curl localhost:5011/keras_linear/ABC/20/2016-12/'pct_lag2,slope5,dow,moy'
+curl localhost:5011/keras_nn/IBM/25/2014-11?features='pctlag1,slope4,moy'&hl=2&neurons=4
 """
 
 import io
@@ -132,6 +133,19 @@ class KerasLinear(fr.Resource):
     out_d  = get_out_d(out_df)
     return {'predictions': out_d}
 api.add_resource(KerasLinear, '/keras_linear/<tkr>/<int:yrs>/<mnth>/<features>')
+  
+class KerasNN(fr.Resource):
+  """
+  This class should return predictions from keras.
+  """
+  def get(self, tkr,yrs,mnth):
+    """
+    out_df = kerastkr.learn_predict_kerasnn(tkr,yrs,mnth,features)
+    out_d  = get_out_d(out_df)
+    """
+    out_d = {'under':'construction'}
+    return {'predictions': out_d}
+api.add_resource(KerasNN, '/keras_nn/<tkr>/<int:yrs>/<mnth>')
   
 if __name__ == "__main__":
   port = int(os.environ.get("PORT", 5000))
