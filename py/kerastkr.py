@@ -22,7 +22,13 @@ import pgdb
 batch_size_i = 256 # Doc: Number of samples per gradient update.
 epochs_i     = 128 # Doc: Number of epochs to train the model.
 
-def learn_predict_kerasnn(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,slope4,moy'):
+def learn_predict_kerasnn(tkr       = 'IBM'
+                          ,yrs      = 20
+                          ,mnth     = '2016-11'
+                          ,features = 'pct_lag1,slope4,moy'
+                          ,hl       = 2
+                          ,neurons  = 4
+                          ):
   """This function should use keras to learn, predict."""
   # I should get train, test data.
   # Also get copy of test data in a DataFrame for later reporting:
