@@ -86,30 +86,6 @@ class Tkrprices(fr.Resource):
     return {'tkrprices': myrow.csvh.split()}
 api.add_resource(Tkrprices, '/tkrprices/<tkr>')
 
-def get_train_test(tkr,yrs,mnth,features):
-  """Using tkr,yrs,mnth,features, this function should get train,test numpy arrays."""
-  feat_df = pgdb.getfeat(tkr)
-  if (feat_df.empty):
-    return False # I should pass a signal that I have no data.
-  # I should get the test data from feat_df:
-  test_bool_sr = (feat_df.cdate.str[:7] == mnth)
-  test_df      =  feat_df.loc[test_bool_sr] # should be about 21 rows
-  # I should get the training data from feat_df:
-  max_train_loc_i = -1 + test_df.index[0]
-  min_train_loc_i = max_train_loc_i - yrs * 252
-  if (min_train_loc_i < 10):
-    min_train_loc_i = 10
-  train_df = feat_df.loc[min_train_loc_i:max_train_loc_i]
-  # I should train:
-  features_l = features.split(',')
-  xtrain_df  = train_df[features_l]
-  xtrain_a   = np.array(xtrain_df)
-  ytrain_a   = np.array(train_df)[:,2 ]
-  xtest_df   = test_df[features_l]
-  xtest_a    = np.array(xtest_df)
-  out_df     = test_df.copy()[['cdate','cp','pct_lead']]
-  return xtrain_a, ytrain_a, xtest_a, out_df
-
 def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,algo_params='None Needed'):
   # I should convert DF to a string
   csv0_s = predictions_df.to_csv(index=False,float_format='%.3f')
@@ -142,7 +118,7 @@ def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,algo_params='None N
 def learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,slope4,moy'):
   """This function should use sklearn to learn, predict."""
   linr_model = skl.LinearRegression()
-  xtrain_a, ytrain_a, xtest_a, out_df = get_train_test(tkr,yrs,mnth,features)
+  xtrain_a, ytrain_a, xtest_a, out_df = pgdb.get_train_test(tkr,yrs,mnth,features)
   # I should fit a model to xtrain_a, ytrain_a
   linr_model.fit(xtrain_a,ytrain_a)
   # I should predict xtest_a then update out_df
