@@ -18,6 +18,11 @@ import pandas as pd
 
 import flaskr
 
+import pgdb
+import kerastkr
+
+out_df = kerastkr.learn_predict_keraslinear()
+
 stophere
 
 
