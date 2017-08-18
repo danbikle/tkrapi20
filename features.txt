@@ -1,11 +1,9 @@
 ~/tkrapi20/features.txt
 
 NOT DONE YET:
-
-enhance predictions2db so it does delete and insert.
   
 list of resources:
-  /keras_linear/IBM/25/2016-11?features='pctlag1,slope4,moy'
+  /keras_linear/ABC/25/2016-11?features='pctlag1,slope4,moy'
   
 question:
   - how to create a 2 layer net having 1 neuron in output layer with linear output?
@@ -29,6 +27,7 @@ Site should have features.txt
 
 
 SHOULD BE DONE NOW:
+
 Start features.txt
 bitb repo: tkrapi20
 README.md started
@@ -68,3 +67,4 @@ enhance curl_tkr.bash
 genf.py
 
 /sklinear/IBM/25/2016-11?features='pctlag1,slope4,moy'
+enhance predictions2db so it does delete and insert.

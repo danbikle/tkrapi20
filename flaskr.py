@@ -7,6 +7,11 @@ $PYTHON flaskr.py
 Other shell:
 curl localhost:5011/demo11.json
 curl localhost:5011/static/hello.json
+curl localhost:5011/tkrlist
+curl localhost:5011/istkr/IBM
+curl localhost:5011/years
+curl localhost:5011/tkrprices/SNAP
+curl localhost:5011/sklinear/ABC/20/2016-12/'pct_lag1,slope3,dow,moy'
 """
 
 import io
@@ -87,22 +92,6 @@ class Tkrprices(fr.Resource):
     myrow       = [row for row in result][0]
     return {'tkrprices': myrow.csvh.split()}
 api.add_resource(Tkrprices, '/tkrprices/<tkr>')
-
-#   /sklinear/ABC/25/2016-11/'pctlag1,slope4,moy'
-
-def learnx_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,slope4,moy'):
-  """This function should use sklearn to learn, predict."""
-  linr_model = skl.LinearRegression()
-  xtrain_a, ytrain_a, xtest_a, out_df = pgdb.get_train_test(tkr,yrs,mnth,features)
-  # I should fit a model to xtrain_a, ytrain_a
-  linr_model.fit(xtrain_a,ytrain_a)
-  # I should predict xtest_a then update out_df
-  out_df['prediction']    = np.round(linr_model.predict(xtest_a),3).tolist()
-  out_df['effectiveness'] = np.sign(out_df.pct_lead*out_df.prediction)*np.abs(out_df.pct_lead)
-  out_df['accuracy']      = (1+np.sign(out_df.effectiveness))/2
-  algo = 'sklinear'
-  pgdb.predictions2db(tkr,yrs,mnth,features,algo,out_df)
-  return out_df
 
 def get_out_l(out_df):
   """This function should convert out_df to a readable format when in JSON."""
