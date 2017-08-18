@@ -86,17 +86,6 @@ class Tkrprices(fr.Resource):
     return {'tkrprices': myrow.csvh.split()}
 api.add_resource(Tkrprices, '/tkrprices/<tkr>')
 
-def getfeatx(tkr):
-  """This function should return a DataFrame full of features for a tkr."""
-  sql_s  = "SELECT csv FROM features WHERE tkr = %s LIMIT 1"
-  result = conn.execute(sql_s,[tkr])
-  if not result.rowcount:
-    return {'no': 'data found'}
-  myrow  = [row for row in result][0]
-  feat_df = pd.read_csv(io.StringIO(myrow.csv))
-  return feat_df
-
-
 def get_train_test(tkr,yrs,mnth,features):
   """Using tkr,yrs,mnth,features, this function should get train,test numpy arrays."""
   feat_df = pgdb.getfeat(tkr)
