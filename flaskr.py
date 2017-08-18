@@ -139,17 +139,13 @@ class KerasNN(fr.Resource):
   This class should return predictions from keras.
   """
   def get(self, tkr,yrs,mnth):
-    pdb.set_trace()
     features_s = fl.request.args.get('features', 'pctlag1,slope3,dom')
     hl_s       = fl.request.args.get('hl', '2')
     neurons_s  = fl.request.args.get('neurons', '4')
-    features_l = features_s.split(',')
     hl_i       = int(hl_s)
     neurons_i  = int(neurons_s)
-    """
-    out_df = kerastkr.learn_predict_kerasnn(tkr,yrs,mnth,features,hl,neurons)
+    out_df = kerastkr.learn_predict_kerasnn(tkr,yrs,mnth,features_s,hl_i,neurons_i)
     out_d  = get_out_d(out_df)
-    """
     out_d = {'under':'construction'}
     return {'predictions': out_d}
 api.add_resource(KerasNN, '/keras_nn/<tkr>/<int:yrs>/<mnth>')
