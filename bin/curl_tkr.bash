@@ -102,4 +102,7 @@ sleep 1
 # Files look okay?
 ls -l ${TKRCSVD}/${TKR}.csv ${TKRCSVH}/${TKR}.csv ${TKRCSVS}/${TKR}.csv
 
+# I should remove null-strings:
+sed -i '/null/d' ${TKRCSVH}/${TKR}.csv
+
 exit

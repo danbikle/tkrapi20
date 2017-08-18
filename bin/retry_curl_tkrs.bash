@@ -6,10 +6,11 @@
 
 SCRIPT=`realpath $0`
 SCRIPTPATH=`dirname $SCRIPT`
-PARPATH=${SCRIPTPATH}/..
+cd ${SCRIPTPATH}/../
+. env.bash
 
 # In bash how to loop through a folder of files?
-for FN in /tmp/curl_tkr/*.csv.gz
+for FN in ${TKRCSVH}/*.csv
 do
     fsz_s=`ls -1s $FN | cut -c1-3`
     if [ "$fsz_s" = '4 /' ]
@@ -17,10 +18,8 @@ do
 	echo This file should be larger:
 	ls -l $FN
 	echo I should retry to curl it:
-	TKR=`basename $FN | sed 's/.csv.gz//'`
+	TKR=`basename $FN | sed 's/.csv//'`
         ${SCRIPTPATH}/curl_tkr.bash $TKR
-        gzip -f      /tmp/curl_tkr/${TKR}.csv
-        ls -la       /tmp/curl_tkr/${TKR}.csv.gz
     fi
 done
     

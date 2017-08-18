@@ -5,7 +5,7 @@ This script should generate features from dates and prices.
 
 Demo:
 . env.bash
-$PYTHON genf.py
+$PYTHON py/genf.py
 """
 
 import io
