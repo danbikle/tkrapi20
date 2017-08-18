@@ -19,8 +19,8 @@ curl localhost:5011/keras_nn/IBM/25/2014-11?features='pctlag1,slope4,moy'&hl=2&n
 import io
 import pdb
 import os
-import flask
 import datetime      as dt
+import flask         as fl
 import flask_restful as fr
 import numpy         as np
 import pandas        as pd
@@ -36,7 +36,7 @@ db_s = os.environ['PGURL']
 conn = sql.create_engine(db_s).connect()
 
 # I should ready flask_restful:
-application = flask.Flask(__name__)
+application = fl.Flask(__name__)
 api         = fr.Api(application)
 
 # I should fill lists which users want frequently:
@@ -139,8 +139,15 @@ class KerasNN(fr.Resource):
   This class should return predictions from keras.
   """
   def get(self, tkr,yrs,mnth):
+    pdb.set_trace()
+    features_s = fl.request.args.get('features', 'pctlag1,slope3,dom')
+    hl_s       = fl.request.args.get('hl', '2')
+    neurons_s  = fl.request.args.get('neurons', '4')
+    features_l = features_s.split(',')
+    hl_i       = int(hl_s)
+    neurons_i  = int(neurons_s)
     """
-    out_df = kerastkr.learn_predict_kerasnn(tkr,yrs,mnth,features)
+    out_df = kerastkr.learn_predict_kerasnn(tkr,yrs,mnth,features,hl,neurons)
     out_d  = get_out_d(out_df)
     """
     out_d = {'under':'construction'}
