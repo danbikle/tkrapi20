@@ -23,7 +23,7 @@ import kerastkr
 import sktkr
 
 tkr='IBM';yrs=20;features='pct_lag1,slope4,moy'
-
+pdb.set_trace()
 out_df = sktkr.learn_predict_sklinear_tkr(tkr,yrs,features)
 print(out_df)
 

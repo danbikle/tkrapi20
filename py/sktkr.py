@@ -50,14 +50,10 @@ def learn_predict_sklinear_yr(tkr='ABC',yrs=20,yr=2016, features='pct_lag1,slope
 def learn_predict_sklinear_tkr(tkr='ABC',yrs=20, features='pct_lag1,slope4,moy'):
   """This function should use sklearn to learn and predict for a tkr."""
   # From db, I should get a list of all months for tkr:
-  mnth_l = pgdb.getmonths4tkr(tkr)
-  # I cant predict all of mnth_l. Some lack enough history.
-  # I should convert yrs to months:
-  month_i     = yrs * 12
-  shortmnth_l = mnth_l[month_i:] # Have enough history.
+  mnth_l = pgdb.getmonths4tkr(tkr,yrs)
   # I should rely on monthy predictions:
   tkr_l = []
-  for mnth_s in shortmnth_l:
+  for mnth_s in mnth_l:
     m_df = learn_predict_sklinear(tkr,yrs,mnth_s, features)
     tkr_l.append(m_df)
   # I should gather the monthy predictions:

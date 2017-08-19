@@ -59,17 +59,20 @@ def get_train_test(tkr,yrs,mnth,features):
   out_df     = test_df.copy()[['cdate','cp','pct_lead']]
   return xtrain_a, ytrain_a, xtest_a, out_df
 
-def getmonths4tkr(tkr):
+def getmonths4tkr(tkr,yrs):
+  """Should return a List of mnth-strings suitable for learning from yrs years."""
   # I should get feat_df for tkr:
-  feat_df  = getfeat(tkr)
+  feat_df = getfeat(tkr)
   if (feat_df.empty):
     # I should return empty List:
     return []
-  pdb.set_trace()
   # I should get a series of month-strings from feat_df.cdate
   mnth_sr = feat_df.cdate.str[:7] # Like: 2010-07
   mnth_a  = mnth_sr.unique() # Actually just unique values.
-  return sorted(mnth_a.tolist()) # sorted List
+  mnth_l  = sorted(mnth_a.tolist()
+  start_i     = 2+yrs*12 # I should start learning 2 months after yrs years.
+  shortmnth_l = mnth_l[start_i:] # Has enough history for learning.
+  return shortmnth_l
 
 def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,algo_params='None Needed'):
   # I should convert DF to a string
