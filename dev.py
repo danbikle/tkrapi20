@@ -22,6 +22,21 @@ import pgdb
 import kerastkr
 import sktkr
 
+tkr='FB';yrs=20;features='pct_lag1,pct_lag2';mnth = '2010-11'
+tkr='FB';yrs=20;features='pct_lag1,pct_lag2';mnth = '2017-07'
+pdb.set_trace()
+xtrain_a, ytrain_a, xtest_a, out_df = pgdb.get_train_test(tkr,yrs,mnth,features)
+print(out_df)
+
+stophere
+
+tkr='SPY';yrs=20;features='pct_lag1,pct_lag2,pct_lag4,slope6,slope4,slope8,moy,dow'
+pdb.set_trace()
+out_df = kerastkr.learn_predict_keraslinear_tkr(tkr,yrs,features)
+print(out_df)
+
+stophere
+
 tkr='IBM';yrs=20;features='pct_lag1,slope4,moy'
 pdb.set_trace()
 out_df = sktkr.learn_predict_sklinear_tkr(tkr,yrs,features)

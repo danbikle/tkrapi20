@@ -118,6 +118,19 @@ def learn_predict_keraslinear_yr(tkr='ABC',yrs=20,yr=2016, features='pct_lag1,sl
   yr_df = pd.concat(yr_l, ignore_index=True)
   return yr_df
 
+def learn_predict_keraslinear_tkr(tkr='ABC',yrs=20, features='pct_lag1,slope4,moy'):
+  """This function should use keras to learn and predict for a tkr."""
+  # From db, I should get a list of all months for tkr:
+  mnth_l = pgdb.getmonths4tkr(tkr,yrs)
+  # I should rely on monthy predictions:
+  tkr_l = []
+  for mnth_s in mnth_l:
+    m_df = learn_predict_keraslinear(tkr,yrs,mnth_s, features)
+    tkr_l.append(m_df)
+  # I should gather the monthy predictions:
+  tkr_df = pd.concat(tkr_l, ignore_index=True)
+  return tkr_df
+
 def learn_predict_kerasnn_yr(tkr    = 'IBM'
                           ,yrs      = 20
                           ,yr       = 2016

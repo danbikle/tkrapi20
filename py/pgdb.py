@@ -40,14 +40,15 @@ def get_train_test(tkr,yrs,mnth,features):
   # I should get the test data from feat_df:
   test_bool_sr = (feat_df.cdate.str[:7] == mnth)
   test_df      =  feat_df.loc[test_bool_sr] # should be about 21 rows
-  if (len(test_df) == 0):
+  if (test_df.empty):
     # I should return empty objects:
     return xtrain_a, ytrain_a, xtest_a, out_df
   # I should get the training data from feat_df:
   max_train_loc_i = -1 + test_df.index[0]
   min_train_loc_i = max_train_loc_i - yrs * 252
   if (min_train_loc_i < 10):
-    min_train_loc_i = 10
+    # I should return empty objects:
+    return xtrain_a, ytrain_a, xtest_a, out_df
   train_df = feat_df.loc[min_train_loc_i:max_train_loc_i]
   # I should train:
   features_l = features.split(',')
