@@ -140,13 +140,12 @@ class KerasNN(fr.Resource):
   """
   def get(self, tkr,yrs,mnth):
     features_s = fl.request.args.get('features', 'pctlag1,slope3,dom')
-    hl_s       = fl.request.args.get('hl', '2')
-    neurons_s  = fl.request.args.get('neurons', '4')
+    hl_s       = fl.request.args.get('hl', '2')      # default 2
+    neurons_s  = fl.request.args.get('neurons', '4') # default 4
     hl_i       = int(hl_s)
     neurons_i  = int(neurons_s)
     out_df = kerastkr.learn_predict_kerasnn(tkr,yrs,mnth,features_s,hl_i,neurons_i)
     out_d  = get_out_d(out_df)
-    out_d = {'under':'construction'}
     return {'predictions': out_d}
 api.add_resource(KerasNN, '/keras_nn/<tkr>/<int:yrs>/<mnth>')
   

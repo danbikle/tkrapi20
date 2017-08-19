@@ -55,7 +55,9 @@ def learn_predict_kerasnn(tkr       = 'IBM'
   kmodel.add(keras.layers.core.Dense(1)) 
   kmodel.add(keras.layers.core.Activation('linear'))
   kmodel.compile(loss='mean_squared_error', optimizer='adam')
-  kmodel.fit(xtrain_a,ytrain_a, batch_size=batch_size_i, epochs=epochs_i)
+  # NN model should train using more epochs than plain Linear:
+  epochs_nn_i = 8 * epochs_i
+  kmodel.fit(xtrain_a,ytrain_a, batch_size=batch_size_i, epochs=epochs_nn_i)
   # I should predict xtest_a then update out_df
   predictions_a           = np.round(kmodel.predict(xtest_a),3)
   # Done with Keras, I should pass along the predictions.
