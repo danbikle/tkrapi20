@@ -148,6 +148,16 @@ class KerasNN(fr.Resource):
     out_d  = get_out_d(out_df)
     return {'predictions': out_d}
 api.add_resource(KerasNN, '/keras_nn/<tkr>/<int:yrs>/<mnth>')
+
+class SklinearYr(fr.Resource):
+  """
+  This class should return predictions from sklearn for a Year.
+  """
+  def get(self, tkr,yrs,yr,features):
+    out_df = sktkr.learn_predict_sklinear_yr(tkr,yrs,yr,features)
+    out_d  = get_out_d(out_df)
+    return {'predictions': out_d}
+api.add_resource(SklinearYr, '/sklinear_yr/<tkr>/<int:yrs>/<int:yr>/<features>')
   
 if __name__ == "__main__":
   port = int(os.environ.get("PORT", 5000))

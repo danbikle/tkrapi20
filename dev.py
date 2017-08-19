@@ -22,10 +22,14 @@ import pgdb
 import kerastkr
 
 pdb.set_trace()
-out_df = kerastkr.learn_predict_kerasnn()#tkr,yrs,mnth,features_s,hl_i,neurons_i)
+
+out_df = kerastkr.learn_predict_sklinear_yr()#tkr,yrs,yr,features_s)
 
 stophere
 
+# out_df = kerastkr.learn_predict_kerasnn()#tkr,yrs,mnth,features_s,hl_i,neurons_i)
+
+stophere
 
 predictions_df = flaskr.learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,slope4,moy')
 pdb.set_trace()
