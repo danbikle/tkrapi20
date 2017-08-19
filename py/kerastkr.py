@@ -41,8 +41,15 @@ def learn_predict_kerasnn(tkr       = 'IBM'
   kmodel.add(keras.layers.core.Dense(features_i, input_shape=(features_i,)))
   # https://keras.io/activations/
   kmodel.add(keras.layers.core.Activation('linear'))
+  # Activations should have 'Dropout' to reduce overfitting:
+  kmodel.add(keras.layers.core.Dropout(0.1)) 
   # I should add hidden layers
-  
+  for l_i in range(hl):
+    # I should create a hidden layer with neurons here
+    kmodel.add(keras.layers.core.Dense(neurons))
+    # linear-Activation is 1 choice of several here:
+    kmodel.add(keras.layers.core.Activation('linear'))
+    kmodel.add(keras.layers.core.Dropout(0.1))
   # Done with    hidden layers
   # I should have 1 linear-output:
   kmodel.add(keras.layers.core.Dense(1)) 
@@ -56,8 +63,9 @@ def learn_predict_kerasnn(tkr       = 'IBM'
   out_df['prediction']    = predictions_l
   out_df['effectiveness'] = np.sign(out_df.pct_lead*out_df.prediction)*np.abs(out_df.pct_lead)
   out_df['accuracy']      = (1+np.sign(out_df.effectiveness))/2
-  algo                    = 'keraslinear'
-  pgdb.predictions2db(tkr,yrs,mnth,features,algo,out_df)
+  algo                    = 'kerasnn'
+  algo_params             = str([hl,neurons])
+  pgdb.predictions2db(tkr,yrs,mnth,features,algo,algo_params,out_df)
   # I should return a DataFrame useful for reporting on the predictions.
   return out_df
 
