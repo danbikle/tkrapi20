@@ -20,10 +20,11 @@ import flaskr
 
 import pgdb
 import kerastkr
+import sktkr
 
 pdb.set_trace()
 
-out_df = kerastkr.learn_predict_sklinear_yr()#tkr,yrs,yr,features_s)
+out_df = sktkr.learn_predict_sklinear_yr()#tkr,yrs,yr,features_s)
 
 stophere
 
