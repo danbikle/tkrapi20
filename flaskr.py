@@ -14,6 +14,7 @@ curl localhost:5011/tkrprices/SNAP
 curl localhost:5011/sklinear/ABC/20/2016-12/'pct_lag1,slope3,dow,moy'
 curl localhost:5011/keras_linear/ABC/20/2016-12/'pct_lag2,slope5,dow,moy'
 curl localhost:5011/keras_nn/IBM/25/2014-11?features='pctlag1,slope4,moy'&hl=2&neurons=4
+curl localhost:5011/sklinear_yr/IBM/20/2016/'pct_lag1,slope3,dow,moy'
 """
 
 import io
@@ -111,6 +112,7 @@ def get_out_d(out_df):
     out_d['Long-Only-Effectivness'] = sum(out_df.pct_lead)
     out_d['Model-Effectivness']     = sum(out_df.effectiveness)
     out_d['Model-Accuracy']         = sum(out_df.accuracy) / out_df.accuracy.size
+    out_d['Prediction-Count']       = out_df.prediction.size
     out_d['Prediction-Details']     = out_l
   return out_d
 
