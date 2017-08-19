@@ -22,9 +22,15 @@ import pgdb
 import kerastkr
 import sktkr
 
+tkr='ABC';yrs=20;mnth='2017-09';features='pct_lag1,slope4,moy'
 pdb.set_trace()
+out_df = sktkr.learn_predict_sklinear(tkr,yrs,mnth,features)
+print(out_df)
 
-out_df = kerastkr.learn_predict_keraslinear_yr()#tkr,yrs,yr,features_s)
+stophere
+
+out_df = kerastkr.learn_predict_kerasnn_yr()#tkr,yrs,yr,features_s)
+print(out_df)
 
 stophere
 
