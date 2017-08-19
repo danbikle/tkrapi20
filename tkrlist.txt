@@ -1,4 +1,5 @@
 ^GSPC
+^IXIC
 ^RUT
 A
 AA
