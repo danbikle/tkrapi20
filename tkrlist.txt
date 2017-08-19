@@ -1,3 +1,5 @@
+^GSPC
+^RUT
 A
 AA
 AAL

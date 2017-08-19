@@ -15,6 +15,7 @@ curl localhost:5011/sklinear/ABC/20/2016-12/'pct_lag1,slope3,dow,moy'
 curl localhost:5011/keraslinear/ABC/20/2016-12/'pct_lag2,slope5,dow,moy'
 curl localhost:5011/keras_nn/IBM/25/2014-11?features='pctlag1,slope4,moy'&hl=2&neurons=4
 curl localhost:5011/sklinear_yr/IBM/20/2016/'pct_lag1,slope3,dow,moy'
+curl localhost:5011/sklinear_tkr/IBM/20/'pct_lag1,slope3,dow,moy'
 curl localhost:5011/keraslinear_yr/IBM/20/2016/'pct_lag1,slope3,dow,moy'
 curl localhost:5011/keras_nn_yr/IBM/20/2016/'pct_lag1,slope3,dow,moy'
 curl localhost:5011/keraslinear_tkr/IBM/20/'pct_lag1,slope3,dow,moy'
