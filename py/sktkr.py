@@ -32,11 +32,13 @@ def learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,s
   pgdb.predictions2db(tkr,yrs,mnth,features,algo,out_df)
   return out_df
 
-def learn_predict_sklinear_yr(tkr='ABC',yrs=20,yr=2017, features='pct_lag1,slope4,moy'):
+def learn_predict_sklinear_yr(tkr='ABC',yrs=20,yr=2016, features='pct_lag1,slope4,moy'):
   """This function should use sklearn to learn and predict for a year."""
   # I should rely on monthy predictions
-  for mnth in range(1,13):
-    print(str(mnth).zfill(2))
+  for mnth_i in range(1,13):
+    mnth_s = str(mnth_i).zfill(2)
+    mnth   = str(yr)+mnth_s
+    m_df   = learn_predict_sklinear(tkr,yrs,mnth, features)
   return True# out_df
 
 'bye'
