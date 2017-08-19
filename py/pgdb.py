@@ -59,6 +59,17 @@ def get_train_test(tkr,yrs,mnth,features):
   out_df     = test_df.copy()[['cdate','cp','pct_lead']]
   return xtrain_a, ytrain_a, xtest_a, out_df
 
+def getmonths4tkr(tkr):
+  # I should get feat_df for tkr:
+  feat_df  = getfeat(tkr)
+  if (feat_df.empty):
+    # I should return empty List:
+    return []
+  pdb.set_trace()
+  # I should get a series of month-strings from feat_df.cdate
+  mnth_sr = feat_df.cdate.str[:7]
+  return ['something']
+
 def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,algo_params='None Needed'):
   # I should convert DF to a string
   csv0_s = predictions_df.to_csv(index=False,float_format='%.3f')

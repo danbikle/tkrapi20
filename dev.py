@@ -22,6 +22,13 @@ import pgdb
 import kerastkr
 import sktkr
 
+tkr='IBM';yrs=20;features='pct_lag1,slope4,moy'
+
+out_df = sktkr.learn_predict_sklinear_tkr(tkr,yrs,features)
+print(out_df)
+
+stophere
+
 tkr='ABC';yrs=20;mnth='2017-09';features='pct_lag1,slope4,moy';yr=2017
 pdb.set_trace()
 out_df = sktkr.learn_predict_sklinear_yr(tkr,yrs,yr,features)
