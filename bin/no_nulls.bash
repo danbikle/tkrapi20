@@ -10,8 +10,9 @@ cd ${SCRIPTPATH}/../
 # I should remove null-strings from price-history csv-files:
 
 cd $TKRCSVH
+grep null *.csv
 
-for FN in AA*.csv
+for FN in *.csv
 do
   sed -i '/null/d' $FN
 done
