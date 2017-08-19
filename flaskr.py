@@ -17,6 +17,7 @@ curl localhost:5011/keras_nn/IBM/25/2014-11?features='pctlag1,slope4,moy'&hl=2&n
 curl localhost:5011/sklinear_yr/IBM/20/2016/'pct_lag1,slope3,dow,moy'
 curl localhost:5011/keraslinear_yr/IBM/20/2016/'pct_lag1,slope3,dow,moy'
 curl localhost:5011/keras_nn_yr/IBM/20/2016/'pct_lag1,slope3,dow,moy'
+curl localhost:5011/keraslinear_tkr/IBM/20/'pct_lag1,slope3,dow,moy'
 """
 
 import io
@@ -189,6 +190,41 @@ class KerasNNYr(fr.Resource):
     out_d  = get_out_d(out_df)
     return {'predictions': out_d}
 api.add_resource(KerasNNYr, '/keras_nn_yr/<tkr>/<int:yrs>/<int:yr>')
+
+class SklinearTkr(fr.Resource):
+  """
+  This class should return all predictions from sklearn for a tkr.
+  """
+  def get(self, tkr,yrs,features):
+    out_df = sktkr.learn_predict_sklinear_tkr(tkr,yrs,features)
+    out_d  = get_out_d(out_df)
+    return {'predictions': out_d}
+api.add_resource(SklinearYr, '/sklinear_tkr/<tkr>/<int:yrs>/<features>')
+
+class KeraslinearTkr(fr.Resource):
+  """
+  This class should return all predictions from keras for a tkr.
+  """
+  def get(self, tkr,yrs,features):
+    out_df = kerastkr.learn_predict_keraslinear_tkr(tkr,yrs,features)
+    out_d  = get_out_d(out_df)
+    return {'predictions': out_d}
+api.add_resource(KeraslinearTkr, '/keraslinear_tkr/<tkr>/<int:yrs>/<features>')
+
+class KerasNNYr(fr.Resource):
+  """
+  This class should return allpredictions from keras for a tkr.
+  """
+  def get(self, tkr,yrs):
+    features_s = fl.request.args.get('features', 'pctlag1,slope3,dom')
+    hl_s       = fl.request.args.get('hl', '2')      # default 2
+    neurons_s  = fl.request.args.get('neurons', '4') # default 4
+    hl_i       = int(hl_s)
+    neurons_i  = int(neurons_s)
+    out_df = kerastkr.learn_predict_kerasnn_tkr(tkr,yrs,features,hl_i,neurons_i)
+    out_d  = get_out_d(out_df)
+    return {'predictions': out_d}
+api.add_resource(KerasNNYr, '/keras_nn_yr/<tkr>/<int:yrs>')
   
 if __name__ == "__main__":
   port = int(os.environ.get("PORT", 5000))
