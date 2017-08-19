@@ -15,6 +15,7 @@ curl localhost:5011/sklinear/ABC/20/2016-12/'pct_lag1,slope3,dow,moy'
 curl localhost:5011/keras_linear/ABC/20/2016-12/'pct_lag2,slope5,dow,moy'
 curl localhost:5011/keras_nn/IBM/25/2014-11?features='pctlag1,slope4,moy'&hl=2&neurons=4
 curl localhost:5011/sklinear_yr/IBM/20/2016/'pct_lag1,slope3,dow,moy'
+curl localhost:5011/keraslinear_yr/IBM/20/2016/'pct_lag1,slope3,dow,moy'
 """
 
 import io
@@ -160,6 +161,16 @@ class SklinearYr(fr.Resource):
     out_d  = get_out_d(out_df)
     return {'predictions': out_d}
 api.add_resource(SklinearYr, '/sklinear_yr/<tkr>/<int:yrs>/<int:yr>/<features>')
+
+class KeraslinearYr(fr.Resource):
+  """
+  This class should return predictions from sklearn for a Year.
+  """
+  def get(self, tkr,yrs,yr,features):
+    out_df = kerastkr.learn_predict_keraslinear_yr(tkr,yrs,yr,features)
+    out_d  = get_out_d(out_df)
+    return {'predictions': out_d}
+api.add_resource(KeraslinearYr, '/keraslinear_yr/<tkr>/<int:yrs>/<int:yr>/<features>')
   
 if __name__ == "__main__":
   port = int(os.environ.get("PORT", 5000))
