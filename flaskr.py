@@ -12,7 +12,7 @@ curl localhost:5011/istkr/IBM
 curl localhost:5011/years
 curl localhost:5011/tkrprices/SNAP
 curl localhost:5011/sklinear/ABC/20/2016-12/'pct_lag1,slope3,dow,moy'
-curl localhost:5011/keras_linear/ABC/20/2016-12/'pct_lag2,slope5,dow,moy'
+curl localhost:5011/keraslinear/ABC/20/2016-12/'pct_lag2,slope5,dow,moy'
 curl localhost:5011/keras_nn/IBM/25/2014-11?features='pctlag1,slope4,moy'&hl=2&neurons=4
 curl localhost:5011/sklinear_yr/IBM/20/2016/'pct_lag1,slope3,dow,moy'
 curl localhost:5011/keraslinear_yr/IBM/20/2016/'pct_lag1,slope3,dow,moy'
@@ -138,7 +138,7 @@ class KerasLinear(fr.Resource):
     out_df = kerastkr.learn_predict_keraslinear(tkr,yrs,mnth,features)
     out_d  = get_out_d(out_df)
     return {'predictions': out_d}
-api.add_resource(KerasLinear, '/keras_linear/<tkr>/<int:yrs>/<mnth>/<features>')
+api.add_resource(KerasLinear, '/keraslinear/<tkr>/<int:yrs>/<mnth>/<features>')
   
 class KerasNN(fr.Resource):
   """
