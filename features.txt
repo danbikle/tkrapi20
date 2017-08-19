@@ -3,6 +3,8 @@
 NOT DONE YET:
   
 list of resources:
+  /sklinear_yr/IBM/25/2016/'pct_lag1,slope4,moy'
+  /sklinear_tkr/IBM/25/'pct_lag1,slope4,moy'
   /keras_nn_yr/ABC/25/2016?features='pct_lag1,slope4,moy'&hl=2&neurons=4
   /keras_nn_tkr/ABC/25?features='pct_lag1,slope4,moy'&hl=2&neurons=4
   
