@@ -21,7 +21,8 @@ import flaskr
 import pgdb
 import kerastkr
 
-out_df = kerastkr.learn_predict_keraslinear()
+pdb.set_trace()
+out_df = kerastkr.learn_predict_kerasnn()#tkr,yrs,mnth,features_s,hl_i,neurons_i)
 
 stophere
 
