@@ -67,9 +67,9 @@ def getmonths4tkr(tkr):
     return []
   pdb.set_trace()
   # I should get a series of month-strings from feat_df.cdate
-  mnth_sr = feat_df.cdate.str[:7]
-  mnth_a  = mnth_sr.unique()
-  return sorted(mnth_a.tolist())
+  mnth_sr = feat_df.cdate.str[:7] # Like: 2010-07
+  mnth_a  = mnth_sr.unique() # Actually just unique values.
+  return sorted(mnth_a.tolist()) # sorted List
 
 def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,algo_params='None Needed'):
   # I should convert DF to a string
