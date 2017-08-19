@@ -69,7 +69,7 @@ def getmonths4tkr(tkr,yrs):
   # I should get a series of month-strings from feat_df.cdate
   mnth_sr = feat_df.cdate.str[:7] # Like: 2010-07
   mnth_a  = mnth_sr.unique() # Actually just unique values.
-  mnth_l  = sorted(mnth_a.tolist()
+  mnth_l  = sorted(mnth_a.tolist())
   start_i     = 2+yrs*12 # I should start learning 2 months after yrs years.
   shortmnth_l = mnth_l[start_i:] # Has enough history for learning.
   return shortmnth_l
