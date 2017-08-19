@@ -102,6 +102,8 @@ api.add_resource(Tkrprices, '/tkrprices/<tkr>')
 def get_out_d(out_df):
   """This function should convert out_df to a readable format when in JSON."""
   out_l = []
+  if out_df.empty :
+    return {'sorry, no':'predictions'}
   for row in out_df.itertuples():
     row_d       = {
       'date,price':[row.cdate,row.cp]

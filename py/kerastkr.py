@@ -33,6 +33,8 @@ def learn_predict_kerasnn(tkr       = 'IBM'
   # I should get train, test data.
   # Also get copy of test data in a DataFrame for later reporting:
   xtrain_a, ytrain_a, xtest_a, out_df = pgdb.get_train_test(tkr,yrs,mnth,features)
+  if ((xtrain_a.size == 0) or (ytrain_a.size == 0) or (xtest_a.size == 0)):
+    return out_df # probably empty too.
   # Start using Keras here.
   kmodel     = keras.models.Sequential()
   # I should fit a Keras model to xtrain_a, ytrain_a
@@ -76,6 +78,8 @@ def learn_predict_keraslinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag
   # I should get train, test data.
   # Also get copy of test data in a DataFrame for later reporting:
   xtrain_a, ytrain_a, xtest_a, out_df = pgdb.get_train_test(tkr,yrs,mnth,features)
+  if ((xtrain_a.size == 0) or (ytrain_a.size == 0) or (xtest_a.size == 0)):
+    return out_df # probably empty too.
   # Start using Keras here.
   kmodel     = keras.models.Sequential()
   # I should fit a Keras model to xtrain_a, ytrain_a
