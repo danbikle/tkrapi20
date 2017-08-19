@@ -199,7 +199,7 @@ class SklinearTkr(fr.Resource):
     out_df = sktkr.learn_predict_sklinear_tkr(tkr,yrs,features)
     out_d  = get_out_d(out_df)
     return {'predictions': out_d}
-api.add_resource(SklinearYr, '/sklinear_tkr/<tkr>/<int:yrs>/<features>')
+api.add_resource(SklinearTkr, '/sklinear_tkr/<tkr>/<int:yrs>/<features>')
 
 class KeraslinearTkr(fr.Resource):
   """
@@ -211,9 +211,9 @@ class KeraslinearTkr(fr.Resource):
     return {'predictions': out_d}
 api.add_resource(KeraslinearTkr, '/keraslinear_tkr/<tkr>/<int:yrs>/<features>')
 
-class KerasNNYr(fr.Resource):
+class KerasNNTkr(fr.Resource):
   """
-  This class should return allpredictions from keras for a tkr.
+  This class should return all predictions from keras for a tkr.
   """
   def get(self, tkr,yrs):
     features_s = fl.request.args.get('features', 'pctlag1,slope3,dom')
@@ -224,7 +224,7 @@ class KerasNNYr(fr.Resource):
     out_df = kerastkr.learn_predict_kerasnn_tkr(tkr,yrs,features,hl_i,neurons_i)
     out_d  = get_out_d(out_df)
     return {'predictions': out_d}
-api.add_resource(KerasNNYr, '/keras_nn_yr/<tkr>/<int:yrs>')
+api.add_resource(KerasNNTkr, '/keras_nn_tkr/<tkr>/<int:yrs>')
   
 if __name__ == "__main__":
   port = int(os.environ.get("PORT", 5000))
