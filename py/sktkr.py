@@ -34,11 +34,15 @@ def learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,s
 
 def learn_predict_sklinear_yr(tkr='ABC',yrs=20,yr=2016, features='pct_lag1,slope4,moy'):
   """This function should use sklearn to learn and predict for a year."""
+  yr_l = []
   # I should rely on monthy predictions
   for mnth_i in range(1,13):
     mnth_s = str(mnth_i).zfill(2)
-    mnth   = str(yr)+mnth_s
+    mnth   = str(yr)+'-'+mnth_s
     m_df   = learn_predict_sklinear(tkr,yrs,mnth, features)
-  return True# out_df
+    yr_l.append(m_df)
+  pdb.set_trace()
+  yr_df = pd.concat(yr_l, ignore_index=True)
+  return yr_df
 
 'bye'
