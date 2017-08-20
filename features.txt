@@ -3,6 +3,11 @@
 NOT DONE YET:
     
 list of resources:
+  - /features
+  - /algos
+  - /tkrs
+  - /istkr/ibm
+    mindate, maxdate, recent price
   - CRUD Keras models
   - retrieve, use a model
   - CRUD sklinear model, use the model
