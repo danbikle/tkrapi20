@@ -23,6 +23,13 @@ import kerastkr
 import sktkr
 
 
+tkr='FB';yrs=7;features='pct_lag1,pct_lag2,pct_lag4,slope6,slope4,slope8,moy,dow'
+pdb.set_trace()
+out_df = sktkr.learn_predict_sklinear_tkr(tkr,yrs,features)
+print(out_df)
+
+stophere
+
 tkr='FB';yrs=20;mnth='2017-08';features='pct_lag1,slope4,moy'
 pdb.set_trace()
 out_df = sktkr.learn_predict_sklinear(tkr,yrs,mnth,features)
