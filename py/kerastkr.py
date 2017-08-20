@@ -107,7 +107,8 @@ def learn_predict_keraslinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag
 
 def learn_predict_keraslinear_yr(tkr='ABC',yrs=20,yr=2016, features='pct_lag1,slope4,moy'):
   """This function should use keras to learn and predict for a year."""
-  yr_l = []
+  empty_df = pd.DataFrame()
+  yr_l     = [empty_df, empty_df] # Ready for pd.concat()
   # I should rely on monthy predictions:
   for mnth_i in range(1,13):
     mnth_s = str(mnth_i).zfill(2)
@@ -132,15 +133,16 @@ def learn_predict_keraslinear_tkr(tkr='ABC',yrs=20, features='pct_lag1,slope4,mo
   tkr_df = pd.concat(tkr_l, ignore_index=True)
   return tkr_df
 
-def learn_predict_kerasnn_yr(tkr    = 'IBM'
-                          ,yrs      = 20
-                          ,yr       = 2016
+def learn_predict_kerasnn_yr(tkr    = 'FB'
+                          ,yrs      = 3
+                          ,yr       = 2017
                           ,features = 'pct_lag1,slope4,moy'
                           ,hl       = 2 # number of hidden layers
                           ,neurons  = 4 # neurons in each hl
                           ):
   """This function should use keras to learn and predict for a year."""
-  yr_l = []
+  empty_df = pd.DataFrame()
+  yr_l     = [empty_df, empty_df] # Ready for pd.concat()
   # I should rely on monthy predictions:
   for mnth_i in range(1,13):
     mnth_s = str(mnth_i).zfill(2)
@@ -151,5 +153,23 @@ def learn_predict_kerasnn_yr(tkr    = 'IBM'
   yr_df = pd.concat(yr_l, ignore_index=True)
   return yr_df
 
+def learn_predict_kerasnn_tkr(tkr   = 'FB'
+                          ,yrs      = 3
+                          ,features = 'pct_lag1,slope4,moy'
+                          ,hl       = 2 # number of hidden layers
+                          ,neurons  = 4 # neurons in each hl
+                          ):
+  """This function should use keras to learn and predict for a tkr."""
+  # From db, I should get a list of all months for tkr:
+  mnth_l = pgdb.getmonths4tkr(tkr,yrs)
+  # I should rely on monthy predictions:
+  empty_df = pd.DataFrame()
+  tkr_l    = [empty_df, empty_df] # Ready for pd.concat()
+  for mnth_s in mnth_l:
+    m_df = learn_predict_kerasnn(tkr,yrs,mnth_s, features)
+    tkr_l.append(m_df)
+  # I should gather the monthy predictions:
+  tkr_df = pd.concat(tkr_l, ignore_index=True)
+  return tkr_df
 
 'bye'
