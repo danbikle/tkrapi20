@@ -17,6 +17,9 @@ import sqlalchemy    as sql
 db_s = os.environ['PGURL']
 conn = sql.create_engine(db_s).connect()
 
+def tkrinfo(tkr):
+  return 'under construction'
+
 def getfeat(tkr):
   """This function should return a DataFrame full of features for a tkr."""
   sql_s  = "SELECT csv FROM features WHERE tkr = %s LIMIT 1"

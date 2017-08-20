@@ -61,6 +61,18 @@ class Demo11(fr.Resource):
     return {my_k_s: my_v_s}
 api.add_resource(Demo11, '/demo11.json')
 
+class Tkrinfo(fr.Resource):
+  """
+  This class should return info about a tkr.
+  """
+  def get(self, tkr):
+    tkrinfo   = None
+    torf      = tkr in tkrlist_l
+    if torf:
+      tkrinfo = pgdb.tkrinfo(tkr)
+    return {'istkr': torf,'tkrinfo': tkrinfo}
+api.add_resource(Tkrinfo, '/tkrinfo/<tkr>')
+
 class Tkrlist(fr.Resource):
   """
   This class should list all the tkrs in tkrlist.txt

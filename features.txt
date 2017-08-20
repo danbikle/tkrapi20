@@ -6,7 +6,7 @@ list of resources:
   - /features
   - /algos
   - /tkrs
-  - /istkr/ibm
+  - /tkrinfo/ibm
     mindate, maxdate, recent price
   - CRUD Keras models
   - retrieve, use a model
