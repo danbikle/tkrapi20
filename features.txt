@@ -1,17 +1,20 @@
 ~/tkrapi20/features.txt
 
 NOT DONE YET:
-  
+    
 list of resources:
-  /sklinear_yr/IBM/25/2016/'pct_lag1,slope4,moy'
-  /sklinear_tkr/IBM/25/'pct_lag1,slope4,moy'
-  /keras_nn_yr/ABC/25/2016?features='pct_lag1,slope4,moy'&hl=2&neurons=4
-  /keras_nn_tkr/ABC/25?features='pct_lag1,slope4,moy'&hl=2&neurons=4
+  - CRUD Keras models
+  - retrieve, use a model
+  - CRUD sklinear model, use the model
   
+keras.js demo
+
+  - select predictions from db
+  - report predictions
+    - bokeh
+    - matplotlib
+    - seaborn
 question:
-  - how to create a 2 layer net having 1 neuron in output layer with linear output?
-  - query of relu in keras help me?
-  - yes, found linear(x) here: https://keras.io/activations/
   - can I have a 1-neuron output layer which outputs binary logistic regression?
   
 Site should have list of behaviorial dimensions:
@@ -73,5 +76,14 @@ resources:
   /sklinear/IBM/25/2016-11?features='pct_lag1,slope4,moy'
   /keraslinear/ABC/25/2016-11/'pct_lag1,slope4,moy'
   /keras_nn/ABC/25/2016-11?features='pct_lag1,slope4,moy'&hl=2&neurons=4
+  /sklinear_yr/IBM/25/2016/'pct_lag1,slope4,moy'
+  /sklinear_tkr/IBM/25/'pct_lag1,slope4,moy'
+  /keras_nn_yr/ABC/25/2016?features='pct_lag1,slope4,moy'&hl=2&neurons=4
+  /keras_nn_tkr/ABC/25?features='pct_lag1,slope4,moy'&hl=2&neurons=4
 
 enhance predictions2db so it does delete and insert.
+
+questions:
+  - how to create a 2 layer net having 1 neuron in output layer with linear output?
+  - query of relu in keras help me?
+  - yes, found linear(x) here: https://keras.io/activations/
