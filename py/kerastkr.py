@@ -123,7 +123,8 @@ def learn_predict_keraslinear_tkr(tkr='ABC',yrs=20, features='pct_lag1,slope4,mo
   # From db, I should get a list of all months for tkr:
   mnth_l = pgdb.getmonths4tkr(tkr,yrs)
   # I should rely on monthy predictions:
-  tkr_l = []
+  empty_df = pd.DataFrame()
+  tkr_l    = [empty_df, empty_df] # Ready for pd.concat()
   for mnth_s in mnth_l:
     m_df = learn_predict_keraslinear(tkr,yrs,mnth_s, features)
     tkr_l.append(m_df)
