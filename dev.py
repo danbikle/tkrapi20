@@ -23,11 +23,37 @@ import kerastkr
 import sktkr
 
 
+tkr='FB';yrs=6;features='pct_lag1,pct_lag2,pct_lag4,slope6,slope4,slope8,moy,dow'
+hl = 1; neurons = 3
+pdb.set_trace()
+out_df = kerastkr.learn_predict_kerasnn_tkr(tkr,yrs,features,hl,neurons)
+print(out_df)
+stophere
+
+tkr='FB';yrs=6;features='pct_lag1,pct_lag2,pct_lag4,slope6,slope4,slope8,moy,dow'
+hl = 1; neurons = 3 ; yr = 2017
+pdb.set_trace()
+out_df = kerastkr.learn_predict_kerasnn_yr(tkr,yrs,yr,features,hl,neurons)
+print(out_df)
+stophere
+
+tkr='FB';yrs=5;features='pct_lag1,pct_lag2,pct_lag4,slope6,slope4,slope8,moy,dow'
+hl = 1; neurons = 3
+pdb.set_trace()
+out_df = kerastkr.learn_predict_kerasnn_tkr(tkr,yrs,features,hl,neurons)
+print(out_df)
+stophere
+
+tkr='FB';yrs=5;features='pct_lag1,pct_lag2,pct_lag4,slope6,slope4,slope8,moy,dow'
+pdb.set_trace()
+out_df = kerastkr.learn_predict_keraslinear_tkr(tkr,yrs,features)
+print(out_df)
+stophere
+
 tkr='FB';yrs=7;features='pct_lag1,pct_lag2,pct_lag4,slope6,slope4,slope8,moy,dow'
 pdb.set_trace()
 out_df = sktkr.learn_predict_sklinear_tkr(tkr,yrs,features)
 print(out_df)
-
 stophere
 
 tkr='FB';yrs=20;mnth='2017-08';features='pct_lag1,slope4,moy'
