@@ -229,7 +229,7 @@ class KerasNNYr(fr.Resource):
   This class should return predictions from keras for a Year.
   """
   def get(self, tkr,yrs,yr):
-    features_s = fl.request.args.get('features', 'pct_lag1,slope3,dom')
+    features_s = fl.request.args.get('features', 'pct_lag1,slope3,dow')
     hl_s       = fl.request.args.get('hl', '2')      # default 2
     neurons_s  = fl.request.args.get('neurons', '4') # default 4
     hl_i       = int(hl_s)
@@ -264,7 +264,7 @@ class KerasNNTkr(fr.Resource):
   This class should return all predictions from keras for a tkr.
   """
   def get(self, tkr,yrs):
-    features_s = fl.request.args.get('features', 'pct_lag1,slope3,dom')
+    features_s = fl.request.args.get('features', 'pct_lag1,slope3,dow')
     hl_s       = fl.request.args.get('hl', '2')      # default 2
     neurons_s  = fl.request.args.get('neurons', '4') # default 4
     hl_i       = int(hl_s)
