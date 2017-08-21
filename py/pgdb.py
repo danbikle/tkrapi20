@@ -39,6 +39,12 @@ def getfeatures():
   # I should remove cdate, cp, pct_lead:
   return columns_l[3:]
 
+def check_features(f_s):
+  """This function should check validity of f_s."""
+  valid_features = getfeatures() # Use later
+  features_s     = f_s.replace("'","").replace('"','')
+  return features_s
+
 def tkrinfo(tkr):
   """This function should return info about a tkr."""
   feat_df             = getfeat(tkr)

@@ -194,7 +194,7 @@ class KerasNN(fr.Resource):
   """
   def get(self, tkr,yrs,mnth):
     features0_s = fl.request.args.get('features', 'pct_lag1,slope3,dom')
-    features_s = features0_s.replace("'","").replace('"','')
+    features_s = pgdb.check_features(features0_s)
     hl_s       = fl.request.args.get('hl', '2')      # default 2
     neurons_s  = fl.request.args.get('neurons', '4') # default 4
     hl_i       = int(hl_s)
