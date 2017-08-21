@@ -283,7 +283,7 @@ class KerasNNTkr(fr.Resource):
     neurons_s  = fl.request.args.get('neurons', '4') # default 4
     hl_i       = int(hl_s)
     neurons_i  = int(neurons_s)
-    out_df = kerastkr.learn_predict_kerasnn_tkr(tkr,yrs,features,hl_i,neurons_i)
+    out_df = kerastkr.learn_predict_kerasnn_tkr(tkr,yrs,features_s,hl_i,neurons_i)
     out_d  = get_out_d(out_df)
     return {'predictions': out_d}
 api.add_resource(KerasNNTkr, '/keras_nn_tkr/<tkr>/<int:yrs>')
