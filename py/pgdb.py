@@ -30,15 +30,17 @@ def getfeat(tkr):
 def tkrinfo(tkr):
   """This function should return info about a tkr."""
   feat_df             = getfeat(tkr)
+  if feat_df.empty:
+    return {'tkr': ('No info for: '+tkr)}
   observation_count_i = int(feat_df.cdate.size)
   maxdate_row = feat_df.loc[feat_df.cdate == feat_df.cdate.max()]
   return {
-      'tkr':                 tkr
-      ,'observation_count':  observation_count_i
-      ,'years_observations': np.round(observation_count_i/252.0,1)
-      ,'mindate':            feat_df.cdate.min()
-      ,'maxdate':            feat_df.cdate.max()
-      ,'maxdate_price':      maxdate_row.cp.tolist()[0]
+    'tkr':                 tkr
+    ,'observation_count':  observation_count_i
+    ,'years_observations': np.round(observation_count_i/252.0,1)
+    ,'mindate':            feat_df.cdate.min()
+    ,'maxdate':            feat_df.cdate.max()
+    ,'maxdate_price':      maxdate_row.cp.tolist()[0]
   }
 
 def get_train_test(tkr,yrs,mnth,features):
