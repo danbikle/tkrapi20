@@ -200,7 +200,7 @@ class KerasNN(fr.Resource):
     hl_i       = int(hl_s)
     neurons_i  = int(neurons_s)
     out_df = kerastkr.learn_predict_kerasnn(tkr,yrs,mnth,features_s,hl_i,neurons_i)
-    out_d  = get_out_d(out_df)
+    out_d      = get_out_d(out_df)
     return {'predictions': out_d}
 api.add_resource(KerasNN, '/keras_nn/<tkr>/<int:yrs>/<mnth>')
 

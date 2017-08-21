@@ -22,6 +22,15 @@ import pgdb
 import kerastkr
 import sktkr
 
+valid_s = set([1,2,3,4,5])
+
+maybe_s = set([1,2,3,6,7,6,7])
+
+inter_s = valid_s.intersection(maybe_s)
+
+stophere
+
+
 pdb.set_trace()
 features = pgdb.getfeatures()
 stophere

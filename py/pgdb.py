@@ -40,10 +40,13 @@ def getfeatures():
   return columns_l[3:]
 
 def check_features(f_s):
-  """This function should check validity of f_s."""
-  valid_features = getfeatures() # Use later
-  features_s     = f_s.replace("'","").replace('"','')
-  return features_s
+  """This function should check validity of f_s user input."""
+  valid_features_l = getfeatures()
+  features_s       = f_s.replace("'","").replace('"','')
+  features_st      = set(features_s.split(','))
+  goodfeatures_st  = set(valid_features_l).intersection(features_st)
+  goodfeatures_s   = ','.join(goodfeatures_st)
+  return goodfeatures_s
 
 def tkrinfo(tkr):
   """This function should return info about a tkr."""
