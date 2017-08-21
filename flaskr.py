@@ -229,12 +229,13 @@ class KerasNNYr(fr.Resource):
   This class should return predictions from keras for a Year.
   """
   def get(self, tkr,yrs,yr):
-    features_s = fl.request.args.get('features', 'pct_lag1,slope3,dow')
+    features0_s = fl.request.args.get('features', 'pct_lag1,slope3,dow')
+    features_s = pgdb.check_features(features0_s)
     hl_s       = fl.request.args.get('hl', '2')      # default 2
     neurons_s  = fl.request.args.get('neurons', '4') # default 4
     hl_i       = int(hl_s)
     neurons_i  = int(neurons_s)
-    out_df = kerastkr.learn_predict_kerasnn_yr(tkr,yrs,yr,features,hl_i,neurons_i)
+    out_df = kerastkr.learn_predict_kerasnn_yr(tkr,yrs,yr,features_s,hl_i,neurons_i)
     out_d  = get_out_d(out_df)
     return {'predictions': out_d}
 api.add_resource(KerasNNYr, '/keras_nn_yr/<tkr>/<int:yrs>/<int:yr>')
@@ -244,7 +245,8 @@ class SklinearTkr(fr.Resource):
   This class should return all predictions from sklearn for a tkr.
   """
   def get(self, tkr,yrs,features):
-    out_df = sktkr.learn_predict_sklinear_tkr(tkr,yrs,features)
+    features_s = pgdb.check_features(features)
+    out_df = sktkr.learn_predict_sklinear_tkr(tkr,yrs,features_s)
     out_d  = get_out_d(out_df)
     return {'predictions': out_d}
 api.add_resource(SklinearTkr, '/sklinear_tkr/<tkr>/<int:yrs>/<features>')
@@ -254,7 +256,8 @@ class KeraslinearTkr(fr.Resource):
   This class should return all predictions from keras for a tkr.
   """
   def get(self, tkr,yrs,features):
-    out_df = kerastkr.learn_predict_keraslinear_tkr(tkr,yrs,features)
+    features_s = pgdb.check_features(features)
+    out_df = kerastkr.learn_predict_keraslinear_tkr(tkr,yrs,features_s)
     out_d  = get_out_d(out_df)
     return {'predictions': out_d}
 api.add_resource(KeraslinearTkr, '/keraslinear_tkr/<tkr>/<int:yrs>/<features>')
@@ -264,7 +267,8 @@ class KerasNNTkr(fr.Resource):
   This class should return all predictions from keras for a tkr.
   """
   def get(self, tkr,yrs):
-    features_s = fl.request.args.get('features', 'pct_lag1,slope3,dow')
+    features0_s = fl.request.args.get('features', 'pct_lag1,slope3,dow')
+    features_s = pgdb.check_features(features0_s)
     hl_s       = fl.request.args.get('hl', '2')      # default 2
     neurons_s  = fl.request.args.get('neurons', '4') # default 4
     hl_i       = int(hl_s)
