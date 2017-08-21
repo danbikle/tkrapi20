@@ -15,7 +15,7 @@ curl localhost:5011/years
 curl localhost:5011/tkrprices/SNAP
 curl localhost:5011/sklinear/ABC/20/2016-12/'pct_lag1,slope3,dow,moy'
 curl localhost:5011/keraslinear/ABC/20/2016-12/'pct_lag2,slope5,dow,moy'
-curl localhost:5011/keras_nn/IBM/25/2014-11?features='pctlag1,slope4,moy'&hl=2&neurons=4
+curl "localhost:5011/keras_nn/IBM/25/2014-11?features='pct_lag1,slope4,moy'&hl=2&neurons=4"
 curl localhost:5011/sklinear_yr/IBM/20/2016/'pct_lag1,slope3,dow,moy'
 curl localhost:5011/sklinear_tkr/IBM/20/'pct_lag1,slope3,dow,moy'
 curl localhost:5011/keraslinear_yr/IBM/20/2016/'pct_lag1,slope3,dow,moy'
@@ -62,6 +62,22 @@ class Demo11(fr.Resource):
     my_v_s = 'world'
     return {my_k_s: my_v_s}
 api.add_resource(Demo11, '/demo11.json')
+
+class AlgoDemos(fr.Resource):
+  """
+  This class should return a list of Algo Demos.
+  """
+  def get(self):
+    algo_demos_l = [
+      "/sklinear/IBM/20/2017-08/'pct_lag1,slope3,dow,moy'"
+      ,"/keraslinear/FB/3/2017-08/'pct_lag2,slope5,moy'"
+      ,"/keras_nn/FB/3/2017-07?features='pct_lag1,slope4,moy'&hl=2&neurons=4"
+    ]
+    return {
+      'algo_demos': algo_demos_l
+      ,'features':  pgdb.getfeatures()
+    }
+api.add_resource(AlgoDemos, '/algo_demos')
 
 class Features(fr.Resource):
   """
@@ -177,7 +193,8 @@ class KerasNN(fr.Resource):
   This class should return predictions from keras.
   """
   def get(self, tkr,yrs,mnth):
-    features_s = fl.request.args.get('features', 'pctlag1,slope3,dom')
+    features0_s = fl.request.args.get('features', 'pct_lag1,slope3,dom')
+    features_s = features0_s.replace("'","").replace('"','')
     hl_s       = fl.request.args.get('hl', '2')      # default 2
     neurons_s  = fl.request.args.get('neurons', '4') # default 4
     hl_i       = int(hl_s)
@@ -212,7 +229,7 @@ class KerasNNYr(fr.Resource):
   This class should return predictions from keras for a Year.
   """
   def get(self, tkr,yrs,yr):
-    features_s = fl.request.args.get('features', 'pctlag1,slope3,dom')
+    features_s = fl.request.args.get('features', 'pct_lag1,slope3,dom')
     hl_s       = fl.request.args.get('hl', '2')      # default 2
     neurons_s  = fl.request.args.get('neurons', '4') # default 4
     hl_i       = int(hl_s)
@@ -247,7 +264,7 @@ class KerasNNTkr(fr.Resource):
   This class should return all predictions from keras for a tkr.
   """
   def get(self, tkr,yrs):
-    features_s = fl.request.args.get('features', 'pctlag1,slope3,dom')
+    features_s = fl.request.args.get('features', 'pct_lag1,slope3,dom')
     hl_s       = fl.request.args.get('hl', '2')      # default 2
     neurons_s  = fl.request.args.get('neurons', '4') # default 4
     hl_i       = int(hl_s)

@@ -1,9 +1,12 @@
 ~/tkrapi20/features.txt
 
 NOT DONE YET:
-    
+
+def check_features(f_s):
+  return features_s
+  
 list of resources:
-  - /algos
+  - /algo_demos
   - CRUD Keras models
   - retrieve, use a model
   - CRUD sklinear model, use the model
