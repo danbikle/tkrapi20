@@ -27,6 +27,18 @@ def getfeat(tkr):
   feat_df = pd.read_csv(io.StringIO(myrow.csv))
   return feat_df
 
+def getfeatures():
+  """This function should return a list of features."""
+  sql_s  = "SELECT csv FROM features WHERE tkr = 'FB' LIMIT 1"
+  result = conn.execute(sql_s)
+  if not result.rowcount:
+    return ['no features found'] # Probably, a problem.
+  myrow     = [row for row in result][0]
+  feat_df   = pd.read_csv(io.StringIO(myrow.csv))
+  columns_l = feat_df.columns.tolist()
+  # I should remove cdate, cp, pct_lead:
+  return columns_l[3:]
+
 def tkrinfo(tkr):
   """This function should return info about a tkr."""
   feat_df             = getfeat(tkr)

@@ -7,8 +7,10 @@ $PYTHON flaskr.py
 Other shell:
 curl localhost:5011/demo11.json
 curl localhost:5011/static/hello.json
+curl localhost:5011/tkrs
 curl localhost:5011/tkrlist
 curl localhost:5011/istkr/IBM
+curl localhost:5011/tkrinfo/IBM
 curl localhost:5011/years
 curl localhost:5011/tkrprices/SNAP
 curl localhost:5011/sklinear/ABC/20/2016-12/'pct_lag1,slope3,dow,moy'
@@ -61,6 +63,14 @@ class Demo11(fr.Resource):
     return {my_k_s: my_v_s}
 api.add_resource(Demo11, '/demo11.json')
 
+class Features(fr.Resource):
+  """
+  This class should return a list of available ML features.
+  """
+  def get(self):
+    return {'features': pgdb.getfeatures()}
+api.add_resource(Features, '/features')
+
 class Tkrinfo(fr.Resource):
   """
   This class should return info about a tkr.
@@ -80,6 +90,14 @@ class Tkrlist(fr.Resource):
   def get(self):
     return {'tkrlist': tkrlist_l}
 api.add_resource(Tkrlist, '/tkrlist')
+
+class Tkrs(fr.Resource):
+  """
+  This class should list all the tkrs in tkrlist.txt
+  """
+  def get(self):
+    return {'tkrs': tkrlist_l}
+api.add_resource(Tkrs, '/tkrs')
 
 class Istkr(fr.Resource):
   """

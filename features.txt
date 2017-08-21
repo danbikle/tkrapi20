@@ -3,11 +3,7 @@
 NOT DONE YET:
     
 list of resources:
-  - /features
   - /algos
-  - /tkrs
-  - /tkrinfo/ibm
-    mindate, maxdate, recent price
   - CRUD Keras models
   - retrieve, use a model
   - CRUD sklinear model, use the model
@@ -59,12 +55,6 @@ Write retry_curl_tkrs.bash to get tkrs which need 2nd try
 Enhance curl_tkrs.bash so it calls retry_curl_tkrs.bash  to get tkrs which need 2nd try
 
 
-list of resources:
-  /tkrlist
-  /years
-  /tkrprices/IBM
-  /istkr/IBM  
-
 postgres account:
   tkrapi/tkrapi
   syntax:
@@ -78,6 +68,12 @@ enhance curl_tkr.bash
 genf.py
 
 resources:
+  /features
+  /tkrs
+  /tkrlist
+  /years
+  /tkrprices/IBM
+  /istkr/IBM  
   /sklinear/IBM/25/2016-11?features='pct_lag1,slope4,moy'
   /keraslinear/ABC/25/2016-11/'pct_lag1,slope4,moy'
   /keras_nn/ABC/25/2016-11?features='pct_lag1,slope4,moy'&hl=2&neurons=4
@@ -85,6 +81,7 @@ resources:
   /sklinear_tkr/IBM/25/'pct_lag1,slope4,moy'
   /keras_nn_yr/ABC/25/2016?features='pct_lag1,slope4,moy'&hl=2&neurons=4
   /keras_nn_tkr/ABC/25?features='pct_lag1,slope4,moy'&hl=2&neurons=4
+  /tkrinfo/ibm
 
 enhance predictions2db so it does delete and insert.
 

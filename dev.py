@@ -22,6 +22,9 @@ import pgdb
 import kerastkr
 import sktkr
 
+pdb.set_trace()
+features = pgdb.getfeatures()
+stophere
 
 tkr='FB';yrs=6;features='pct_lag1,pct_lag2,pct_lag4,slope6,slope4,slope8,moy,dow'
 hl = 1; neurons = 3
