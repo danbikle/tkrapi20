@@ -173,7 +173,8 @@ class Sklinear(fr.Resource):
   This class should return predictions from sklearn.
   """
   def get(self, tkr,yrs,mnth,features):
-    out_df = sktkr.learn_predict_sklinear(tkr,yrs,mnth,features)
+    features_s = pgdb.check_features(features)
+    out_df = sktkr.learn_predict_sklinear(tkr,yrs,mnth,features_s)
     out_d  = get_out_d(out_df)
     return {'predictions': out_d}
 api.add_resource(Sklinear, '/sklinear/<tkr>/<int:yrs>/<mnth>/<features>')
@@ -183,7 +184,8 @@ class KerasLinear(fr.Resource):
   This class should return predictions from keras.
   """
   def get(self, tkr,yrs,mnth,features):
-    out_df = kerastkr.learn_predict_keraslinear(tkr,yrs,mnth,features)
+    features_s = pgdb.check_features(features)
+    out_df = kerastkr.learn_predict_keraslinear(tkr,yrs,mnth,features_s)
     out_d  = get_out_d(out_df)
     return {'predictions': out_d}
 api.add_resource(KerasLinear, '/keraslinear/<tkr>/<int:yrs>/<mnth>/<features>')
@@ -209,7 +211,8 @@ class SklinearYr(fr.Resource):
   This class should return predictions from sklearn for a Year.
   """
   def get(self, tkr,yrs,yr,features):
-    out_df = sktkr.learn_predict_sklinear_yr(tkr,yrs,yr,features)
+    features_s = pgdb.check_features(features)
+    out_df = sktkr.learn_predict_sklinear_yr(tkr,yrs,yr,features_s)
     out_d  = get_out_d(out_df)
     return {'predictions': out_d}
 api.add_resource(SklinearYr, '/sklinear_yr/<tkr>/<int:yrs>/<int:yr>/<features>')
@@ -219,7 +222,8 @@ class KeraslinearYr(fr.Resource):
   This class should return predictions from keras for a Year.
   """
   def get(self, tkr,yrs,yr,features):
-    out_df = kerastkr.learn_predict_keraslinear_yr(tkr,yrs,yr,features)
+    features_s = pgdb.check_features(features)
+    out_df = kerastkr.learn_predict_keraslinear_yr(tkr,yrs,yr,features_s)
     out_d  = get_out_d(out_df)
     return {'predictions': out_d}
 api.add_resource(KeraslinearYr, '/keraslinear_yr/<tkr>/<int:yrs>/<int:yr>/<features>')
