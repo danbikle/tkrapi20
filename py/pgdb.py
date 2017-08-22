@@ -129,9 +129,9 @@ def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,kmodel,algo_params=
   tkr_s         = "'"+tkr+"'"
   mnth_s        = "'"+mnth+"'"
   features_s    = "'"+features+"'"
-  algo_s        = "'"+algo+"'"
-  algo_params_s = "'"+algo_params+"'"
-  yrs_s         = str(yrs)
+  #  algo_s        = "'"+algo+"'"
+  #  algo_params_s = "'"+algo_params+"'"
+  #  yrs_s         = str(yrs)
   # I should move CREATE TABLE to an initialization script.
   # Running this statement frequently is inefficient:
   sql_s = '''CREATE TABLE IF NOT EXISTS
@@ -145,9 +145,8 @@ def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,kmodel,algo_params=
     ,csv           TEXT
     ,kmodel_h5_b64 TEXT
   )'''
-  pdb.set_trace()
   conn.execute(sql_s)
-  # Perhaps eventually I should replace DELETE/INSERT wit UPSERT:
+  # Perhaps eventually I should replace DELETE/INSERT with UPSERT:
   sql_s = '''DELETE FROM predictions
     WHERE tkr         = %s
     AND   yrs         = %s
@@ -157,13 +156,11 @@ def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,kmodel,algo_params=
     AND   algo_params = %s
     '''
   conn.execute(sql_s,[tkr,yrs,mnth,features,algo,algo_params])
-  old_sql_s = '''INSERT INTO predictions(
-    tkr,yrs,mnth,features,algo,algo_params,csv)VALUES(
-    '''+tkr_s+","+yrs_s+","+mnth_s+","+features_s+","+algo_s+","+algo_params_s+","+csv_s+")"
   sql_s = '''INSERT INTO predictions(
     tkr, yrs,mnth,features,algo,algo_params,csv,kmodel_h5_b64)VALUES(
      %s, %s ,%s  ,%s      ,%s  ,%s         ,%s ,%s)'''
-  conn.execute(sql_s,[tkr, yrs_s,mnth,features,algo,algo_params,csv0_s,kmodel_h5_b64])
+  conn.execute(sql_s,[
+    tkr, yrs,mnth,features,algo,algo_params,csv0_s,kmodel_h5_b64])
   return True
 
 'bye'

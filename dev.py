@@ -32,7 +32,7 @@ epochs_i     = 1 # Doc: Number of epochs to train the model.
 
 # I should create a simple model.
 
-def learn_predict_keraslinear(tkr='FB',yrs=2,mnth='2017-08', features='pct_lag1,slope4,moy'):
+def learn_predict_keraslinear(tkr='FB',yrs=2,mnth='2017-08', features='pct_lag2,slope5,moy'):
   """This function should use keras to learn, predict."""
   # I should get train, test data.
   # Also get copy of test data in a DataFrame for later reporting:
@@ -88,7 +88,7 @@ def learn_predict_keraslinear(tkr='FB',yrs=2,mnth='2017-08', features='pct_lag1,
   return out_df
 
 pdb.set_trace()
-out_df = learn_predict_keraslinear()
+out_df = kerastkr.learn_predict_keraslinear()
 
 # I should save it to file(s).
 
