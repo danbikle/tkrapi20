@@ -21,14 +21,28 @@ import sqlalchemy    as sql
 import keras
 # modules in the py folder:
 
-
 import pgdb
 import kerastkr
 import sktkr
 
-out_df = kerastkr.learn_predict_keraslinear('FB',2,'2017-08','pct_lag1,slope4,moy')
 
-# I should save it to file(s).
+# I should connect to the DB
+db_s = os.environ['PGURL']
+conn = sql.create_engine(db_s).connect()
+
+#'FB',2,'2017-08','pct_lag1,slope4,moy'
+tkr = 'FB'
+yrs = 2
+mnth = '2017-08'
+features = 'pct_lag1,slope4,moy'
+out_df = kerastkr.learn_predict_keraslinear(tkr,yrs,mnth,features)
+
+# I should copy kmodel from db into python.
+
+sql_s = "SELECT tkr,yrs,mnth,features FROM predictions WHERE tkr = %s LIMIT 1"
+result = conn.execute(sql_s,[tkr])
+myrow  = [row for row in result][0]
+print(myrow.tkr) # s.b. 'FB'
 
 # I should use it to predict.
 
