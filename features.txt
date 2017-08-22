@@ -3,7 +3,7 @@
 NOT DONE YET:
 
 list of resources:
-  /demos
+
   - CRUD Keras models
   - retrieve, use a model
   - CRUD sklinear model, use the model
@@ -68,6 +68,8 @@ enhance curl_tkr.bash
 genf.py
 
 resources:
+  /algo_demos
+  /demos
   /features
   /tkrs
   /tkrlist
@@ -93,4 +95,3 @@ questions:
 def check_features(f_s):
   return features_s
   
-  - /algo_demos
