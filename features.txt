@@ -2,11 +2,8 @@
 
 NOT DONE YET:
 
-def check_features(f_s):
-  return features_s
-  
 list of resources:
-  - /algo_demos
+  /demos
   - CRUD Keras models
   - retrieve, use a model
   - CRUD sklinear model, use the model
@@ -92,3 +89,8 @@ questions:
   - how to create a 2 layer net having 1 neuron in output layer with linear output?
   - query of relu in keras help me?
   - yes, found linear(x) here: https://keras.io/activations/
+
+def check_features(f_s):
+  return features_s
+  
+  - /algo_demos
