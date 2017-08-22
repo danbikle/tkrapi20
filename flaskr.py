@@ -85,6 +85,24 @@ class AlgoDemos(fr.Resource):
     }
 api.add_resource(AlgoDemos, '/algo_demos')
 
+class Demos(fr.Resource):
+  """
+  This class should return a list of Demos.
+  """
+  def get(self):
+    demos_l = [
+      "/demos"
+      ,"/algo_demos"
+      ,"/features"
+      ,"/tkrs"
+      ,"/tkrlist"
+      ,"/tkrinfo/IBM"
+      ,"/istkr/YHOO"
+      ,AlgoDemos().get()
+    ]
+    return {'demos': demos_l}
+api.add_resource(Demos, '/demos')
+
 class Features(fr.Resource):
   """
   This class should return a list of available ML features.
