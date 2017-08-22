@@ -18,6 +18,8 @@ import sklearn.linear_model as skl
 # modules in the py folder:
 import pgdb
 
+# By default, I should train from 20 years of data.
+
 def learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,slope4,moy'):
   """This function should use sklearn to learn, predict."""
   linr_model = skl.LinearRegression()
@@ -32,6 +34,7 @@ def learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,s
   out_df['accuracy']      = (1+np.sign(out_df.effectiveness))/2
   algo   = 'sklinear'
   kmodel = None # sklearn has no kmodel, keras does.
+  # I should save work to the db:
   pgdb.predictions2db(tkr,yrs,mnth,features,algo,out_df,kmodel)
   return out_df
 

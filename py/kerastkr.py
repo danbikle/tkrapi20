@@ -23,8 +23,8 @@ batch_size_i = 256 # Doc: Number of samples per gradient update.
 epochs_i     = 128 # Doc: Number of epochs to train the model.
 
 def learn_predict_kerasnn(tkr       = 'IBM'
-                          ,yrs      = 20
-                          ,mnth     = '2016-11'
+                          ,yrs      = 20        # years to train
+                          ,mnth     = '2016-11' # Month to predict
                           ,features = 'pct_lag1,slope4,moy'
                           ,hl       = 2 # number of hidden layers
                           ,neurons  = 4 # neurons in each hl
@@ -136,8 +136,8 @@ def learn_predict_keraslinear_tkr(tkr='ABC',yrs=20, features='pct_lag1,slope4,mo
   return tkr_df
 
 def learn_predict_kerasnn_yr(tkr    = 'FB'
-                          ,yrs      = 3
-                          ,yr       = 2017
+                          ,yrs      = 3    # Years to train
+                          ,yr       = 2017 # Predict this year
                           ,features = 'pct_lag1,slope4,moy'
                           ,hl       = 2 # number of hidden layers
                           ,neurons  = 4 # neurons in each hl
@@ -155,14 +155,14 @@ def learn_predict_kerasnn_yr(tkr    = 'FB'
   yr_df = pd.concat(yr_l, ignore_index=True)
   return yr_df
 
-def learn_predict_kerasnn_tkr(tkr   = 'FB'
-                          ,yrs      = 3
+def learn_predict_kerasnn_tkr(tkr   = 'FB' # Predict all years for this tkr.
+                          ,yrs      = 3    # years to train
                           ,features = 'pct_lag1,slope4,moy'
                           ,hl       = 2 # number of hidden layers
                           ,neurons  = 4 # neurons in each hl
                           ):
   """This function should use keras to learn and predict for a tkr."""
-  # From db, I should get a list of all months for tkr:
+  # From db, I should get a list of all months, and thus all years, for tkr:
   mnth_l = pgdb.getmonths4tkr(tkr,yrs)
   # I should rely on monthy predictions:
   empty_df = pd.DataFrame()
