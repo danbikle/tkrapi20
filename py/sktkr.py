@@ -30,8 +30,9 @@ def learn_predict_sklinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,s
   out_df['prediction']    = np.round(linr_model.predict(xtest_a),3).tolist()
   out_df['effectiveness'] = np.sign(out_df.pct_lead*out_df.prediction)*np.abs(out_df.pct_lead)
   out_df['accuracy']      = (1+np.sign(out_df.effectiveness))/2
-  algo = 'sklinear'
-  pgdb.predictions2db(tkr,yrs,mnth,features,algo,out_df)
+  algo   = 'sklinear'
+  kmodel = None # sklearn has no kmodel, keras does.
+  pgdb.predictions2db(tkr,yrs,mnth,features,algo,out_df,kmodel)
   return out_df
 
 def learn_predict_sklinear_yr(tkr='ABC',yrs=20,yr=2016, features='pct_lag1,slope4,moy'):

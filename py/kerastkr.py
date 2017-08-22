@@ -69,7 +69,8 @@ def learn_predict_kerasnn(tkr       = 'IBM'
   out_df['accuracy']      = (1+np.sign(out_df.effectiveness))/2
   algo                    = 'kerasnn'
   algo_params             = str([hl,neurons])
-  pgdb.predictions2db(tkr,yrs,mnth,features,algo,out_df,algo_params)
+  # I should save my work to the db:
+  pgdb.predictions2db(tkr,yrs,mnth,features,algo,out_df,kmodel,algo_params)
   # I should return a DataFrame useful for reporting on the predictions.
   return out_df
 
