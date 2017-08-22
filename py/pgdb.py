@@ -122,16 +122,8 @@ def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,kmodel,algo_params=
     fp.seek(0)
     kmodel_h5_binary = fp.read()
     kmodel_h5_b64    = codecs.encode(kmodel_h5_binary, 'base64')
-  
   # I should convert DF to a string
-  csv0_s = predictions_df.to_csv(index=False,float_format='%.3f')
-  csv_s         = "'"+csv0_s+"'"
-  tkr_s         = "'"+tkr+"'"
-  mnth_s        = "'"+mnth+"'"
-  features_s    = "'"+features+"'"
-  #  algo_s        = "'"+algo+"'"
-  #  algo_params_s = "'"+algo_params+"'"
-  #  yrs_s         = str(yrs)
+  csv_s = predictions_df.to_csv(index=False,float_format='%.3f')
   # I should move CREATE TABLE to an initialization script.
   # Running this statement frequently is inefficient:
   sql_s = '''CREATE TABLE IF NOT EXISTS
@@ -157,10 +149,10 @@ def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,kmodel,algo_params=
     '''
   conn.execute(sql_s,[tkr,yrs,mnth,features,algo,algo_params])
   sql_s = '''INSERT INTO predictions(
-    tkr, yrs,mnth,features,algo,algo_params,csv,kmodel_h5_b64)VALUES(
-     %s, %s ,%s  ,%s      ,%s  ,%s         ,%s ,%s)'''
+    tkr, yrs,mnth,features,algo,algo_params,csv  ,kmodel_h5_b64)VALUES(
+    %s , %s ,%s  ,%s      ,%s  ,%s         ,%s   ,%s)'''
   conn.execute(sql_s,[
-    tkr, yrs,mnth,features,algo,algo_params,csv0_s,kmodel_h5_b64])
+    tkr, yrs,mnth,features,algo,algo_params,csv_s,kmodel_h5_b64])
   return True
 
 'bye'

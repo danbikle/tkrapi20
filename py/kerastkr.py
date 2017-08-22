@@ -101,6 +101,7 @@ def learn_predict_keraslinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag
   out_df['effectiveness'] = np.sign(out_df.pct_lead*out_df.prediction)*np.abs(out_df.pct_lead)
   out_df['accuracy']      = (1+np.sign(out_df.effectiveness))/2
   algo                    = 'keraslinear'
+  # I should save my work to the db:
   pgdb.predictions2db(tkr,yrs,mnth,features,algo,out_df,kmodel)
   # I should return a DataFrame useful for reporting on the predictions.
   return out_df
