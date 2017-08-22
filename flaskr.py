@@ -96,8 +96,12 @@ class Demos(fr.Resource):
       ,"/features"
       ,"/tkrs"
       ,"/tkrlist"
+      ,"/years"
       ,"/tkrinfo/IBM"
+      ,"/tkrprices/SNAP"
       ,"/istkr/YHOO"
+      ,"/demo11.json"
+      ,"/static/hello.json"
       ,AlgoDemos().get()
     ]
     return {'demos': demos_l}
