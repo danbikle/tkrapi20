@@ -32,7 +32,7 @@ epochs_i     = 1 # Doc: Number of epochs to train the model.
 
 # I should create a simple model.
 
-def learn_predict_keraslinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag1,slope4,moy'):
+def learn_predict_keraslinear(tkr='FB',yrs=2,mnth='2017-08', features='pct_lag1,slope4,moy'):
   """This function should use keras to learn, predict."""
   # I should get train, test data.
   # Also get copy of test data in a DataFrame for later reporting:
@@ -60,14 +60,23 @@ def learn_predict_keraslinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag
     pdb.set_trace()
     kmodel.save(fp.name)
     fp.seek(0)
-    somebytes = fp.read()
-    print(len(somebytes))
-
+    kmodel_h5_binary = fp.read()
     # Use the codecs module to encode
     import codecs
-    base64_data = codecs.encode(somebytes, 'base64')
-    print(base64_data[:99])
-
+    kmodel_h5_b64 = codecs.encode(kmodel_h5_binary, 'base64')
+    print(kmodel_h5_b64[:22]) # whats it look like?
+    # I should insert it into a table:
+    import sqlalchemy    as sql
+    # I should connect to the DB
+    db_s = os.environ['PGURL']
+    conn = sql.create_engine(db_s).connect()
+    sql_s = '''CREATE TABLE IF NOT EXISTS dropme(tkr VARCHAR, kmodel_h5_b64 TEXT)'''
+    conn.execute(sql_s)
+    tkr_s = "'"+tkr+"'"
+    sql_s = "insert into dropme(tkr,kmodel_h5_b64)values( %s, %s )"
+    pdb.set_trace()
+    conn.execute(sql_s,[tkr,kmodel_h5_b64])
+    
   # I should predict xtest_a then update out_df
   predictions_a           = np.round(kmodel.predict(xtest_a),3)
   # Done with Keras, I should pass along the predictions.
