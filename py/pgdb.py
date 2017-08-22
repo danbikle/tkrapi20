@@ -5,9 +5,11 @@ This script should provide sytnax to connect flask-restful to a postgres db.
 
 """
 
+import codecs
 import io
 import pdb
 import os
+import tempfile
 import datetime      as dt
 import numpy         as np
 import pandas        as pd
@@ -112,7 +114,15 @@ def getmonths4tkr(tkr,yrs):
   shortmnth_l = mnth_l[start_i:] # Has enough history for learning.
   return shortmnth_l
 
-def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,algo_params='None Needed'):
+def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,kmodel,algo_params='None Needed'):
+  """This function should copy predictions and reporting columns to db."""
+  with tempfile.NamedTemporaryFile() as fp:
+    """This block should prepare kmodel for insertion into db."""
+    kmodel.save(fp.name)
+    fp.seek(0)
+    kmodel_h5_binary = fp.read()
+    kmodel_h5_b64    = codecs.encode(kmodel_h5_binary, 'base64')
+  
   # I should convert DF to a string
   csv0_s = predictions_df.to_csv(index=False,float_format='%.3f')
   csv_s         = "'"+csv0_s+"'"
@@ -132,7 +142,10 @@ def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,algo_params='None N
     ,features    VARCHAR
     ,algo        VARCHAR
     ,algo_params VARCHAR
-    ,csv TEXT)'''
+    ,csv           TEXT
+    ,kmodel_h5_b64 TEXT
+  )'''
+  pdb.set_trace()
   conn.execute(sql_s)
   # Perhaps eventually I should replace DELETE/INSERT wit UPSERT:
   sql_s = '''DELETE FROM predictions
@@ -144,10 +157,13 @@ def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,algo_params='None N
     AND   algo_params = %s
     '''
   conn.execute(sql_s,[tkr,yrs,mnth,features,algo,algo_params])
-  sql_s = '''INSERT INTO predictions(
+  old_sql_s = '''INSERT INTO predictions(
     tkr,yrs,mnth,features,algo,algo_params,csv)VALUES(
     '''+tkr_s+","+yrs_s+","+mnth_s+","+features_s+","+algo_s+","+algo_params_s+","+csv_s+")"
-  conn.execute(sql_s)
+  sql_s = '''INSERT INTO predictions(
+    tkr, yrs,mnth,features,algo,algo_params,csv,kmodel_h5_b64)VALUES(
+     %s, %s ,%s  ,%s      ,%s  ,%s         ,%s ,%s)'''
+  conn.execute(sql_s,[tkr, yrs_s,mnth,features,algo,algo_params,csv0_s,kmodel_h5_b64])
   return True
 
 'bye'

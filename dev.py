@@ -52,12 +52,11 @@ def learn_predict_keraslinear(tkr='FB',yrs=2,mnth='2017-08', features='pct_lag1,
   kmodel.add(keras.layers.core.Activation('linear'))
   kmodel.compile(loss='mean_squared_error', optimizer='adam')
   kmodel.fit(xtrain_a,ytrain_a, batch_size=batch_size_i, epochs=epochs_i)
-  pdb.set_trace()
+
   # I should save the model:
   # https://keras.io/getting-started/faq/#how-can-i-save-a-keras-model
   import tempfile
   with tempfile.NamedTemporaryFile() as fp:
-    pdb.set_trace()
     kmodel.save(fp.name)
     fp.seek(0)
     kmodel_h5_binary = fp.read()
@@ -74,7 +73,6 @@ def learn_predict_keraslinear(tkr='FB',yrs=2,mnth='2017-08', features='pct_lag1,
     conn.execute(sql_s)
     tkr_s = "'"+tkr+"'"
     sql_s = "insert into dropme(tkr,kmodel_h5_b64)values( %s, %s )"
-    pdb.set_trace()
     conn.execute(sql_s,[tkr,kmodel_h5_b64])
     
   # I should predict xtest_a then update out_df
@@ -85,7 +83,7 @@ def learn_predict_keraslinear(tkr='FB',yrs=2,mnth='2017-08', features='pct_lag1,
   out_df['effectiveness'] = np.sign(out_df.pct_lead*out_df.prediction)*np.abs(out_df.pct_lead)
   out_df['accuracy']      = (1+np.sign(out_df.effectiveness))/2
   algo                    = 'keraslinear'
-  pgdb.predictions2db(tkr,yrs,mnth,features,algo,out_df)
+  pgdb.predictions2db(tkr,yrs,mnth,features,algo,out_df,kmodel)
   # I should return a DataFrame useful for reporting on the predictions.
   return out_df
 
