@@ -111,7 +111,7 @@ def getmonths4tkr(tkr,yrs):
   mnth_a  = mnth_sr.unique() # Actually just unique values.
   mnth_l  = sorted(mnth_a.tolist())
   start_i     = 2+yrs*12 # I should start learning 2 months after yrs years.
-  shortmnth_l = mnth_l[start_i:] # Has enough history for learning.
+  shortmnth_l = mnth_l[start_i:] # Should have enough history for learning.
   return shortmnth_l
 
 def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,kmodel,algo_params='None Needed'):

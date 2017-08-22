@@ -1,7 +1,7 @@
 """
 csv2db.py
 
-This script should insert csv.gz files into a table.
+This script should insert csv files into a table.
 
 Demo:
 . env.bash
