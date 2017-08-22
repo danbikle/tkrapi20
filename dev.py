@@ -39,10 +39,12 @@ out_df = kerastkr.learn_predict_keraslinear(tkr,yrs,mnth,features)
 
 # I should copy kmodel from db into python.
 
-sql_s = "SELECT tkr,yrs,mnth,features FROM predictions WHERE tkr = %s LIMIT 1"
+sql_s = "SELECT tkr,yrs,mnth,features,algo,algo_params, kmodel_h5_b64 FROM predictions WHERE tkr = %s LIMIT 1"
 result = conn.execute(sql_s,[tkr])
 myrow  = [row for row in result][0]
 print(myrow.tkr) # s.b. 'FB'
+kmodel_h5_b64 = myrow.kmodel_h5_b64
+print(kmodel_h5_b64[:22])
 
 # I should use it to predict.
 
