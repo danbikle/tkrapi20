@@ -121,8 +121,8 @@ def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,kmodel,algo_params=
       """This block should prepare kmodel for insertion into db."""
       kmodel.save(fp.name)
       fp.seek(0)
-      kmodel_h5_binary = fp.read()
-      kmodel_h5_b64    = codecs.encode(kmodel_h5_binary, 'base64')
+      kmodel_h5     = fp.read()
+      kmodel_h5_b64 = codecs.encode(kmodel_h5, 'base64')
   else: # I am not using keras.
     kmodel_h5_b64 = None # db should convert this to NULL during INSERT.
   # I should convert DF to a string
@@ -137,8 +137,8 @@ def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,kmodel,algo_params=
     ,features    VARCHAR
     ,algo        VARCHAR
     ,algo_params VARCHAR
-    ,csv           TEXT
-    ,kmodel_h5_b64 TEXT
+    ,csv         TEXT
+    ,kmodel_h5   BYTEA
   )'''
   conn.execute(sql_s) # should be ok for now.
   # Eventually I should replace DELETE/INSERT with UPSERT:
@@ -153,10 +153,10 @@ def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,kmodel,algo_params=
   conn.execute(sql_s,[tkr,yrs,mnth,features,algo,algo_params])
   # I should match %s tokens with each column:
   sql_s = '''INSERT INTO predictions(
-    tkr, yrs,mnth,features,algo,algo_params,csv  ,kmodel_h5_b64)VALUES(
+    tkr, yrs,mnth,features,algo,algo_params,csv  ,kmodel_h5)VALUES(
     %s , %s ,%s  ,%s      ,%s  ,%s         ,%s   ,%s)'''
   conn.execute(sql_s,[
-    tkr, yrs,mnth,features,algo,algo_params,csv_s,kmodel_h5_b64])
+    tkr, yrs,mnth,features,algo,algo_params,csv_s,kmodel_h5])
   return True
 
 'bye'

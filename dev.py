@@ -8,7 +8,7 @@ Demo:
 $PYTHON dev.py
 """
 
-
+import codecs
 import io
 import pdb
 import os
@@ -35,18 +35,23 @@ tkr = 'FB'
 yrs = 2
 mnth = '2017-08'
 features = 'pct_lag1,slope4,moy'
+pdb.set_trace()
 out_df = kerastkr.learn_predict_keraslinear(tkr,yrs,mnth,features)
 
 # I should copy kmodel from db into python.
 
-sql_s = "SELECT tkr,yrs,mnth,features,algo,algo_params, kmodel_h5_b64 FROM predictions WHERE tkr = %s LIMIT 1"
+sql_s = "SELECT tkr,yrs,mnth,features,algo,algo_params, kmodel_h5 FROM predictions WHERE tkr = %s LIMIT 1"
 result = conn.execute(sql_s,[tkr])
 myrow  = [row for row in result][0]
 print(myrow.tkr) # s.b. 'FB'
-kmodel_h5_b64 = myrow.kmodel_h5_b64
-print(kmodel_h5_b64[:22])
+kmodel_h5 = (bytes(myrow.kmodel_h5)).decode("utf-8")
+print(type(kmodel_h5))
+
+stophere
 
 # I should use it to predict.
+kmodel = keras.models.load_model(kmodel_h5)
+print(type(kmodel))
 
 stophere
 
