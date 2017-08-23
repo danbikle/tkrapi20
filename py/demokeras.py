@@ -33,6 +33,7 @@ print(x_a)
 print(x_a.shape)
 print('y_a:')
 print(y_a)
+print(y_a.shape)
 
 # I should build a keras model.
 kmodel     = keras.models.Sequential()
