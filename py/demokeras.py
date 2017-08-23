@@ -47,4 +47,18 @@ prediction_a = kmodel.predict(xtest_a) # s.b. about 2.5
 print('prediction_a:')
 print(prediction_a)
 
+# I should save the model:
+
+kmodel.save('/tmp/kmodel.h5')
+
+# I should create a new model from the h5-file:
+
+kmodel2 = keras.models.load_model('/tmp/kmodel.h5')
+
+prediction2_a = kmodel2.predict(xtest_a) # s.b. about 2.5
+
+print('prediction2_a:')
+print(prediction2_a)
+
+
 'bye'
