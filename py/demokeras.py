@@ -28,6 +28,7 @@ y_a = np.array(
  ,[ 3.4]
  ,[ 4. ]
  ,[ 5.2]])
+
 print('x_a:')
 print(x_a)
 print(x_a.shape)
@@ -36,9 +37,13 @@ print(y_a)
 print(y_a.shape)
 
 # I should build a keras model.
+# https://keras.io/models/sequential/#the-sequential-model-api
 kmodel     = keras.models.Sequential()
+
+# https://keras.io/getting-started/sequential-model-guide/#specifying-the-input-shape
 features_i = len(x_a[0])
 kmodel.add(keras.layers.core.Dense(features_i, input_shape=(features_i,)))
+
 # https://keras.io/activations/
 kmodel.add(keras.layers.core.Activation('linear'))
 # I should have 1 linear-output:
