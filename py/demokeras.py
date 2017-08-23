@@ -45,7 +45,7 @@ kmodel.add(keras.layers.core.Activation('linear'))
 kmodel.add(keras.layers.core.Dense(1)) 
 kmodel.add(keras.layers.core.Activation('linear'))
 kmodel.compile(loss='mean_squared_error', optimizer='adam')
-kmodel.fit(x_a,y_a, epochs=12)
+kmodel.fit(x_a,y_a, batch_size=4, epochs=128)
 xtest_a      = np.array([2.4,3.6]).reshape(1,2) # 1 row, 2 columns
 prediction_a = kmodel.predict(xtest_a) # s.b. about 2.5
 
@@ -73,49 +73,35 @@ conn.execute(sql_s)
 
 sql_s = 'create table if not exists demokeras(kmodel bytea)'
 conn.execute(sql_s)
-"""
-import h5py
-kmodel3 = h5py.File('/tmp/kmodel.h5','r')
-
-# I should use it to predict again:
-prediction3_a = kmodel3.predict(xtest_a) # s.b. about 2.5
-
-print('prediction3_a:')
-print( prediction3_a)
-
-"""
-
 
 with open('/tmp/kmodel.h5','rb') as fh:
-    # I should copy the file into the db
     kmodel3 = fh.read()
 
+# I should copy the file into the db
 sql_s = 'insert into demokeras(kmodel)values( %s )'
 conn.execute(sql_s,[kmodel3])
 
+# In psql I should run this to check my work:
 # select count(*) from demokeras;
 
-sql_s  = 'select kmodel from demokeras limit 1'
-result = conn.execute(sql_s)
-myrow  = [row for row in result][0]
-pdb.set_trace()
+# I should copy bytes out of the bytea column into Python:
+sql_s   = 'select kmodel from demokeras limit 1'
+result  = conn.execute(sql_s)
+myrow   = [row for row in result][0]
+# https://docs.python.org/3/library/functions.html
 kmodel4 = bytes(myrow.kmodel)
 
-"""
-bfh = io.BytesIO(myrow.kmodel)
-bfh = io.BytesIO(kmodel4)
-"""
-
+# I should write the bytes to a file:
 with open('/tmp/kmodel4.h5','wb') as fh:
     fh.write(kmodel4)
 
 # I should create a new model from the h5-file:
-kmodel5       = keras.models.load_model('/tmp/kmodel4.h5')
+kmodel5 = keras.models.load_model('/tmp/kmodel4.h5')
 
 # I should use it to predict again:
-prediction5_a = kmodel5.predict(xtest_a) # s.b. about 2.5
+prediction3_a = kmodel5.predict(xtest_a) # s.b. about 2.5
 
-print('prediction5_a:')
-print( prediction5_a)
+print('prediction3_a:')
+print( prediction3_a)
 
 'bye'
