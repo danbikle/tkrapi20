@@ -11,11 +11,22 @@ import keras
 import numpy as np
 import pdb
 
-x0_a = np.array([1.1, 2.2])
-x_a  = np.array((0+x0_a, 1+x0_a, 2+x0_a, 3+x0_a, 4+x0_a))
-y_a  = np.array((1.3,2.1,3.4,4.0,5.2)).reshape((-1,1))
+x_a = np.array(
+[[  1.1,  2.2]
+ ,[ 2.1,  3.2]
+ ,[ 3.1,  4.2]
+ ,[ 4.1,  5.2]
+ ,[ 5.1,  6.2]])
+
+y_a = np.array(
+[[  1.3]
+ ,[ 2.1]
+ ,[ 3.4]
+ ,[ 4. ]
+ ,[ 5.2]])
 print('x_a:')
 print(x_a)
+print(x_a.shape)
 print('y_a:')
 print(y_a)
 
@@ -29,12 +40,11 @@ kmodel.add(keras.layers.core.Activation('linear'))
 kmodel.add(keras.layers.core.Dense(1)) 
 kmodel.add(keras.layers.core.Activation('linear'))
 kmodel.compile(loss='mean_squared_error', optimizer='adam')
-kmodel.fit(x_a,y_a, batch_size=1, epochs=4)
+kmodel.fit(x_a,y_a, epochs=512)
+xtest_a      = np.array([2.4,3.6]).reshape(1,2) # 1 row, 2 columns
+prediction_a = kmodel.predict(xtest_a) # s.b. about 2.5
 
-xtest_a       = np.array((2.4,3.6))
-predictions_a = kmodel.predict(xtest_a)
-
-print('predictions_a:')
-print(predictions_a)
+print('prediction_a:')
+print(prediction_a)
 
 'bye'
