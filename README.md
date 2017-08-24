@@ -410,6 +410,14 @@ That script is named: csv2db.py
 
 I should run csv2db.py after request_tkr.bash finishes.
 
+The shell command to run csv2db.py is listed below
+
+```bash
+cd ~/tkrapi20/py
+. ../env.bash
+~/anaconda3/bin/python csv2db.py
+```
+
 After I run csv2db.py, I am ready to generate machine learning features from dates and prices of each ticker.
 
 # Generate Features
@@ -445,4 +453,12 @@ Counting them up, we see that this repo has 13 features.
 One feature I don't have but would like is daily interest rate.
 
 The script which generates the above features from the CSV files is genf.py
+
+The shell command to run genf.py is listed below
+
+```bash
+cd ~/tkrapi20/py
+. ../env.bash
+~/anaconda3/bin/python genf.py
+```
 
