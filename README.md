@@ -160,6 +160,8 @@ The above demo worked well so I ran some shell commands to start the FlaskRESTfu
 ```bash
 cd ~/tkrapi20/py
 . ../env.bash
+export PORT=5050
+export FLASK_DEBUG=1
 ~/anaconda3/bin/python demoflask_restful.py
 ```
 
