@@ -663,3 +663,19 @@ ann@ub16aug:~/tkrapi20$
 ann@ub16aug:~/tkrapi20$ 
 ann@ub16aug:~/tkrapi20$
 ```
+
+Also I noticed that FlaskRESTful added a line to its shell:
+
+```bash
+ann@ub16aug:~/tkrapi20$ ./flaskr.bash 
+Using TensorFlow backend.
+ * Running on http://0.0.0.0:5011/ (Press CTRL+C to quit)
+ * Restarting with stat
+Using TensorFlow backend.
+ * Debugger is active!
+ * Debugger PIN: 167-686-399
+127.0.0.1 - - [24/Aug/2017 14:51:54] "GET /demos HTTP/1.1" 200 -
+```
+
+The above output tells me that FlaskRESTful saw a GET request for /demos and the response code was 200 which usually means good news.
+
