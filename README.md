@@ -139,6 +139,7 @@ export PGURL='postgres://afizipm:33abc8@ec2-23-13-220-251.compute-1.amazonaws.co
 ~/anaconda3/bin/python demosql.py
 heroku pg:psql
 select * from dropme;
+\q
 ```
 
 The above demo worked well so I ran some shell commands to start the Keras demo:
