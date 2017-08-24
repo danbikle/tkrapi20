@@ -121,3 +121,22 @@ cd ~/tkrapi20/py
 . ../env.bash
 ~/anaconda3/bin/python demosql.py
 ```
+
+The above demo worked well so I stepped through the script with the pdb-debugger:
+
+```bash
+~/anaconda3/bin/python -m pdb demosql.py
+```
+
+The above demo worked well so I pointed demosql.py at a Postgres database on Heroku:
+
+```bash
+cd ~/tkrapi20/py
+heroku create myapp2017abc
+heroku addons:create heroku-postgresql:hobby-dev
+heroku config
+export PGURL='postgres://afizipm:33abc8@ec2-23-13-220-251.compute-1.amazonaws.com:5432/ddrpugf'
+~/anaconda3/bin/python demosql.py
+heroku pg:psql
+select * from dropme;
+```
