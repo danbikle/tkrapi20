@@ -304,3 +304,60 @@ Wrote: /home/ann/tkrcsv/div/ADBE.csv
 Wrote: /home/ann/tkrcsv/history/ADBE.csv
 Wrote: /home/ann/tkrcsv/split/ADBE.csv
 ```
+
+The above script takes a long time to run.
+
+It depends on tkrlist.txt, a list of 728 tickers, to declare which stocks to get.
+
+If I am in a hurry, I update the script so it uses tkrlist_small.txt which lists these tickers:
+
+```bash
+ann@ub16aug:~/tkrapi20$ ll
+total 104
+drwxrwxr-x  7 ann ann  4096 Aug 24 00:11 .
+drwxr-xr-x 41 ann ann  4096 Aug 24 00:10 ..
+drwxrwxr-x  2 ann ann  4096 Aug 24 00:08 bin
+-rw-rw-r--  1 ann ann   372 Aug 23 20:29 cr_tkrapi.sql
+-rw-rw-r--  1 ann ann  5055 Aug 23 20:29 dev.py
+-rw-rw-r--  1 ann ann   565 Aug 23 20:39 env.bash
+-rw-rw-r--  1 ann ann  2685 Aug 23 21:04 features.txt
+-rwxrwxr-x  1 ann ann   181 Aug 23 20:29 flaskr.bash
+-rw-rw-r--  1 ann ann 10178 Aug 23 20:29 flaskr.py
+drwxrwxr-x  8 ann ann  4096 Aug 24 00:08 .git
+-rw-rw-r--  1 ann ann    12 Aug 23 20:29 .gitignore
+-rw-rw-r--  1 ann ann  2218 Aug 23 20:29 meetup.txt
+drwxrwxr-x  2 ann ann  4096 Aug 23 23:28 py
+-rw-rw-r--  1 ann ann  5196 Aug 24 00:08 README.md
+-rw-rw-r--  1 ann ann   713 Aug 23 20:29 README.old.md
+-rw-rw-r--  1 ann ann    15 Aug 23 20:29 requirements.txt
+-rw-rw-r--  1 ann ann    13 Aug 23 20:29 runtime.txt
+drwxrwxr-x  2 ann ann  4096 Aug 23 20:29 static
+drwxrwxr-x  2 ann ann  4096 Aug 23 20:29 tests
+-rw-rw-r--  1 ann ann    70 Aug 23 20:29 tkrlist_small.txt
+-rw-rw-r--  1 ann ann  3030 Aug 23 20:29 tkrlist.txt
+-rw-rw-r--  1 ann ann    40 Aug 23 20:29 years.txt
+ann@ub16aug:~/tkrapi20$ 
+ann@ub16aug:~/tkrapi20$ wc -l tkrlist.txt
+728 tkrlist.txt
+ann@ub16aug:~/tkrapi20$ 
+ann@ub16aug:~/tkrapi20$ cat tkrlist_small.txt 
+^GSPC
+^RUT
+QQQ
+DIA
+GLD
+TLT
+AAPL
+AMZN
+BAC
+FB
+GOOG
+JNJ
+JPM
+MSFT
+WFC
+XOM
+ann@ub16aug:~/tkrapi20$ 
+ann@ub16aug:~/tkrapi20$
+```
+
