@@ -204,3 +204,21 @@ And I see that the post() method responds to the second.
 These methods get() and post() correspond to HTTP verbs: GET, POST.
 
 https://www.google.com/search?q=what+are+HTTP+verbs
+
+So, that concludes the discussion about the three demos.
+
+We have a sense of how the Python APIs work for SQLAlchemy, Keras, and FlaskRESTful.
+
+Later we will blend the above three APIs into a simple API server.
+
+But first we need to get some data.
+
+# Get Data
+
+I used shell commands listed below to get stock price data:
+
+```bash
+cd ~/tkrapi20
+bin/request_tkr.bash
+```
+

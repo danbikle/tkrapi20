@@ -17,7 +17,7 @@ mkdir -p $TKRCSVD $TKRCSVH $TKRCSVS
 date
 cat ${PARPATH}/tkrlist.txt|while read TKR
 do
-    echo busy with                   $TKR
+    echo busy with                       $TKR
     $PYTHON ${PYTHONPATH}/request_tkr.py $TKR
     # I should remove null-strings:
     sed -i '/null/d' ${TKRCSVH}/${TKR}.csv
