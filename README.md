@@ -63,3 +63,10 @@ The next demo I ran was a single shell command which is listed below:
 conda install keras flask sqlalchemy pandas numpy
 ```
 
+The above command finished after 90 seconds.
+
+Next, I ran this shell command:
+
+```bash
+conda install flask-restful -c conda-forge
+```
