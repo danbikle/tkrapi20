@@ -71,7 +71,7 @@ Next, I ran this shell command:
 conda install flask-restful -c conda-forge
 ```
 
-Then, I checked that the above packages were installed:
+Then, I checked that the above packages were installed with shell commands:
 
 ```bash
 conda list keras
@@ -79,4 +79,48 @@ conda list flask
 conda list sqlalchemy
 conda list pandas
 conda list numpy
+```
+
+Next, I worked with Postgres so this repo could interact with database tables.
+
+I issued some shell commands:
+
+```bash
+sudo apt-get install postgresql postgresql-server-dev-all libpq-dev
+sudo su - postgres
+psql
+```
+
+At this point I was inside the psql interface which accepts both Postgres and SQL commands.
+
+I typed three commands:
+
+```sql
+create database tkrapi;
+create role tkrapi with login superuser password 'tkrapi';
+\q
+```
+
+I typed exit at the shell prompt to exit the postgres Linux account and return to the ann account:
+
+```bash
+exit
+```
+
+
+In the py folder of this repo, I wrote some demos of packages:
+
+* Keras
+* SQLAlchemy
+* FlaskRESTful
+
+The shell commands for the first demo are listed below:
+
+
+
+
+```bash
+cd ~/tkrapi20/py
+. ../env.bash
+~/anaconda3/bin/python demokeras.py
 ```
