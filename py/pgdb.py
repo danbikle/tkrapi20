@@ -117,14 +117,11 @@ def getmonths4tkr(tkr,yrs):
 def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,kmodel,algo_params='None Needed'):
   """This function should copy predictions and reporting columns to db."""
   if kmodel: # If I am using keras.
-    with tempfile.NamedTemporaryFile() as fp:
-      """This block should prepare kmodel for insertion into db."""
-      kmodel.save(fp.name)
-      fp.seek(0)
-      kmodel_h5     = fp.read()
-      kmodel_h5_b64 = codecs.encode(kmodel_h5, 'base64')
+    kmodel.save('/tmp/kmodel.h5')
+    with open('/tmp/kmodel.h5','rb') as fh:
+      kmodel_h5 = fh.read()
   else: # I am not using keras.
-    kmodel_h5_b64 = None # db should convert this to NULL during INSERT.
+    kmodel_h5   = None # db should convert this to NULL during INSERT.
   # I should convert DF to a string
   csv_s = predictions_df.to_csv(index=False,float_format='%.3f')
   # I should move CREATE TABLE to an initialization script.

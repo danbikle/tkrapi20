@@ -2,6 +2,8 @@
 
 NOT DONE YET:
 
+remove tempfile code from predictions2db
+
 readme:
   - meetup url
   - virtualbox dl
