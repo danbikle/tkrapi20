@@ -404,3 +404,34 @@ When Yahoo sees the above request, it usually responds with a CSV file after it 
 
 I'm not sure why Yahoo is serving crumbs and cookies which frequently change but I thought that solving the puzzle was fun.
 
+# Generate Features
+
+When I started working with stock market data many years ago I quickly saw that other people making decisions based on trendlines and candlesticks.
+
+Also I saw some people making decisions based on what I call 'calendar events'.
+
+For example some people like to sell in May and buy in October.
+
+Or maybe they want to buy on Monday and sell on Friday.
+
+I saw this behavior and used it to guide my efforts to create machine learning features from time series of prices.
+
+The features I use in this repo are listed below:
+
+* pct_lag1 (1 day pct pricelag)
+* pct_lag2
+* pct_lag4
+* pct_lag8
+* slope3 (normalized 3 day price moving avg slope)
+* slope4
+* slope5
+* slope6
+* slope7
+* slope8
+* slope9
+* dow (integer day of week)
+* moy (integer month of year)
+
+Counting them up, we see that this repo has 13 features.
+
+One feature I don't have but would like is daily interest rate.
