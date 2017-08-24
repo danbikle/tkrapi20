@@ -456,3 +456,10 @@ python
 import kerastkr
 kerastkr.learn_predict_kerasnn('^GSPC',25,'2017-08')
 ```
+
+The above syntax should predict one-day percent gain, a variable I call: 'pct_lead', for the month 2017-08.
+
+The predictions are for a ticker called: '^GSPC' which tracks the S&P 500 index.
+
+The Keras model which calculates the predictions learns from 25 years of ^GSPC features (created from dates and prices).
+
