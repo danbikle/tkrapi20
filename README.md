@@ -149,3 +149,8 @@ cd ~/tkrapi20/py
 ~/anaconda3/bin/python demokeras.py
 ```
 
+The above demo worked well so I stepped through the script with the pdb-debugger:
+
+```bash
+~/anaconda3/bin/python -m pdb demosql.py
+```
