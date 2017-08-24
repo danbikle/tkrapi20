@@ -33,7 +33,19 @@ After I did the above steps, I logged in as 'ann' with password 'a'.
 Next, I cloned this repo using a simple shell command:
 
 ```bash
+cd ~ann
 git clone https://github.com/danbikle/tkrapi20
 ```
+
+I ran the first demo by issuing some shell commands:
+
+```bash
+cd ~ann
+cd tkrapi20
+. env.bash
+python
+```
+
+
 
 

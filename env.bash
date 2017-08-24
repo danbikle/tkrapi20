@@ -17,4 +17,4 @@ export TKRCSVS=${TKRCSV}'/split'
 export FLASK_DEBUG=1
 export PORT=5011
 export KERAS_BACKEND=tensorflow
-
+export PATH=${HOME}/anaconda3/bin:$PATH
