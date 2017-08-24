@@ -443,6 +443,54 @@ cd ~/tkrapi20/py
 ```
 
 I ran the above script on my laptop and it finished after 5 minutes.
+I used the Postgres psql command to see the features inside the features table:
+
+```sql
+ann@ub16aug:~/tkrapi20/py$ cd ..
+ann@ub16aug:~/tkrapi20$ bin/psql.bash 
+psql (9.5.8)
+SSL connection (protocol: TLSv1.2, cipher: ECDHE-RSA-AES256-GCM-SHA384, bits: 256, compression: off)
+Type "help" for help.
+
+tkrapi=# \d features
+        Table "public.features"
+ Column |       Type        | Modifiers 
+--------+-------------------+-----------
+ tkr    | character varying | 
+ csv    | text              | 
+
+tkrapi=# select count(tkr) from features;
+ count 
+-------
+   711
+(1 row)
+
+tkrapi=# select tkr from features where tkr = '^GSPC';
+  tkr  
+-------
+ ^GSPC
+(1 row)
+
+tkrapi=# select tkr, length(csv) from features where tkr = '^GSPC';
+  tkr  | length  
+-------+---------
+ ^GSPC | 1840709
+(1 row)
+
+tkrapi=# select tkr, substring(csv for 256) from features where tkr = '^GSPC';
+  tkr  |                                                   substring                                                    
+-------+----------------------------------------------------------------------------------------------------------------
+ ^GSPC | cdate,cp,pct_lead,pct_lag1,pct_lag2,pct_lag4,pct_lag8,slope3,slope4,slope5,slope6,slope7,slope8,slope9,dow,moy+
+       | 1950-01-03,16.660,1.140,0.000,0.000,0.000,0.000,,,,,,,,0.020,0.010                                            +
+       | 1950-01-04,16.850,0.475,1.140,0.000,0.000,0.000,,,,,,,,0.030,0.010                                            +
+       | 1950-01-05,
+(1 row)
+
+tkrapi=# \q
+ann@ub16aug:~/tkrapi20$
+ann@ub16aug:~/tkrapi20$
+ann@ub16aug:~/tkrapi20$
+```
 
 # Learn, Predict
 
