@@ -679,3 +679,249 @@ Using TensorFlow backend.
 
 The above output tells me that FlaskRESTful saw a GET request for /demos and the response code was 200 which usually means good news.
 
+Remember above that I had asked for a month of predictions using Python syntax:
+
+```python
+kerastkr.learn_predict_kerasnn('^GSPC',25,'2017-08')
+```
+
+I sent a similar request to FlaskRESTful using curl and captured a screenshot:
+
+```json
+ann@ub16aug:~/tkrapi20$ curl localhost:5011"/keras_nn/^GSPC/25/2017-08?features='pct_lag1,slope4,moy'&hl=2&neurons=4"
+{
+    "predictions": {
+        "Long-Only-Accuracy": 0.5,
+        "Long-Only-Effectivness": -1.278,
+        "Model-Effectivness": -1.278,
+        "Model-Accuracy": 0.5,
+        "Prediction-Count": 17,
+        "Prediction-Details": [
+            {
+                "date,price": [
+                    "2017-08-01",
+                    2476.35
+                ],
+                "pct_lead": 0.049,
+                "prediction,effectiveness,accuracy": [
+                    0.032999999821186066,
+                    0.049,
+                    1.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-02",
+                    2477.57
+                ],
+                "pct_lead": -0.218,
+                "prediction,effectiveness,accuracy": [
+                    0.03700000047683716,
+                    -0.218,
+                    0.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-03",
+                    2472.16
+                ],
+                "pct_lead": 0.18899999999999997,
+                "prediction,effectiveness,accuracy": [
+                    0.04800000041723251,
+                    0.18899999999999997,
+                    1.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-04",
+                    2476.83
+                ],
+                "pct_lead": 0.165,
+                "prediction,effectiveness,accuracy": [
+                    0.02800000086426735,
+                    0.165,
+                    1.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-07",
+                    2480.91
+                ],
+                "pct_lead": -0.24100000000000002,
+                "prediction,effectiveness,accuracy": [
+                    0.03099999949336052,
+                    -0.24100000000000002,
+                    0.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-08",
+                    2474.92
+                ],
+                "pct_lead": -0.036000000000000004,
+                "prediction,effectiveness,accuracy": [
+                    0.050999999046325684,
+                    -0.036000000000000004,
+                    0.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-09",
+                    2474.02
+                ],
+                "pct_lead": -1.4469999999999998,
+                "prediction,effectiveness,accuracy": [
+                    0.03999999910593033,
+                    -1.4469999999999998,
+                    0.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-10",
+                    2438.21
+                ],
+                "pct_lead": 0.128,
+                "prediction,effectiveness,accuracy": [
+                    0.12200000137090683,
+                    0.128,
+                    1.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-11",
+                    2441.32
+                ],
+                "pct_lead": 1.004,
+                "prediction,effectiveness,accuracy": [
+                    0.06700000166893005,
+                    1.004,
+                    1.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-14",
+                    2465.84
+                ],
+                "pct_lead": -0.05,
+                "prediction,effectiveness,accuracy": [
+                    0.012000000104308128,
+                    -0.05,
+                    0.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-15",
+                    2464.61
+                ],
+                "pct_lead": 0.142,
+                "prediction,effectiveness,accuracy": [
+                    0.04899999871850014,
+                    0.142,
+                    1.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-16",
+                    2468.11
+                ],
+                "pct_lead": -1.544,
+                "prediction,effectiveness,accuracy": [
+                    0.010999999940395355,
+                    -1.544,
+                    0.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-17",
+                    2430.01
+                ],
+                "pct_lead": -0.184,
+                "prediction,effectiveness,accuracy": [
+                    0.10300000011920929,
+                    -0.184,
+                    0.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-18",
+                    2425.55
+                ],
+                "pct_lead": 0.11599999999999999,
+                "prediction,effectiveness,accuracy": [
+                    0.07900000363588333,
+                    0.11599999999999999,
+                    1.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-21",
+                    2428.37
+                ],
+                "pct_lead": 0.9940000000000001,
+                "prediction,effectiveness,accuracy": [
+                    0.06499999761581421,
+                    0.9940000000000001,
+                    1.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-22",
+                    2452.51
+                ],
+                "pct_lead": -0.345,
+                "prediction,effectiveness,accuracy": [
+                    0.017999999225139618,
+                    -0.345,
+                    0.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-23",
+                    2444.04
+                ],
+                "pct_lead": 0.0,
+                "prediction,effectiveness,accuracy": [
+                    0.04100000113248825,
+                    0.0,
+                    0.5
+                ]
+            }
+        ]
+    }
+}
+ann@ub16aug:~/tkrapi20$ 
+ann@ub16aug:~/tkrapi20$ 
+```
+
+Also I noticed that FlaskRESTful added many lines to its shell:
+
+```bash
+Epoch 1/1024
+6301/6301 [==============================] - 0s - loss: 1.3696     
+Epoch 2/1024
+6301/6301 [==============================] - 0s - loss: 1.3760     
+Epoch 3/1024
+6301/6301 [==============================] - 0s - loss: 1.3214     
+
+SNIP ....
+
+6301/6301 [==============================] - 0s - loss: 1.2838     
+Epoch 1024/1024
+6301/6301 [==============================] - 0s - loss: 1.2814     
+127.0.0.1 - - [24/Aug/2017 15:03:45] "GET /keras_nn/^GSPC/25/2017-08?features='pct_lag1,slope4,moy'&hl=2&neurons=4 HTTP/1.1" 200 -
+```
