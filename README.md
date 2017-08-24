@@ -598,4 +598,21 @@ cd ~/tkrapi20
 I ran the above syntax on my laptop and captured a screenshot:
 
 ```bash
+ann@ub16aug:~/tkrapi20$ 
+ann@ub16aug:~/tkrapi20$ ./flaskr.bash 
+Using TensorFlow backend.
+ * Running on http://0.0.0.0:5011/ (Press CTRL+C to quit)
+ * Restarting with stat
+Using TensorFlow backend.
+ * Debugger is active!
+ * Debugger PIN: 167-686-399
+```
+
+So, that shell became locked.
+
+I started another shell and issued a simple curl command.
+
+I captured a screenshot:
+
+```bash
 ```
