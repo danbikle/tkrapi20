@@ -614,5 +614,52 @@ I started another shell and issued a simple curl command.
 
 I captured a screenshot:
 
-```bash
+```json
+ann@ub16aug:~/tkrapi20$ curl localhost:5011/demos
+{
+    "demos": [
+        "/demos",
+        "/algo_demos",
+        "/features",
+        "/tkrs",
+        "/tkrlist",
+        "/years",
+        "/tkrinfo/IBM",
+        "/tkrprices/SNAP",
+        "/istkr/YHOO",
+        "/demo11.json",
+        "/static/hello.json",
+        {
+            "algo_demos": [
+                "/sklinear/IBM/20/2017-08/'pct_lag1,slope3,dow,moy'",
+                "/sklinear_yr/IBM/20/2016/'pct_lag1,slope3,dow,moy'",
+                "/sklinear_tkr/IBM/20/'pct_lag1,slope3,dow,moy'",
+                "/keraslinear/FB/3/2017-08/'pct_lag2,slope5,moy'",
+                "/keraslinear_yr/IBM/20/2016/'pct_lag1,slope3,dow,moy'",
+                "/keraslinear_tkr/IBM/20/'pct_lag1,slope3,dow,moy'",
+                "/keras_nn/FB/3/2017-07?features='pct_lag1,slope4,moy'&hl=2&neurons=4",
+                "/keras_nn_yr/FB/3/2017?features='pct_lag1,slope4,moy'&hl=2&neurons=4",
+                "/keras_nn_tkr/FB/3?features='pct_lag1,slope4,moy'&hl=2&neurons=4"
+            ],
+            "features": [
+                "pct_lag1",
+                "pct_lag2",
+                "pct_lag4",
+                "pct_lag8",
+                "slope3",
+                "slope4",
+                "slope5",
+                "slope6",
+                "slope7",
+                "slope8",
+                "slope9",
+                "dow",
+                "moy"
+            ]
+        }
+    ]
+}
+ann@ub16aug:~/tkrapi20$ 
+ann@ub16aug:~/tkrapi20$ 
+ann@ub16aug:~/tkrapi20$
 ```
