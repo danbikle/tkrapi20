@@ -7,6 +7,9 @@ $PYTHON flaskr.py
 Other shell:
 curl localhost:5011/demo11.json
 curl localhost:5011/static/hello.json
+curl localhost:5011/demos
+curl localhost:5011/features
+curl localhost:5011/algo_demos
 curl localhost:5011/tkrs
 curl localhost:5011/tkrlist
 curl localhost:5011/istkr/IBM
