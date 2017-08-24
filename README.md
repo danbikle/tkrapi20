@@ -28,4 +28,12 @@ After you boot Ubuntu 16, you should see a login screen for an account named: 'a
 
 The password is: 'a'
 
+After I did the above steps, I logged in as 'ann' with password 'a'.
+
+Next, I cloned this repo using a simple shell command:
+
+```bash
+git clone https://github.com/danbikle/tkrapi20
+```
+
 
