@@ -465,3 +465,12 @@ cd ~/tkrapi20/py
 # Learn, Predict
 
 After the features are ready, I can learn and predict.
+
+A demonstration of the Python API which supports both Learn and Predict is listed below:
+
+```
+cd ~/tkrapi20
+python
+import kerastkr
+kerastkr.learn_predict_kerasnn('^GSPC',25,'2017-08')
+```
