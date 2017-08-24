@@ -925,3 +925,9 @@ Epoch 1024/1024
 6301/6301 [==============================] - 0s - loss: 1.2814     
 127.0.0.1 - - [24/Aug/2017 15:03:45] "GET /keras_nn/^GSPC/25/2017-08?features='pct_lag1,slope4,moy'&hl=2&neurons=4 HTTP/1.1" 200 -
 ```
+
+Next, I tried calling a different algorithm for a different ticker and different features, but same month:
+
+```json
+
+```
