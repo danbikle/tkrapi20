@@ -20,6 +20,21 @@ bash Anaconda3-4.4.0-Linux-x86_64.sh
 conda install sqlalchemy
 export PGURL='postgres://tkrapi:tkrapi@127.0.0.1/tkrapi'
 ~/anaconda3/bin/python demosql.py
+
+heroku demo:
+Install heroku client
+mkdir myapp2017abc
+cd    myapp2017abc
+echo  Hello > README.md
+git init;git add .;git commit -am hello
+heroku create myapp2017abc
+heroku addons:create heroku-postgresql:hobby-dev
+heroku config
+export PGURL='postgres://afizipm:33abc8@ec2-23-13-220-251.compute-1.amazonaws.com:5432/ddrpugf'
+~/anaconda3/bin/python demosql.py
+heroku pg:psql --app myapp2017abc
+select * from dropme;
+
 """
 
 import os
