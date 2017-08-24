@@ -160,7 +160,7 @@ The above demo worked well so I ran some shell commands to start the FlaskRESTfu
 ```bash
 cd ~/tkrapi20/py
 . ../env.bash
-~/anaconda3/bin/python demo_restful.py
+~/anaconda3/bin/python demoflask_restful.py
 ```
 
 The above shell became locked. I call it Shell-1.
@@ -168,7 +168,7 @@ The above shell became locked. I call it Shell-1.
 I started another shell, called Shell-2, and issued curl commands:
 
 ```bash
-curl localhost:5050/hello.json
+curl                            localhost:5050/hello.json
 curl -d 'msg2flask=hello-flask' localhost:5050/hello.json
 ```
 
