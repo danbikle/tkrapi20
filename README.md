@@ -223,7 +223,7 @@ cd ~/tkrapi20
 bin/request_tkr.bash
 ```
 
-While the above command was running, I captured a screen shot:
+While the above command was running, I captured a partial screen shot:
 
 ```bash
 ann@ub16aug:~/tkrapi20$ 
@@ -264,46 +264,6 @@ busy with AAPL
 Wrote: /home/ann/tkrcsv/div/AAPL.csv
 Wrote: /home/ann/tkrcsv/history/AAPL.csv
 Wrote: /home/ann/tkrcsv/split/AAPL.csv
-busy with ABAX
-Wrote: /home/ann/tkrcsv/div/ABAX.csv
-Wrote: /home/ann/tkrcsv/history/ABAX.csv
-Wrote: /home/ann/tkrcsv/split/ABAX.csv
-busy with ABBV
-Wrote: /home/ann/tkrcsv/div/ABBV.csv
-Wrote: /home/ann/tkrcsv/history/ABBV.csv
-Wrote: /home/ann/tkrcsv/split/ABBV.csv
-busy with ABC
-Wrote: /home/ann/tkrcsv/div/ABC.csv
-Wrote: /home/ann/tkrcsv/history/ABC.csv
-Wrote: /home/ann/tkrcsv/split/ABC.csv
-busy with ABG
-Wrote: /home/ann/tkrcsv/div/ABG.csv
-Wrote: /home/ann/tkrcsv/history/ABG.csv
-Wrote: /home/ann/tkrcsv/split/ABG.csv
-busy with ABT
-Wrote: /home/ann/tkrcsv/div/ABT.csv
-Wrote: /home/ann/tkrcsv/history/ABT.csv
-Wrote: /home/ann/tkrcsv/split/ABT.csv
-busy with ABX
-Wrote: /home/ann/tkrcsv/div/ABX.csv
-Wrote: /home/ann/tkrcsv/history/ABX.csv
-Wrote: /home/ann/tkrcsv/split/ABX.csv
-busy with ACGL
-Wrote: /home/ann/tkrcsv/div/ACGL.csv
-Wrote: /home/ann/tkrcsv/history/ACGL.csv
-Wrote: /home/ann/tkrcsv/split/ACGL.csv
-busy with ACN
-Wrote: /home/ann/tkrcsv/div/ACN.csv
-Wrote: /home/ann/tkrcsv/history/ACN.csv
-Wrote: /home/ann/tkrcsv/split/ACN.csv
-busy with ACOR
-Wrote: /home/ann/tkrcsv/div/ACOR.csv
-Wrote: /home/ann/tkrcsv/history/ACOR.csv
-Wrote: /home/ann/tkrcsv/split/ACOR.csv
-busy with ADBE
-Wrote: /home/ann/tkrcsv/div/ADBE.csv
-Wrote: /home/ann/tkrcsv/history/ADBE.csv
-Wrote: /home/ann/tkrcsv/split/ADBE.csv
 ```
 
 The above script needs between 5 and 6 hours to run.
@@ -391,7 +351,7 @@ The next request goes to a url like this:
 
 https://finance.yahoo.com/quote/IBM/history?p=IBM
 
-The next request goes to a url like this:
+Then, another request goes to a url like this:
 
 https://query1.finance.yahoo.com/v7/finance/download/IBM?period1=-631123200&period2=1503561650&interval=1d&events=div&crumb=UCaZNLyqkGQ
 
@@ -424,7 +384,7 @@ That script is named: csv2db.py
 
 I should run csv2db.py after request_tkr.bash finishes.
 
-The shell command to run csv2db.py is listed below
+The shell command to run csv2db.py is listed below:
 
 ```bash
 cd ~/tkrapi20/py
