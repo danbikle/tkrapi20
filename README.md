@@ -1154,3 +1154,65 @@ After I ran the above curl command I summarized the output:
 * sklinear is much faster than keras_nn
 * The above model was less bullish (bearish prediction on 2017-08-18)
 * The bearish prediction on 2017-08-18 was True but not very effective.
+
+Next, I ran a demo which saves a keras model into a Postgres table which holds predictions for each month.
+
+Then, I captured a screenshot:
+
+```bash
+ann@ub16aug:~/tkrapi20$ python py/demoload_keras_fromdb.py 
+Using TensorFlow backend.
+Epoch 1/128
+2017-08-24 16:38:52.457999: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2017-08-24 16:38:52.458030: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2017-08-24 16:38:52.458036: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+757/757 [==============================] - 0s - loss: 3.8787     
+Epoch 2/128
+757/757 [==============================] - 0s - loss: 3.8289     
+
+SNIP ...
+
+757/757 [==============================] - 0s - loss: 2.4529     
+Epoch 126/128
+757/757 [==============================] - 0s - loss: 2.4527     
+Epoch 127/128
+757/757 [==============================] - 0s - loss: 2.4527     
+Epoch 128/128
+757/757 [==============================] - 0s - loss: 2.4526     
+           cdate      cp  pct_lead  prediction  effectiveness  accuracy
+1308  2017-08-01  169.86    -0.330       0.027         -0.330       0.0
+1309  2017-08-02  169.30    -0.419       0.144         -0.419       0.0
+1310  2017-08-03  168.59     0.611       0.220          0.611       1.0
+1311  2017-08-04  169.62     1.391       0.159          1.391       1.0
+1312  2017-08-07  171.98    -0.436       0.157         -0.436       0.0
+1313  2017-08-08  171.23    -0.029       0.045         -0.029       0.0
+1314  2017-08-09  171.18    -2.208       0.052         -2.208       0.0
+1315  2017-08-10  167.40     0.406       0.055          0.406       1.0
+1316  2017-08-11  168.08     1.589       0.275          1.589       1.0
+1317  2017-08-14  170.75     0.146       0.248          0.146       1.0
+1318  2017-08-15  171.00    -0.585       0.146         -0.585       0.0
+1319  2017-08-16  170.00    -1.818       0.015         -1.818       0.0
+1320  2017-08-17  166.91     0.300       0.049          0.300       1.0
+1321  2017-08-18  167.41     0.221       0.252          0.221       1.0
+1322  2017-08-21  167.78     1.109       0.243          1.109       1.0
+1323  2017-08-22  169.64    -0.548       0.214         -0.548       0.0
+1324  2017-08-23  168.71     0.000       0.041          0.000       0.5
+ann@ub16aug:~/tkrapi20$ 
+ann@ub16aug:~/tkrapi20$ 
+ann@ub16aug:~/tkrapi20$ 
+```
+
+If we have time in the Meetup we will step through the above code in the debugger.
+
+The ability to store Keras models in a database is an attractive feature.
+
+It allows me to generate models on a cluster of cheap or free hardware.
+
+Then, I can deploy the models to an API server so they can be used by many users.
+
+Also, technology exists which allows me to convert the models into a format suitable for running in a browser:
+
+https://github.com/transcranial/keras-js
+
+Perhaps a demo of some details behind this theme would make a good Meetup presentation.
+
