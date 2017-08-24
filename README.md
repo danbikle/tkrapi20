@@ -177,5 +177,30 @@ curl -d 'msg2flask=hello-flask' localhost:5050/hello.json
 I saw this:
 
 ```bash
+ann@ub16aug:~/tkrapi20/py$ curl http://0.0.0.0:5050/hello.json
+{
+    "hello": "world"
+}
+ann@ub16aug:~/tkrapi20/py$ 
+ann@ub16aug:~/tkrapi20/py$ 
+ann@ub16aug:~/tkrapi20/py$ 
 
+
+
+ann@ub16aug:~/tkrapi20/py$ curl -d 'msg2flask=hello-flask' localhost:5050/hello.json
+{
+    "post-hello": "world",
+    "curlmsg": "hello-flask"
+}
+ann@ub16aug:~/tkrapi20/py$ 
+ann@ub16aug:~/tkrapi20/py$ 
+ann@ub16aug:~/tkrapi20/py$ 
 ```
+
+When I study the behavior of the above curl commands, I see that the get() method in demoflask_restful.py responds to the first curl command.
+
+And I see that the post() method responds to the second.
+
+These methods get() and post() correspond to HTTP verbs: GET, POST.
+
+https://www.google.com/search?q=what+are+HTTP+verbs
