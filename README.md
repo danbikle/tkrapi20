@@ -57,7 +57,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 ann@ub16aug:~/tkrapi20$
 ```
 
-The next demo I ran is listed below:
+The next demo I ran was a single shell command which is listed below:
 
 ```bash
 conda install keras flask flask-restful sqlalchemy pandas numpy
