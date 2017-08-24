@@ -361,3 +361,21 @@ ann@ub16aug:~/tkrapi20$
 ann@ub16aug:~/tkrapi20$
 ```
 
+The script bin/request_tkr.bash, depends on py/request_tkr.py which depends on the Python requests package.
+
+If you study request_tkr.py you will see it sends an initial request to a URL like this:
+
+https://finance.yahoo.com/quote/IBM
+
+Yahoo responds to that request with two pieces of information I need to track.
+
+The first piece is in a browser cookie.
+
+The second piece, I call it a crumb, is embedded within the HTML response from Yahoo.
+
+The next request goes to a url like this:
+
+https://finance.yahoo.com/quote/IBM/history?p=IBM
+
+The next request goes to a url like this:
+
