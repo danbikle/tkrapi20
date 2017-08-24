@@ -60,7 +60,7 @@ ann@ub16aug:~/tkrapi20$
 The next demo I ran was a single shell command which is listed below:
 
 ```bash
-conda install keras flask sqlalchemy pandas numpy
+conda install flask keras numpy pandas psycopg2 sqlalchemy
 ```
 
 The above command finished after 90 seconds.
@@ -74,11 +74,12 @@ conda install flask-restful -c conda-forge
 Then, I checked that the above packages were installed with shell commands:
 
 ```bash
-conda list keras
 conda list flask
-conda list sqlalchemy
-conda list pandas
+conda list keras
 conda list numpy
+conda list pandas
+conda list psycopg2
+conda list sqlalchemy
 ```
 
 Next, I worked with Postgres so this repo could interact with database tables.
