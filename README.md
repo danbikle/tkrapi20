@@ -404,6 +404,14 @@ When Yahoo sees the above request, it usually responds with a CSV file after it 
 
 I'm not sure why Yahoo is serving crumbs and cookies which frequently change but I thought that solving the puzzle was fun.
 
+After the above script finishes, I run another script to copy all the CSV data into a Postgres table.
+
+That script is named: csv2db.py
+
+I should run csv2db.py after request_tkr.bash finishes.
+
+After I run csv2db.py, I am ready to generate machine learning features from dates and prices of each ticker.
+
 # Generate Features
 
 When I started working with stock market data many years ago I quickly saw that other people making decisions based on trendlines and candlesticks.
@@ -435,3 +443,6 @@ The features I use in this repo are listed below:
 Counting them up, we see that this repo has 13 features.
 
 One feature I don't have but would like is daily interest rate.
+
+The script which generates the above features from the CSV files is genf.py
+
