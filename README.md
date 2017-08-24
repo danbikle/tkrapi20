@@ -222,3 +222,85 @@ cd ~/tkrapi20
 bin/request_tkr.bash
 ```
 
+While the above command was running, I captured a screen shot:
+
+```bash
+ann@ub16aug:~/tkrapi20$ 
+ann@ub16aug:~/tkrapi20$ bin/request_tkr.bash
+Thu Aug 24 00:11:38 PDT 2017
+busy with ^GSPC
+Wrote: /home/ann/tkrcsv/div/^GSPC.csv
+Wrote: /home/ann/tkrcsv/history/^GSPC.csv
+Wrote: /home/ann/tkrcsv/split/^GSPC.csv
+busy with ^IXIC
+Wrote: /home/ann/tkrcsv/div/^IXIC.csv
+Wrote: /home/ann/tkrcsv/history/^IXIC.csv
+Wrote: /home/ann/tkrcsv/split/^IXIC.csv
+busy with ^RUT
+Wrote: /home/ann/tkrcsv/div/^RUT.csv
+Wrote: /home/ann/tkrcsv/history/^RUT.csv
+Wrote: /home/ann/tkrcsv/split/^RUT.csv
+busy with A
+GET request of  A  failed. So I am trying again...
+GET request of  A  failed. Maybe try later.
+GET request of  A  failed. So I am trying again...
+Wrote: /home/ann/tkrcsv/history/A.csv
+GET request of  A  failed. So I am trying again...
+Wrote: /home/ann/tkrcsv/split/A.csv
+busy with AA
+Wrote: /home/ann/tkrcsv/div/AA.csv
+Wrote: /home/ann/tkrcsv/history/AA.csv
+Wrote: /home/ann/tkrcsv/split/AA.csv
+busy with AAL
+Wrote: /home/ann/tkrcsv/div/AAL.csv
+Wrote: /home/ann/tkrcsv/history/AAL.csv
+Wrote: /home/ann/tkrcsv/split/AAL.csv
+busy with AAP
+Wrote: /home/ann/tkrcsv/div/AAP.csv
+Wrote: /home/ann/tkrcsv/history/AAP.csv
+Wrote: /home/ann/tkrcsv/split/AAP.csv
+busy with AAPL
+Wrote: /home/ann/tkrcsv/div/AAPL.csv
+Wrote: /home/ann/tkrcsv/history/AAPL.csv
+Wrote: /home/ann/tkrcsv/split/AAPL.csv
+busy with ABAX
+Wrote: /home/ann/tkrcsv/div/ABAX.csv
+Wrote: /home/ann/tkrcsv/history/ABAX.csv
+Wrote: /home/ann/tkrcsv/split/ABAX.csv
+busy with ABBV
+Wrote: /home/ann/tkrcsv/div/ABBV.csv
+Wrote: /home/ann/tkrcsv/history/ABBV.csv
+Wrote: /home/ann/tkrcsv/split/ABBV.csv
+busy with ABC
+Wrote: /home/ann/tkrcsv/div/ABC.csv
+Wrote: /home/ann/tkrcsv/history/ABC.csv
+Wrote: /home/ann/tkrcsv/split/ABC.csv
+busy with ABG
+Wrote: /home/ann/tkrcsv/div/ABG.csv
+Wrote: /home/ann/tkrcsv/history/ABG.csv
+Wrote: /home/ann/tkrcsv/split/ABG.csv
+busy with ABT
+Wrote: /home/ann/tkrcsv/div/ABT.csv
+Wrote: /home/ann/tkrcsv/history/ABT.csv
+Wrote: /home/ann/tkrcsv/split/ABT.csv
+busy with ABX
+Wrote: /home/ann/tkrcsv/div/ABX.csv
+Wrote: /home/ann/tkrcsv/history/ABX.csv
+Wrote: /home/ann/tkrcsv/split/ABX.csv
+busy with ACGL
+Wrote: /home/ann/tkrcsv/div/ACGL.csv
+Wrote: /home/ann/tkrcsv/history/ACGL.csv
+Wrote: /home/ann/tkrcsv/split/ACGL.csv
+busy with ACN
+Wrote: /home/ann/tkrcsv/div/ACN.csv
+Wrote: /home/ann/tkrcsv/history/ACN.csv
+Wrote: /home/ann/tkrcsv/split/ACN.csv
+busy with ACOR
+Wrote: /home/ann/tkrcsv/div/ACOR.csv
+Wrote: /home/ann/tkrcsv/history/ACOR.csv
+Wrote: /home/ann/tkrcsv/split/ACOR.csv
+busy with ADBE
+Wrote: /home/ann/tkrcsv/div/ADBE.csv
+Wrote: /home/ann/tkrcsv/history/ADBE.csv
+Wrote: /home/ann/tkrcsv/split/ADBE.csv
+```
