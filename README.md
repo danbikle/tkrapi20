@@ -385,6 +385,19 @@ Notice the crumb parameter at the end.
 
 The Python script request_tkr.py figures out what that crumb should be by using a regexp search against a previous Yahoo HTML response.
 
+If I send the wrong crumb (a crumb which fails to match my cookie), Yahoo responds with this friendly message:
+
+```json
+{
+    "finance": {
+        "error": {
+            "code": "Unauthorized",
+            "description": "Invalid cookie"
+        }
+    }
+}
+```
+
 That is the only 'tricky' part of the script; the rest is plain-old web-scraping.
 
 When Yahoo sees the above request, it usually responds with a CSV file after it matches the crumb with the cookie it had served me earlier.
