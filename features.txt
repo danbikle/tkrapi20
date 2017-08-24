@@ -2,6 +2,26 @@
 
 NOT DONE YET:
 
+readme:
+  - meetup url
+  - virtualbox dl
+  - git clone
+  - git pull
+  - demos:
+    - demosql.py
+    - demoflask_restful.py
+    - demokeras.py
+    - flaskr.bash
+    - walk through urls
+
+website:
+  keras4.us
+
+heroku:
+  - setup flask server
+    serve predictions
+    serve models
+    
 list of resources:
 
   - CRUD Keras models
@@ -19,13 +39,10 @@ question:
   - can I have a 1-neuron output layer which outputs binary logistic regression?
   
 Site should have list of behaviorial dimensions:
-  - algo-types
-  - ml-feature-names
   - training sizes
   - join candidates: gspc, gld, tlt, rut, xom
   - prediction types: pct_lead-1day, pct_lead-2day, pct_lead-5day
   - tkr
-  - month2predict
   
 Site should have README.md
 The README should list installation steps

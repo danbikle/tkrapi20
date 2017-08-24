@@ -1,31 +1,31 @@
 # README.md
 
-This repo, tkrapi20, should drive an API service.
-
-The code in this repo should be presented to a Meetup:
+This repo, tkrapi20, should contain demos for a Meetup:
 
 2017-08-24
+
 Stock Market ML API with Flask-RESTful AND Keras-Tensor-Flow
 
-Code development in this repo should be driven by a document:
+https://www.meetup.com/BAyPIGgies/events/239118816/
 
-features.txt
+https://www.meetup.com/Palo-Alto-Data-Science-Association/events/242451739/
 
-Some of features.txt depends on a description of the Meetup presentation:
+The software in this repo was developed on Ubuntu 16.
 
-meetup.txt
+If you want to run the demos on your laptop, you should install Ubuntu 16 on your laptop.
 
-Note that I had started an earlier repos:
-  * tkrapi in 2017-01 [ API server for the tkrz Rails app. ]
-  * tkrapi2 in 2017-06-ish
-  
-Maybe someday I will merge the 3 repos.
+If you are on Mac or windows, a straightforward way to do this is to install VirtualBox.
 
-Currently I have these:
+After you install VirtualBox, download the file listed below and then import it into VirtualBox.
 
-  * git@bitbucket.org:bikle/tkrapi.git
-  * git@bitbucket.org:bikle/tkrapi2.git
-  * git@bitbucket.org:bikle/tkrapi20.git
+https://drive.google.com/file/d/0Bx3iDDAtxxI4VUtZcTRxTnZKZlk/
 
-This README.md is for tkrapi20.git
+It is a large 10GB file.
+
+After you import the above file, you should use the green-arrow in the VirtualBox GUI to boot Ubuntu 16.
+
+After you boot Ubuntu 16, you should see a login screen for an account named: 'ann'.
+
+The password is: 'a'
+
 
