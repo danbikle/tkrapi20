@@ -446,11 +446,11 @@ I ran the above script on my laptop and it finished after 5 minutes.
 
 # Learn, Predict
 
-After the features are ready, I can learn and predict.
+After the features are ready, I can learn and predict from them.
 
 A demonstration of the Python API which supports both Learn and Predict is listed below:
 
-```
+```python
 cd ~/tkrapi20
 python
 import kerastkr
@@ -463,3 +463,8 @@ The predictions are for a ticker called: '^GSPC' which tracks the S&P 500 index.
 
 The Keras model which calculates the predictions learns from 25 years of ^GSPC features (created from dates and prices).
 
+I ran the above syntax on my laptop and captured a screenshot:
+
+```python
+
+```
