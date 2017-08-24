@@ -594,3 +594,8 @@ I use the syntax below to start the FlaskRESTful API server:
 cd ~/tkrapi20
 ./flaskr.bash
 ```
+
+I ran the above syntax on my laptop and captured a screenshot:
+
+```bash
+```
