@@ -379,3 +379,15 @@ https://finance.yahoo.com/quote/IBM/history?p=IBM
 
 The next request goes to a url like this:
 
+https://query1.finance.yahoo.com/v7/finance/download/IBM?period1=-631123200&period2=1503561650&interval=1d&events=div&crumb=UCaZNLyqkGQ
+
+Notice the crumb parameter at the end.
+
+The Python script request_tkr.py figures out what that crumb should be by using a regexp search against a previous Yahoo HTML response.
+
+That is the only 'tricky' part of the script; the rest is plain-old web-scraping.
+
+When Yahoo sees the above request, it usually responds with a CSV file after it matches the crumb with the cookie it had served me earlier.
+
+I'm not sure why Yahoo is serving crumbs and cookies which frequently change but I thought that solving the puzzle was fun.
+
