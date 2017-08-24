@@ -392,6 +392,9 @@ cd ~/tkrapi20/py
 ~/anaconda3/bin/python csv2db.py
 ```
 
+I ran the above script on my laptop and it ran very quickly.
+
+
 After I run csv2db.py, I am ready to generate machine learning features from dates and prices of each ticker.
 
 # Generate Features
