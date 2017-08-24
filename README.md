@@ -306,7 +306,7 @@ Wrote: /home/ann/tkrcsv/history/ADBE.csv
 Wrote: /home/ann/tkrcsv/split/ADBE.csv
 ```
 
-The above script takes a long time to run.
+The above script needs between 5 and 6 hours to run.
 
 I ran it on my laptop and after it is finished I checked the disk usage:
 
