@@ -385,16 +385,18 @@ That script is named: csv2db.py
 
 I should run csv2db.py after request_tkr.bash finishes.
 
-The shell command to run csv2db.py is listed below:
+The shell commands to run csv2db.py is listed below:
 
 ```bash
-cd ~/tkrapi20/py
-. ../env.bash
-~/anaconda3/bin/python csv2db.py
+cd ~/tkrapi20
+. env.bash
+bin/rmbad_cookies.bash
+~/anaconda3/bin/python py/csv2db.py
 ```
 
-I ran the above script on my laptop and it ran very quickly.
+I ran the above script on my laptop and it finished in about 30 seconds.
 
+The script rmbad_cookies.bash removes CSV files which contain error messages from Yahoo rather than good data.
 
 After I run csv2db.py, I am ready to generate machine learning features from dates and prices of each ticker.
 
