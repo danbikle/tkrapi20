@@ -308,7 +308,7 @@ Wrote: /home/ann/tkrcsv/split/ADBE.csv
 
 The above script needs between 5 and 6 hours to run.
 
-I ran it on my laptop and after it is finished I checked the disk usage:
+I ran it on my laptop; after it finished I checked the disk usage:
 
 ```bash
 ann@ub16aug:~/tkrapi20$ du -sh ~/tkrcsv/*
