@@ -70,3 +70,13 @@ Next, I ran this shell command:
 ```bash
 conda install flask-restful -c conda-forge
 ```
+
+Then, I checked that the above packages were installed:
+
+```bash
+conda list keras
+conda list flask
+conda list sqlalchemy
+conda list pandas
+conda list numpy
+```
