@@ -385,7 +385,7 @@ That script is named: csv2db.py
 
 I should run csv2db.py after request_tkr.bash finishes.
 
-The shell commands to run csv2db.py is listed below:
+The shell commands to run csv2db.py are listed below:
 
 ```bash
 cd ~/tkrapi20
