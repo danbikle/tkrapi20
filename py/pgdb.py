@@ -119,7 +119,7 @@ def predictions2db(tkr,yrs,mnth,features,algo,predictions_df,kmodel,algo_params=
   if kmodel: # If I am using keras.
     kmodel.save('/tmp/kmodel.h5')
     with open('/tmp/kmodel.h5','rb') as fh:
-      kmodel_h5 = fh.read()
+      kmodel_h5 = fh.read() # kmodel_h5 s.b. different than kmodel
   else: # I am not using keras.
     kmodel_h5   = None # db should convert this to NULL during INSERT.
   # I should convert DF to a string
