@@ -308,7 +308,18 @@ Wrote: /home/ann/tkrcsv/split/ADBE.csv
 
 The above script takes a long time to run.
 
-It depends on tkrlist.txt, a list of 728 tickers, to declare which stocks to get.
+I ran it on my laptop and after it is finished I checked the disk usage:
+
+```bash
+ann@ub16aug:~/tkrapi20$ du -sh ~/tkrcsv/*
+2.9M	/home/ann/tkrcsv/div
+255M	/home/ann/tkrcsv/history
+2.9M	/home/ann/tkrcsv/split
+ann@ub16aug:~/tkrapi20$ 
+ann@ub16aug:~/tkrapi20$ 
+```
+
+The above script depends on tkrlist.txt, a list of 728 tickers, to declare which stocks to get.
 
 If I am in a hurry, I update the script so it uses tkrlist_small.txt which lists these tickers:
 
@@ -362,7 +373,9 @@ ann@ub16aug:~/tkrapi20$
 ann@ub16aug:~/tkrapi20$
 ```
 
-The script bin/request_tkr.bash, depends on py/request_tkr.py which depends on the Python requests package.
+The script bin/request_tkr.bash, depends on py/request_tkr.py which depends on the Python requests package:
+
+http://docs.python-requests.org
 
 If you study request_tkr.py you will see it sends an initial request to a URL like this:
 
