@@ -442,6 +442,8 @@ cd ~/tkrapi20/py
 ~/anaconda3/bin/python genf.py
 ```
 
+I ran the above script on my laptop and it finished after 5 minutes.
+
 # Learn, Predict
 
 After the features are ready, I can learn and predict.
