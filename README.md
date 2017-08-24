@@ -462,3 +462,6 @@ cd ~/tkrapi20/py
 ~/anaconda3/bin/python genf.py
 ```
 
+# Learn, Predict
+
+After the features are ready, I can learn and predict.
