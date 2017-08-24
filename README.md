@@ -514,5 +514,83 @@ The Keras model which calculates the predictions learns from 25 years of ^GSPC f
 I ran the above syntax on my laptop and captured a screenshot:
 
 ```python
+ann@ub16aug:~$ 
+ann@ub16aug:~$ cd ~/tkrapi20
 
+
+ann@ub16aug:~/tkrapi20$ . env.bash
+
+
+ann@ub16aug:~/tkrapi20$ ~/anaconda3/bin/python
+Python 3.6.1 |Anaconda custom (64-bit)| (default, May 11 2017, 13:09:58) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+
+
+>>> import kerastkr
+Using TensorFlow backend.
+
+
+
+>>> kerastkr.learn_predict_kerasnn('^GSPC',25,'2017-08')
+Epoch 1/1024
+2017-08-24 14:17:04.077248: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2017-08-24 14:17:04.077279: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2017-08-24 14:17:04.077288: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+6301/6301 [==============================] - 0s - loss: 2.3986     
+Epoch 2/1024
+6301/6301 [==============================] - 0s - loss: 1.8951
+
+SNIP...
+
+Epoch 1023/1024
+6301/6301 [==============================] - 0s - loss: 1.2835     
+Epoch 1024/1024
+6301/6301 [==============================] - 0s - loss: 1.2787     
+            cdate       cp  pct_lead  prediction  effectiveness  accuracy
+17004  2017-08-01  2476.35     0.049       0.029          0.049       1.0
+17005  2017-08-02  2477.57    -0.218       0.034         -0.218       0.0
+17006  2017-08-03  2472.16     0.189       0.046          0.189       1.0
+17007  2017-08-04  2476.83     0.165       0.024          0.165       1.0
+17008  2017-08-07  2480.91    -0.241       0.027         -0.241       0.0
+17009  2017-08-08  2474.92    -0.036       0.050         -0.036       0.0
+17010  2017-08-09  2474.02    -1.447       0.037         -1.447       0.0
+17011  2017-08-10  2438.21     0.128       0.131          0.128       1.0
+17012  2017-08-11  2441.32     1.004       0.067          1.004       1.0
+17013  2017-08-14  2465.84    -0.050       0.004         -0.050       0.0
+17014  2017-08-15  2464.61     0.142       0.048          0.142       1.0
+17015  2017-08-16  2468.11    -1.544       0.005         -1.544       0.0
+17016  2017-08-17  2430.01    -0.184       0.111         -0.184       0.0
+17017  2017-08-18  2425.55     0.116       0.081          0.116       1.0
+17018  2017-08-21  2428.37     0.994       0.065          0.994       1.0
+17019  2017-08-22  2452.51    -0.345       0.011         -0.345       0.0
+17020  2017-08-23  2444.04     0.000       0.039          0.000       0.5
+>>> quit()
+ann@ub16aug:~/tkrapi20$ 
+ann@ub16aug:~/tkrapi20$ 
+ann@ub16aug:~/tkrapi20$
+```
+
+The above tabular report is output from a Pandas DataFrame.
+
+In a middle column I see the predictions from my Keras model.
+
+In this example all of the predictions are above zero so they are bullish predictions.
+
+The most bullish prediction was issued for 2017-08-10.
+
+When I look to the right of that prediction I see it was an accurate predicition.
+
+I consider any prediction which can predict the sign of pct_lead, to be an accurate prediction.
+
+Lets attach this Python syntax to a FlaskRESTful API server.
+
+# FlaskRESTful
+
+I use the syntax below to start the FlaskRESTful API server:
+
+```bash
+cd ~/tkrapi20
+./flaskr.bash
 ```
