@@ -107,6 +107,43 @@ def learn_predict_keraslinear(tkr='ABC',yrs=20,mnth='2016-11', features='pct_lag
   # I should return a DataFrame useful for reporting on the predictions.
   return out_df
 
+def load_predict_keraslinear(tkr='FB',yrs=3,mnth='2017-08', features='pct_lag1,slope4,moy'):
+  """This function should demo how to predict from a model in the db."""
+  learn_predict_keraslinear(tkr,yrs,mnth,features) # Store a model in the db.
+  # I should connect to the DB
+  db_s = os.environ['PGURL']
+  conn = sql.create_engine(db_s).connect()
+  sql_s = '''SELECT tkr,yrs,mnth,features,algo,algo_params, kmodel_h5
+    FROM predictions
+    WHERE tkr      = %s 
+    AND   yrs      = %s
+    AND   mnth     = %s
+    AND   features = %s
+    LIMIT 1'''
+  result = conn.execute(sql_s,[tkr,yrs,mnth,features])
+  if not result.rowcount:
+    return ['no result'] # Probably, a problem.
+  myrow     = [row for row in result][0]
+  kmodel_h5 = (bytes(myrow.kmodel_h5))
+  with open('/tmp/kmodel2.h5','wb') as fh:
+    fh.write(kmodel_h5)
+  kmodel = keras.models.load_model('/tmp/kmodel2.h5')
+  
+  xtrain_a, ytrain_a, xtest_a, out_df = pgdb.get_train_test(tkr,yrs,mnth,features)
+  if ((xtrain_a.size == 0) or (ytrain_a.size == 0) or (xtest_a.size == 0)):
+    return out_df # probably empty too.
+  # Start using Keras here.
+  # I should predict xtest_a then update out_df
+  predictions_a           = np.round(kmodel.predict(xtest_a),3)
+  # Done with Keras, I should pass along the predictions.
+  predictions_l           = [p_f[0] for p_f in predictions_a] # I want a list
+  out_df['prediction']    = predictions_l
+  out_df['effectiveness'] = np.sign(out_df.pct_lead*out_df.prediction)*np.abs(out_df.pct_lead)
+  out_df['accuracy']      = (1+np.sign(out_df.effectiveness))/2
+  algo                    = 'keraslinear'
+  
+  return out_df
+  
 def learn_predict_keraslinear_yr(tkr='ABC',yrs=20,yr=2016, features='pct_lag1,slope4,moy'):
   """This function should use keras to learn and predict for a year."""
   empty_df = pd.DataFrame()
