@@ -154,3 +154,26 @@ The above demo worked well so I stepped through the script with the pdb-debugger
 ```bash
 ~/anaconda3/bin/python -m pdb demokeras.py
 ```
+
+The above demo worked well so I ran some shell commands to start the FlaskRESTful demo:
+
+```bash
+cd ~/tkrapi20/py
+. ../env.bash
+~/anaconda3/bin/python demo_restful.py
+```
+
+The above shell became locked. I call it Shell-1.
+
+I started another shell, called Shell-2, and issued curl commands:
+
+```bash
+curl localhost:5050/hello.json
+curl -d 'msg2flask=hello-flask' localhost:5050/hello.json
+```
+
+I saw this:
+
+```bash
+
+```
