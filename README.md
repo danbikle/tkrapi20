@@ -46,6 +46,13 @@ cd tkrapi20
 python
 ```
 
+I saw in the Python banner that I was running this:
 
-
-
+```bash
+ann@ub16aug:~/tkrapi20$ python
+Python 3.6.1 |Anaconda 4.4.0 (64-bit)| (default, May 11 2017, 13:09:58) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+ann@ub16aug:~/tkrapi20$
+```
