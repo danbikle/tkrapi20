@@ -1155,6 +1155,8 @@ After I ran the above curl command I summarized the output:
 * The above model was less bullish (bearish prediction on 2017-08-18)
 * The bearish prediction on 2017-08-18 was True but not very effective.
 
+# Keras + Postgres
+
 Next, I ran a demo which saves a keras model into a Postgres table which holds predictions for each month.
 
 Then, I captured a screenshot:
