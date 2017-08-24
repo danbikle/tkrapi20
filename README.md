@@ -107,20 +107,16 @@ I typed exit at the shell prompt to exit the postgres Linux account and return t
 exit
 ```
 
-
 In the py folder of this repo, I wrote some demos of packages:
 
-* Keras
 * SQLAlchemy
+* Keras
 * FlaskRESTful
 
 The shell commands for the first demo are listed below:
 
-
-
-
 ```bash
 cd ~/tkrapi20/py
 . ../env.bash
-~/anaconda3/bin/python demokeras.py
+~/anaconda3/bin/python demosql.py
 ```
