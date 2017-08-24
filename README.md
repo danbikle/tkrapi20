@@ -929,5 +929,228 @@ Epoch 1024/1024
 Next, I tried calling a different algorithm for a different ticker and different features, but same month:
 
 ```json
-
+ann@ub16aug:~/tkrapi20$ curl localhost:5011/sklinear/^RUT/25/2017-08/'pct_lag1,pct_lag4,slope3,slope6,dow,moy'
+{
+    "predictions": {
+        "Long-Only-Accuracy": 0.38235294117647056,
+        "Long-Only-Effectivness": -4.123,
+        "Model-Effectivness": -3.9910000000000005,
+        "Model-Accuracy": 0.4411764705882353,
+        "Prediction-Count": 17,
+        "Prediction-Details": [
+            {
+                "date,price": [
+                    "2017-08-01",
+                    1428.33
+                ],
+                "pct_lead": -1.08,
+                "prediction,effectiveness,accuracy": [
+                    0.063,
+                    -1.08,
+                    0.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-02",
+                    1412.9
+                ],
+                "pct_lead": -0.5429999999999999,
+                "prediction,effectiveness,accuracy": [
+                    0.125,
+                    -0.5429999999999999,
+                    0.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-03",
+                    1405.23
+                ],
+                "pct_lead": 0.505,
+                "prediction,effectiveness,accuracy": [
+                    0.087,
+                    0.505,
+                    1.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-04",
+                    1412.32
+                ],
+                "pct_lead": 0.131,
+                "prediction,effectiveness,accuracy": [
+                    0.023,
+                    0.131,
+                    1.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-07",
+                    1414.17
+                ],
+                "pct_lead": -0.284,
+                "prediction,effectiveness,accuracy": [
+                    0.095,
+                    -0.284,
+                    0.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-08",
+                    1410.15
+                ],
+                "pct_lead": -0.9359999999999999,
+                "prediction,effectiveness,accuracy": [
+                    0.105,
+                    -0.9359999999999999,
+                    0.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-09",
+                    1396.95
+                ],
+                "pct_lead": -1.7469999999999999,
+                "prediction,effectiveness,accuracy": [
+                    0.125,
+                    -1.7469999999999999,
+                    0.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-10",
+                    1372.54
+                ],
+                "pct_lead": 0.12300000000000001,
+                "prediction,effectiveness,accuracy": [
+                    0.103,
+                    0.12300000000000001,
+                    1.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-11",
+                    1374.23
+                ],
+                "pct_lead": 1.4609999999999999,
+                "prediction,effectiveness,accuracy": [
+                    0.015,
+                    1.4609999999999999,
+                    1.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-14",
+                    1394.31
+                ],
+                "pct_lead": -0.794,
+                "prediction,effectiveness,accuracy": [
+                    0.059,
+                    -0.794,
+                    0.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-15",
+                    1383.24
+                ],
+                "pct_lead": 0.021,
+                "prediction,effectiveness,accuracy": [
+                    0.14,
+                    0.021,
+                    1.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-16",
+                    1383.53
+                ],
+                "pct_lead": -1.777,
+                "prediction,effectiveness,accuracy": [
+                    0.12,
+                    -1.777,
+                    0.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-17",
+                    1358.94
+                ],
+                "pct_lead": -0.085,
+                "prediction,effectiveness,accuracy": [
+                    0.131,
+                    -0.085,
+                    0.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-18",
+                    1357.79
+                ],
+                "pct_lead": -0.066,
+                "prediction,effectiveness,accuracy": [
+                    -0.004,
+                    0.066,
+                    1.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-21",
+                    1356.9
+                ],
+                "pct_lead": 1.079,
+                "prediction,effectiveness,accuracy": [
+                    0.081,
+                    1.079,
+                    1.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-22",
+                    1371.54
+                ],
+                "pct_lead": -0.131,
+                "prediction,effectiveness,accuracy": [
+                    0.073,
+                    -0.131,
+                    0.0
+                ]
+            },
+            {
+                "date,price": [
+                    "2017-08-23",
+                    1369.74
+                ],
+                "pct_lead": 0.0,
+                "prediction,effectiveness,accuracy": [
+                    0.1,
+                    0.0,
+                    0.5
+                ]
+            }
+        ]
+    }
+}
+ann@ub16aug:~/tkrapi20$ 
+ann@ub16aug:~/tkrapi20$ 
 ```
+
+After I ran the above curl command I summarized the output:
+
+* sklinear is much faster than keras_nn
+* The above model was less bullish (bearish prediction on 2017-08-18)
+* The bearish prediction on 2017-08-18 was True but not very effective.
