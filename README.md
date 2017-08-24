@@ -500,12 +500,12 @@ A demonstration of the Python API which supports both Learn and Predict is liste
 
 ```python
 cd ~/tkrapi20
-python
+~/anaconda3/bin/python
 import kerastkr
 kerastkr.learn_predict_kerasnn('^GSPC',25,'2017-08')
 ```
 
-The above syntax should predict one-day percent gain, a variable I call: 'pct_lead', for the month 2017-08.
+The above syntax should predict one-day percent gain, a variable I call: 'pct_lead', for each day in the month 2017-08.
 
 The predictions are for a ticker called: '^GSPC' which tracks the S&P 500 index.
 
