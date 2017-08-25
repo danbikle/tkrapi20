@@ -1216,5 +1216,13 @@ Also, technology exists which allows me to convert the models into a format suit
 
 https://github.com/transcranial/keras-js
 
-Perhaps a demo of some details behind this theme would make a good Meetup presentation.
+Perhaps a demo of some details behind this theme would make a good Meetup presentation in the future.
+
+If you have questions, e-me: bikle101 at gmail
+
+If you want to wrestle with this technology in a classroom environment I invite you to attend my classes at Santa Clara Adult Education.
+
+They are easy to find with google or send me an e-mail.
+
+I look forward to working with you on your Machine Learning Applications/Projects.
 
